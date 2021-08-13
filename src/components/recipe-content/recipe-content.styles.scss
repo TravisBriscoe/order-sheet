@@ -1,0 +1,26 @@
+.recipe-content {
+  width: 66%;
+  height: 75%;
+  position: absolute;
+  right: 200px;
+  text-align: center;
+  overflow-y: scroll;
+  
+  &-title {
+    margin-top: -8px;
+    margin-bottom: -8px;
+    text-decoration: underline;
+  }
+  
+  &-ingredients {
+    font-size: 14px;
+  }
+
+  &-notes {
+    width: 66%;
+    position: absolute;
+    right: 140px;
+    font-weight: bold;
+    color: red;
+  }
+}

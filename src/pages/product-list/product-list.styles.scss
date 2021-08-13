@@ -1,0 +1,42 @@
+.product {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 5px;
+
+  &-headers {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr;
+    border-bottom: 2px solid black;
+
+    &-name {
+      grid-column: 1 / 1;
+    }
+
+    &-desc {
+      grid-column: 2 / 2;
+    }
+
+    &-unit {
+      grid-column: 3 / 3;
+    }
+
+    &-quantity {
+      grid-column: 4 / 4;
+    }
+  }
+
+
+  &-items {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #8f8f8f;
+    margin-top: 3px;
+    margin-bottom: 3px;
+
+    &-quantity {
+      width: 30px;
+      text-align: right;
+    }
+  }
+}

@@ -1,0 +1,173 @@
+const quarter = String.fromCharCode(0x00BC);
+const half = String.fromCharCode(189);
+const third = String.fromCharCode(0x2153);
+
+const RECIPE_DATA = {
+  tartar: {
+    id: 1,
+    name: 'Tartar Sauce',
+    linkUrl: 'tartar',
+    recipe: {
+      ingredients: [
+        `${half} container of Mayo`,
+        `1 container of Sour Cream`,
+        `${third} cup of Mustard`,
+        `3 cups of Relish`,
+        `1 tablespoon of Garlic`,
+        `${quarter} cup of Lemon Juice`,
+        `2 tablespoons Dry Dill`,
+        `2 teaspoons Kosher Salt`,
+        `1 teaspoon Ground Black Pepper`,
+        `${half} teaspoon Paprika`,
+        `1 Red Onion, finely diced`
+      ]
+    },
+  },
+  coleslaw: {
+    id: 2,
+    name: 'Coleslaw',
+    linkUrl: 'coleslaw',
+    recipe: {
+      ingredients: [
+        `1 Cabbage, chopped`,
+        `1 Carrot, shredded`,
+        `2 Celery Stalks, diced`,
+        `1 Red Onion, diced`,
+        `1 tablesppon Greek Seasoning`,
+        `1 teaspoon Thyme`,
+        `1 teaspoon Onion Powder`,
+        `1 teaspoon Ground Black Pepper`,
+        `${half} teaspoon Smoked Paprika`,
+        `1 tablespoon Kosher Salt`,
+        `3 tablespoons White Sugar`,
+        `1 tablespoon Chopped Garlic`,
+        `${quarter} cup Olive Oil`,
+        `${quarter} cup White Vinegar`,
+        `1 tablespoon Lemon Juice`,
+        `2 cups Mayo`,
+        `${quarter} cup Yellow Mustard`
+      ],
+      notes: `Adjust according to Cabbage size`
+    }
+  },
+  rosemaryaioli: {
+    id: 3,
+    name: 'Rosemary Aioli',
+    linkUrl: 'rosemaryaioli',
+    recipe: {
+      ingredients: [
+        `${half} container of Mayo`,
+        `3 tablespoons Chopped Garlic`,
+        `2 tablespoons Rosemary`,
+        `1 teaspoon Onion Powder`,
+        `1 teaspoon Kosher Salt`,
+        `${half} teaspoon Ground Black Pepper`
+      ]
+    }
+  },
+  sriracha: {
+    id: 4,
+    name: 'Sriracha',
+    linkUrl: 'sriracha',
+    recipe: {
+      ingredients: [
+        `Mayo`,
+        `Sriracha`
+      ]
+    }
+  },
+  beefrub: {
+    id: 5,
+    name: 'Roast-beef Rub',
+    linkUrl: 'beefrub',
+    recipe: {}
+  },
+  chickenmarinade: {
+    id: 6,
+    name: 'Chicken Marinade',
+    linkUrl: 'chickenmarinade',
+    recipe: {}
+  },
+  frenchonionsoup: {
+    id: 7,
+    name: 'French Onion Soup',
+    linkUrl: 'frenchonionsoup',
+    recipe: {
+      ingredients: [
+        `${quarter} cup Olive Oil`,
+        `4 large Red Onions`,
+        `2 teaspoons Chopped Garlic`,
+        `1 cup Red Wine`,
+        `1 teaspoon Oregano`,
+        `1 teaspoon Rosemary`,
+        `1 teaspoon Thyme`,
+        `1 teaspoon Kosher Salt`,
+        `${half} teaspoon Ground Black Pepper`,
+        `1 cup Beef Soup Base Concentrate`,
+        `Cold Water`
+      ],
+      notes: `Sautee Onions and Garlic in Olive Oil. De glaze with Red Wine when onions are transparent. Add Spices and Beef Soup Base Concentrate. Fill pot to top with cold Water and brind to boil. Turn off and taste, add Salt/Pepper if needed`
+    }
+  },
+  obatzda: {
+    id: 8,
+    name: 'Obatzda',
+    linkUrl: 'obatzda',
+    recipe: {
+      ingredients: [
+        `1 Large White Onion, roughly diced`,
+        `1 lb Camembert/Brie cheese, cubed`,
+        `6 tablespoons Butter`,
+        `1 cup Cream Cheese`,
+        `1 teaspoon Smoked Paprika`,
+        `1 teaspoon Ground Black Pepper`,
+        `1 tablespoon Kosher Salt`,
+        `8 tablespoons Wheat Beer (Creemore)`
+      ],
+      notes: `Pulse in food processor.`
+    }
+  },
+  marinara: {
+    id: 9,
+    name: 'Marinara Sauce',
+    linkUrl: 'marinara',
+    recipe: {
+      ingredients: [
+        `1 28oz. can San Mazrano tomatoes`,
+        `${quarter} cup Extra Virgin Olive Oil`,
+        `7 cloves Garlic, slivered`,
+        `Pinch of Crushed Chilies`,
+        `1 teaspoon Kosher Salt`,
+        `1 large Fresh Basil Sprig`,
+        `1+ cup Water`
+      ],
+      notes: `Pour tomatoes in bowl and crush by hand. Pour 1 cup Water in can and slosh around. Set aside. In large skillet (not pot) over medium heat, heat oil, add Garlic. Soon as it sizzles (don't brown), add Tomatoes, then can of Water. Simmer until thickened and oil on surface is deep orange (approx 15 min.), place Basil sprid on sauce and let wilt, submerge. Discard Basil`
+    }
+  },
+  placeholder: {
+    id: 10,
+    name: 'Placeholder',
+    linkUrl: 'placeholder',
+    recipe: {}
+  },
+  placeholder1: {
+    id: 11,
+    name: 'Placeholder1',
+    linkUrl: 'placeholder1',
+    recipe: {}
+  },
+  placeholder2: {
+    id: 12,
+    name: 'Placeholder2',
+    linkUrl: 'placeholder2',
+    recipe: {}
+  },
+  placeholder3: {
+    id: 13,
+    name: 'Placeholder3',
+    linkUrl: 'placeholder3',
+    recipe: {}
+  },
+};
+
+export default RECIPE_DATA;

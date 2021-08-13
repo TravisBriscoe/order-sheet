@@ -1,0 +1,9 @@
+.recipe-nav {
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 10px 0 10px 10px;
+  border-right: 1px solid gray;
+  overflow-y: auto;
+}
