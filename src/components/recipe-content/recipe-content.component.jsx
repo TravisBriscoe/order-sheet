@@ -8,8 +8,8 @@ const RecipeContent = (...otherRecipeProps) => {
   const { recipeId } = useParams();
   const recipeData = {...otherRecipeProps[0][recipeId]};
 
-  const { name, recipe } = recipeData;
-  const { ingredients, notes } = recipe;
+  const { name, recipe: {ingredients, notes} = {} } = recipeData;
+  // const { ingredients, notes } = recipe;
 
   return (
   <div className='recipe-content'>
