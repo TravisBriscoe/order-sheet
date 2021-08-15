@@ -20,7 +20,7 @@ class App extends React.Component {
 
     this.state = {
       isUserLoggedIn: true,
-      loggedInUser: 'overlord',
+      loggedInUser: 'Manager',
     }
   }
 
@@ -32,17 +32,20 @@ class App extends React.Component {
   }
 
   render() {
-    const { isUserLoggedIn, loggedInUser } = this.state;
+    const { isUserLoggedIn, loggedInUser, title } = this.state;
+
     return (
-      <div className="App">
-        <Header isUserLoggedIn={isUserLoggedIn} userLoggedIn={loggedInUser} />
-        <Switch>
-          <Route path='/manage' component={ManagePage} />
-          <Route path='/order-sheet' component={OrderListPage} />
-          <Route path='/recipes' component={RecipesPage} />
-          <Route exact path='/' component={ProductList} />
-        </Switch>
-        <Footer  />
+      <div className={`App`}>
+        <Header isUserLoggedIn={isUserLoggedIn} userLoggedIn={loggedInUser} title={title} />
+        <div className={`${!isUserLoggedIn ? "is-blurred" : ""}`}>
+          <Switch>
+            <Route path='/manage' component={ManagePage} />
+            <Route path='/order-sheet' component={OrderListPage} />
+            <Route path='/recipes' component={RecipesPage} />
+            <Route exact path='/' component={ProductList} />
+          </Switch>
+        </div>
+        <Footer isUserLoggedIn={isUserLoggedIn} />
         {
           !isUserLoggedIn ? 
             (

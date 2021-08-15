@@ -2,7 +2,11 @@ import React from 'react';
 
 // import { Link } from 'react-router-dom';
 
+// import NewUserComponent from '../newuser/newuser.component';
+
 import USER_DATA from '../../data/user.data';
+
+import './login.styles.scss';
 
 class LoginComponent extends React.Component {
   constructor(props) {
@@ -14,6 +18,7 @@ class LoginComponent extends React.Component {
     this.state = {
       users: USER_DATA,
       username: '',
+      location: '',
       password: '',
     }
   }
@@ -46,24 +51,38 @@ class LoginComponent extends React.Component {
 
 
   render() {
-    const { username, password } = this.state.users;
+    const { username, location, password } = this.state.users;
 
     return (
-    <div className='login'>
+      <div className='login'>
+        <h2>Login</h2>
         <form onSubmit={this.checkLogin} className='login-form'>
           <input
+            className='login-form--username'
             type='text'
             name='username'
+            placeholder='Username'
             value={username}
             onChange={this.handleChange}
           />
           <input
+            className='login-form--location'
+            type='text'
+            name='location'
+            placeholder='Location'
+            value={location}
+            onChange={this.handleChange}
+          />
+          <input
+            className='login-form--password'
             type='password'
             name='password'
+            placeholder='Password'
             value={password}
             onChange={this.handleChange}
           />
-          <input type='submit' value='Login ' />
+          {/* <Link component={NewUserComponent}><button className='login-form--newuser-btn'>New User</button></Link> */}
+          <input className='login-form--login-btn' type='submit' value='Login' />
           {/* <Link to='/new-user' component={NewUserComponent} /> */}
         </form>
       </div>

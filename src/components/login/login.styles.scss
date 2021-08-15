@@ -1,0 +1,11 @@
+.login {
+  width: 100%;
+  height: 25%;
+  display: flex;
+  justify-content: center;
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,30 +1,60 @@
 .footer {
-  box-sizing: border-box;
-  display: flex;
+  grid-area: foot;
+  align-self: end;
+  border-top: 2px solid black;
   width: 80%;
   margin: 0 auto;
-  position: fixed;
-  left: 10%;
-  bottom: 10px;
-  border-top: 3px solid black;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 3fr 120px 2fr 70px 95px;
+  grid-template-rows: 30px;
+  grid-template-areas: "copyright items blank buttonone buttontwo";
 
   &-copyright {
-    margin-top: 5px;
+    grid-area: copyright;
+    align-self: center;
+  }
+
+  &-item-total {
+    grid-area: items;
+    align-self: center;
+    justify-self: start;
+    padding-left: 12px;
   }
 
   &-nav {
-    display: flex;
-    margin-top: 5px;
+    &--submit {
+      grid-area: buttonone;
+      place-self: center;
+    }
 
-    button {
-      border: 2px solid black;
-      border-radius: 25px;
-      padding: 2px 5px;
+    &--ordersheet {
+      grid-area: buttontwo;
+      place-self: center;
+    }
 
-      &:hover {
-        background-color: red;
-        color: white;
+    &--submit button, &--ordersheet button {
+      padding: 4px 4px;
+    }
+  }
+
+  @media only screen and (width: 670px) {
+    .footer {
+      grid-gap: 0;
+      gap: 0;
+      &-copyright {
+        font-size: 12px;
+      }
+      &-item-total {
+        font-size: 12px;
+        justify-self: end;
+      }
+    
+      &-nav {
+        &--submit { justify-self: end; }
+        &--submit button, &--ordersheet button {
+          font-size: 10px;
+          padding: 4px 4px;
+        }
       }
     }
   }

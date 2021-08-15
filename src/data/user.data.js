@@ -1,18 +1,21 @@
 const USER_DATA = {
-  overlord: {
-    name: 'overlord',
+  admin: {
+    name: 'Admin',
     password: '123456',
-    role: 'root',
+    email: 'overlord@test.com', 
+    role: 'administrator',
   },
-  master: {
-    name: 'master',
+  manager: {
+    name: 'Manager',
     password: '123456',
-    role: 'admin'
+    email: 'master@test.com',
+    role: 'manager'
   },
-  minion: {
-    name: 'minion',
+  worker: {
+    name: 'Worker',
     pass: '123456',
-    role: 'user'
+    email: 'minion@test.com',
+    role: 'worker'
   },
 }
 

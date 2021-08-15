@@ -1,12 +1,14 @@
 .product {
+  grid-area: main;
   width: 80%;
   margin: 0 auto;
-  margin-top: 5px;
+  place-items: start;
 
   &-headers {
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr;
+    grid-template-columns: 2fr, 2fr, 2fr, 2fr, 1fr, 2fr;
+    grid-template-areas: "product-id name desc unit split quantity";
     border-bottom: 2px solid black;
 
     &-name {

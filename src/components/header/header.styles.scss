@@ -2,72 +2,99 @@
   box-sizing: border-box;
   width: 80%;
   height: 95px;
-  display: flex;
-  flex-direction: column;
+  grid-area: head;
   margin: 0 auto;
   border-bottom: 3px solid black;
   box-shadow: 0px 5px 3px -4px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "loginLink title title recipeLink"
+                       "actions actions actions actions";
+  justify-items: center;
 
   &-title {
     &-user {
-      text-align: left;
-      margin-left: 10px;
-      margin-top: 10px;
-      margin-bottom: -55px;
-      z-index: 1000;
-      width: 100px;
+      grid-area: loginLink;
+      justify-self: start;
+      margin-top: 5px;
     }
-
     &-main {
-      width: 300px;
+      grid-area: title;
+      align-self: start;
       font-size: 30px;
       font-weight: bold;
-      margin-bottom: 1px;
-      z-index: 1;
-      align-self: center;
     }
-
     &-recipes {
-      align-self: flex-end;
-      margin-top: -32px;
-    }
-  }
-
-  &-bar-one--labels {
-    text-align: left;
-    // flex-grow: 1;
-  
-    label {
-      margin-left: 80px;
-    }
-
-    label:last-of-type {
-      margin-left: 55px;
-    }
-  }
-
-  &-bar-one {
-    display: flex;
-    justify-content: space-between;
-    // margin-bottom: 5px;
-    margin-left: 50px;
-    
-    & select {
-      width: 100px;
-      height: 30px;
-      margin-right: 10px;
-      text-align: center;
-    }
-  }
-
-  &-bar-two {
-    margin-bottom: 10px;
-    flex-grow: 2;
-
-    & input {
-      width: 75%;
+      grid-area: recipeLink;
+      justify-self: end;
       margin-top: 5px;
-      // margin-right: 10px;
+    }
+
+    &-actions {
+      grid-area: actions;
+      width: 100%;
+      margin-bottom: 10px;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 5fr 1fr;
+      grid-template-areas: "labelwhere labelwhat nothing nothing"
+                           "where what search searchbutton";
+      &-labels {
+
+        &-where {
+          grid-area: labelwhere;
+          place-self: center;
+        }
+        &-what {
+          grid-area: labelwhat;
+          place-self: center;
+        }
+      }
+
+      &--where {
+        grid-area: where;
+        place-self: center;
+      }
+      &--what {
+        grid-area: what;
+        place-self: center;
+      }
+      &--search {
+        &_input {
+          grid-area: search;
+          justify-self: center;
+          width: 90%;
+        }        
+        &_button {
+          grid-area: searchbutton;
+          justify-self: start;
+          width: 50%;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 670px) {
+    .header {
+      &-title {
+        &-main {
+          font-size: 20px;
+        }
+        &-actions {
+          font-size: 12px;
+          
+          &--where, &--what {
+            font-size: 12px;
+            width: 90%;
+          }
+          &--search {
+            &_button {
+              width: auto;
+            }
+          }
+        }
+      }
     }
   }
 }
