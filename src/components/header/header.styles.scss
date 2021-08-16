@@ -1,23 +1,23 @@
 .header {
   box-sizing: border-box;
   width: 80%;
-  height: 95px;
+  height: 55px;
   grid-area: head;
   margin: 0 auto;
   border-bottom: 3px solid black;
   box-shadow: 0px 5px 3px -4px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas: "loginLink title title recipeLink"
-                       "actions actions actions actions";
+  grid-template-columns: 1fr 6fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "loginLink title recipeLink";
   justify-items: center;
 
   &-title {
     &-user {
       grid-area: loginLink;
       justify-self: start;
-      margin-top: 5px;
+      align-self: center;
+      margin-left: 25px;
     }
     &-main {
       grid-area: title;
@@ -28,51 +28,52 @@
     &-recipes {
       grid-area: recipeLink;
       justify-self: end;
-      margin-top: 5px;
+      align-self: center;
+      margin-right: 25px;
     }
 
-    &-actions {
-      grid-area: actions;
-      width: 100%;
-      margin-bottom: 10px;
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      grid-template-columns: 1fr 1fr 5fr 1fr;
-      grid-template-areas: "labelwhere labelwhat nothing nothing"
-                           "where what search searchbutton";
-      &-labels {
+    // &-actions {
+    //   grid-area: actions;
+    //   width: 100%;
+    //   margin-bottom: 10px;
+    //   display: grid;
+    //   grid-template-rows: 1fr 1fr;
+    //   grid-template-columns: 1fr 1fr 5fr 1fr;
+    //   grid-template-areas: "labelwhere labelwhat nothing nothing"
+    //                        "where what search searchbutton";
+    //   &-labels {
 
-        &-where {
-          grid-area: labelwhere;
-          place-self: center;
-        }
-        &-what {
-          grid-area: labelwhat;
-          place-self: center;
-        }
-      }
+    //     &-where {
+    //       grid-area: labelwhere;
+    //       place-self: center;
+    //     }
+    //     &-what {
+    //       grid-area: labelwhat;
+    //       place-self: center;
+    //     }
+    //   }
 
-      &--where {
-        grid-area: where;
-        place-self: center;
-      }
-      &--what {
-        grid-area: what;
-        place-self: center;
-      }
-      &--search {
-        &_input {
-          grid-area: search;
-          justify-self: center;
-          width: 90%;
-        }        
-        &_button {
-          grid-area: searchbutton;
-          justify-self: start;
-          width: 50%;
-        }
-      }
-    }
+    //   &--where {
+    //     grid-area: where;
+    //     place-self: center;
+    //   }
+    //   &--what {
+    //     grid-area: what;
+    //     place-self: center;
+    //   }
+    //   &--search {
+    //     &_input {
+    //       grid-area: search;
+    //       justify-self: center;
+    //       width: 90%;
+    //     }        
+    //     &_button {
+    //       grid-area: searchbutton;
+    //       justify-self: start;
+    //       width: 50%;
+    //     }
+    //   }
+    // }
   }
 
   @media only screen and (max-width: 670px) {
@@ -81,19 +82,19 @@
         &-main {
           font-size: 20px;
         }
-        &-actions {
-          font-size: 12px;
+        // &-actions {
+        //   font-size: 12px;
           
-          &--where, &--what {
-            font-size: 12px;
-            width: 90%;
-          }
-          &--search {
-            &_button {
-              width: auto;
-            }
-          }
-        }
+        //   &--where, &--what {
+        //     font-size: 12px;
+        //     width: 90%;
+        //   }
+        //   &--search {
+        //     &_button {
+        //       width: auto;
+        //     }
+        //   }
+        // }
       }
     }
   }

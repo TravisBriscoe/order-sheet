@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 
 import Header from './components/header/header.component';
 import Footer from './components/footer/footer.component';
@@ -11,6 +11,8 @@ import ManagePage from './pages/manage/manage.component';
 import OrderListPage from './pages/order-list/order-list.component';
 import RecipesPage from './pages/recipes/recipes.component';
 import LoginComponent from './components/login/login.component.jsx';
+import USER_DATA from './data/user.data';
+import PRODUCT_DATA from './data/product.data';
 
 class App extends React.Component {
   constructor() {
@@ -20,7 +22,9 @@ class App extends React.Component {
 
     this.state = {
       isUserLoggedIn: true,
-      loggedInUser: 'Manager',
+      loggedInUser: 'Admin',
+      users: USER_DATA,
+      products: PRODUCT_DATA,
     }
   }
 
@@ -32,17 +36,17 @@ class App extends React.Component {
   }
 
   render() {
-    const { isUserLoggedIn, loggedInUser, title } = this.state;
+    const { isUserLoggedIn, loggedInUser, title, users, products } = this.state;
 
     return (
       <div className={`App`}>
         <Header isUserLoggedIn={isUserLoggedIn} userLoggedIn={loggedInUser} title={title} />
         <div className={`${!isUserLoggedIn ? "is-blurred" : ""}`}>
           <Switch>
-            <Route path='/manage' component={ManagePage} />
+            <Route path='/manage' render={(props) => <ManagePage {...props} users={users} products={products} />} />
             <Route path='/order-sheet' component={OrderListPage} />
             <Route path='/recipes' component={RecipesPage} />
-            <Route exact path='/' component={ProductList} />
+            <Route exact path='/' render={(props) => <ProductList {...props} products={products} />} />
           </Switch>
         </div>
         <Footer isUserLoggedIn={isUserLoggedIn} />
@@ -62,4 +66,4 @@ class App extends React.Component {
   }
 };
 
-export default App;
+export default withRouter(App);

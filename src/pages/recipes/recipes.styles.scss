@@ -1,6 +1,8 @@
 .recipe {
-  box-sizing: border-box;
   width: 80%;
-  display: block;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+  grid-template-rows: 100%;
+  grid-template-areas: "navi rcontent";
 }

@@ -4,12 +4,10 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 4fr 35px;
+  grid-template-rows: 60px 4fr 35px;
   grid-template-areas: "head"
                        "main"
                        "foot";
-//   justify-content: center;
-//   align-content: center;
 }
 
 a {

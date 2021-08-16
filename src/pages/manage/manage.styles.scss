@@ -1,3 +1,33 @@
-.manage-content {
-  text-align: center;
+.manage-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas: "managenav"
+                       "managecontent";
+
+  &-header {
+    grid-area: managenav;
+    justify-self: center;
+    display: grid;
+    width: 30%;
+    height: 22px;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+    
+    &--link_products {
+      text-align: center;
+      width: 60%;
+      grid-column: 1/2;
+    }
+    &--link_users {
+      text-align: center;
+      width: 60%;
+      grid-column: 2/2;
+    }
+  }
+
+  &-content {
+    grid-area: managecontent;
+    justify-self: center;
+  }
 }

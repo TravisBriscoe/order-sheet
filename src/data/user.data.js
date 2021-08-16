@@ -2,7 +2,7 @@ const USER_DATA = {
   admin: {
     name: 'Admin',
     password: '123456',
-    email: 'overlord@test.com', 
+    email: 'overlord@test.com',
     role: 'administrator',
   },
   manager: {
@@ -13,7 +13,7 @@ const USER_DATA = {
   },
   worker: {
     name: 'Worker',
-    pass: '123456',
+    password: '123456',
     email: 'minion@test.com',
     role: 'worker'
   },
