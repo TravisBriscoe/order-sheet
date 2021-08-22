@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 // import "firebase/analytics";
 import 'firebase/firestore';
@@ -23,10 +23,8 @@ export const users = firestore.collection('users');
 
 export const signIn = async (username, pass) => {
   const userDataObj = await userData();
+  username = username.toLowerCase();
   let loggedInUser = {}
-
-  console.log(userDataObj)
-  console.log(userDataObj[username])
 
   if (userDataObj[username.toLowerCase()] && userDataObj[username.toLowerCase()].password === pass) {
     loggedInUser = {
@@ -39,25 +37,9 @@ export const signIn = async (username, pass) => {
     }
   }
   
-  console.log(loggedInUser);
   return loggedInUser;
 }
 
-// export const signIn = (username, pass) => {
-//   const userDataObj = userData().then(x => x);
-  
-//   const { name, password, role, email } = userDataObj.filter(data => {
-//     console.log(data);
-//   }) 
-
-//   if (!username || username !== name.toLowerCase() || pass !== password) {
-//     return alert ('Invalid username or password')
-//   }
-
-//   let loggedInUser;
-
-//   return loggedInUser;
-// }
 
 export const signOut = firebase.auth().signOut()
   .then(() => {

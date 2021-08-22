@@ -15,7 +15,6 @@ class Header extends React.Component {
   }
 
   userClickedManageUserLink(event) {
-    console.log(this.props)
     const {userLoggedIn} = this.props;
 
     if (userLoggedIn === 'Worker') {
@@ -28,7 +27,6 @@ class Header extends React.Component {
 
   render() {
     const { userLoggedIn, title = 'Portsmouth Tavern' } = this.props;
-    console.log(userLoggedIn);
 
     return (
       <div className="header" >

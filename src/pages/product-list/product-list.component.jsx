@@ -15,8 +15,6 @@ class ProductList extends React.Component {
     const { where } = products
     const { findlay, quatrocchis } = where;
     const productsObj = Object.entries(products);
-    console.log(products)
-    console.log(productsObj)
 
     return (
       // product-id name desc unit split quantity
