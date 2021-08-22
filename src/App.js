@@ -39,19 +39,21 @@ class App extends React.Component {
     const { isUserLoggedIn, loggedInUser, title, users, products } = this.state;
 
     return (
-      <div className={`App`}>
+      <div>
         { 
           !isUserLoggedIn ? 
           (
-            <LoginComponent
-              isUserLoggedIn={isUserLoggedIn}
-              setUserLoggedIn={this.setUserLoggedIn}
-              {...this.state}
-            />
+            <div className={'App'}>
+              <LoginComponent
+                isUserLoggedIn={isUserLoggedIn}
+                setUserLoggedIn={this.setUserLoggedIn}
+                {...this.state}
+              />
+            </div>
           )
           :
           (
-            <div>
+            <div className={'App'}>
               <Header isUserLoggedIn={isUserLoggedIn} userLoggedIn={loggedInUser} users={users} title={title} />
               <Switch>
                 <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} />} />
