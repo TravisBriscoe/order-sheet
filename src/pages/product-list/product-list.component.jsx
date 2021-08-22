@@ -25,8 +25,8 @@ class ProductList extends React.Component {
             <select className="product-headers-actions--from" name="header-order-from">
               <option value="all" default> -= ALL =- </option>
               <option value="findlay">Findlay</option>
-              <option value="quatrochi">Quatrochi's</option>
-              <option value="pigolive">Pig & Olive</option>
+              <option value="quattrocchi">Quattrocchi's</option>
+              <option value="pigolive">Pig &amp; Olive</option>
               <option value="misc">Misc</option>
             </select>
             <label className='product-headers-actions-labels-category' htmlFor="header-order-catagory">Category:</label>
@@ -38,12 +38,12 @@ class ProductList extends React.Component {
               <option value="dairy">Dairy</option>
               <option value="meat">Meats</option>
               <option value="produce">Produce</option>
-              <option value="sauces">Sauces & Dressings</option>
+              <option value="sauces">Sauces &amp; Dressings</option>
               <option value="paper">Paper</option>
               <option value="misc">Misc</option>
             </select>
             <input className="product-headers-actions--search_input" type="text"></input>
-            <button className="product-headers-actions--search_button">Search</button>
+            {/* <button className="product-headers-actions--search_button">Search</button> */}
           </div>
           <div className='product-headers-labels'>
             <div className='product-headers-id'>Product Id</div>

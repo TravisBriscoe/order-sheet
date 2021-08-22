@@ -80,13 +80,34 @@ const RECIPE_DATA = {
     id: 5,
     name: 'Roast-beef Rub',
     linkUrl: 'beefrub',
-    recipe: {}
+    recipe: {
+      ingrediants: [
+        '4 tablespoons Kosher Salt',
+        '2 tablespoons Cracked Black Pepper',
+        '1 tablespoon Smoked Paprika',
+        '1 tablespoon Rosemary',
+        '1 tablespoon Onion Powder',
+        '2 tablespoons Chopped Garlic'
+      ]
+    }
   },
   chickenmarinade: {
     id: 6,
     name: 'Chicken Marinade',
     linkUrl: 'chickenmarinade',
-    recipe: {}
+    recipe: {
+      ingredients: [
+        '1 cup Olive Oil',
+        '1 cup Lemon Juice',
+        '4 tablespoons Greek Seasoning',
+        '2 tablespoons Kosher Salt',
+        '2 tablespoons Cracked Black Pepper',
+        '1 tablespoon Oregano',
+        '1 teaspoon Thyme',
+        '1 tablespoon Chopped Garlic',
+        `${half} teaspoon Smoked Paprika`
+      ]
+    }
   },
   frenchonionsoup: {
     id: 7,
@@ -144,30 +165,112 @@ const RECIPE_DATA = {
       notes: `Pour tomatoes in bowl and crush by hand. Pour 1 cup Water in can and slosh around. Set aside. In large skillet (not pot) over medium heat, heat oil, add Garlic. Soon as it sizzles (don't brown), add Tomatoes, then can of Water. Simmer until thickened and oil on surface is deep orange (approx 15 min.), place Basil sprid on sauce and let wilt, submerge. Discard Basil`
     }
   },
-  placeholder: {
+  chickenfingers: {
     id: 10,
-    name: 'Placeholder',
-    linkUrl: 'placeholder',
-    recipe: {}
+    name: 'Chicken Fingers',
+    linkUrl: 'chickenfingers',
+    recipe: {
+      ingredients: [
+        'Marinade:',
+        '1 Egg',
+        '1 cup of Buttermilk',
+        `1 ${half} teaspoon Garlic powder`,
+        '1 teaspoon Smoked Paprika',
+        '1 teaspoon Kosher Salt',
+        `${half} teaspoon Ground Black Pepper`,
+        '',
+        'Breading:',
+        '3 cups Panko',
+        '1 tablespoon Kosher Salf',
+        '2 teaspoons Ground Black Pepper',
+        '1 teaspoon Onion Powder',
+        '1 teaspooon Garlic Powder',
+        '1 teaspoon Smoked Paprika',
+        `${half} cup Parmesean`,
+        '1 tablespoon Italian Seasoning'
+      ]
+    }
   },
-  placeholder1: {
+  guacamole: {
     id: 11,
-    name: 'Placeholder1',
-    linkUrl: 'placeholder1',
-    recipe: {}
+    name: 'Guacamole',
+    linkUrl: 'guacamole',
+    recipe: {
+      ingredients: [
+        '3 Avocados, mashed',
+        '2 Roma Tomatoes, diced',
+        `${half} cup diced Red Onion`,
+        '1 tablespoon Chopped Garlic',
+        '1 Lime, juiced',
+        '1 teaspoon Kosher Salt',
+        '3 tablespoon chopped Cilantro'
+      ]
+    }
   },
-  placeholder2: {
+  tzatziki: {
     id: 12,
-    name: 'Placeholder2',
-    linkUrl: 'placeholder2',
-    recipe: {}
+    name: 'Tzatziki',
+    linkUrl: 'tzatziki',
+    recipe: {
+      ingredients: [
+        '2 containers Greek Yogurt',
+        '2 tablespoons Lemon Juice',
+        '3 tablespoons Olive Oil',
+        '2 teaspoons Chopped Garlic',
+        '1 Cucumber, shredded',
+        '3 tablespoon of Fresh Dill/1 tablespoon Dried Dill',
+        `${half} teaspoon Kosher Salt`,
+        `${half} teaspoon Ground Black Pepper`,
+        `${half} teaspooon Onion Powder`,
+      ]
+    }
   },
-  placeholder3: {
+  garlicbutter: {
     id: 13,
-    name: 'Placeholder3',
-    linkUrl: 'placeholder3',
-    recipe: {}
+    name: 'Garlic Butter',
+    linkUrl: 'garlicbutter',
+    recipe: {
+      ingredients: [
+        `${half} container of Margerine`,
+        `${half} cup of Chopped Garlic`,
+        '1 tablespoon Worcestershire Sauce',
+        '2 teaspoons Garlic Powder',
+        '1 teaspoon Onion Powder',
+        '1 teaspoon Oregano',
+        '2 teaspoons Rosemary',
+        '2 teaspoons Thyme',
+        '1 tablespoon Kosher Salt',
+        `${half} teaspoon Ground Black Pepper`
+      ]
+    }
   },
+  fishbatter: {
+    id: 14,
+    name: 'Fish Batter',
+    linkUrl: 'fishbatter',
+    recipe: {
+      ingredients: [
+        'Batter:',
+        '10 oz. Lemon Juice',
+        '20 oz. Rickards Red',
+        '30 oz. Cold Water',
+        `5 ${half} cups Flour`,
+        '4 heaping teaspoons Baking Powder',
+        '5 heaping teaspoons Lemon Pepper',
+        '3 tablespoons Dried Dill',
+        '1 tablespoon Coriander',
+        '2 tablespoons Kosher Salt',
+        '1 teaspoon Ground Black Pepper',
+        `${half} teaspoon Smoked Paprika`,
+        '',
+        'Dredge:',
+        '2 cups flour',
+        '1 tablespoon Coriander',
+        '1 teaspoon Ground Black Pepper',
+      ],
+      notes: `Combine all dry ingredients for batter and mix well. Combine all wet ingredients. Mix both together with whisk until the consistiency of thickish pancake mix (adding water or flour if needed). Let sit for 10 minutes. Whisk before using.`
+    }
+  }
 };
 
 export default RECIPE_DATA;

@@ -19,7 +19,7 @@ const PRODUCT_DATA = {
         }
       }
     },
-    quatrocchis: {
+    quattrocchis: {
       id: 2,
       peppers: {
         red: {
