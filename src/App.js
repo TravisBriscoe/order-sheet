@@ -3,16 +3,18 @@ import { Switch, Route, withRouter } from "react-router-dom";
 
 import Header from './components/header/header.component';
 import Footer from './components/footer/footer.component';
-
-// import logo from './logo.svg';
-import './App.scss';
 import ProductList from './pages/product-list/product-list.component';
 import ManagePage from './pages/manage/manage.component';
 import OrderListPage from './pages/order-list/order-list.component';
 import RecipesPage from './pages/recipes/recipes.component';
 import LoginComponent from './components/login/login.component.jsx';
-import USER_DATA from './data/user.data';
+
 import PRODUCT_DATA from './data/product.data';
+
+import { userData } from './firebase/firebase.utils';
+
+// import logo from './logo.svg';
+import './App.scss';
 
 class App extends React.Component {
   constructor() {
@@ -21,9 +23,9 @@ class App extends React.Component {
     this.setUserLoggedIn = this.setUserLoggedIn.bind(this);
 
     this.state = {
-      isUserLoggedIn: true,
-      loggedInUser: 'Admin',
-      users: USER_DATA,
+      isUserLoggedIn: false,
+      loggedInUser: '',
+      users: userData,
       products: PRODUCT_DATA,
     }
   }
@@ -31,8 +33,6 @@ class App extends React.Component {
   setUserLoggedIn(status, user) {
     this.setState({isUserLoggedIn: status });
     this.setState({loggedInUser: user});
-
-    console.log(this.state);
   }
 
   render() {
@@ -40,26 +40,28 @@ class App extends React.Component {
 
     return (
       <div className={`App`}>
-        <Header isUserLoggedIn={isUserLoggedIn} userLoggedIn={loggedInUser} title={title} />
-        <div className={`${!isUserLoggedIn ? "is-blurred" : ""}`}>
-          <Switch>
-            <Route path='/manage' render={(props) => <ManagePage {...props} users={users} products={products} />} />
-            <Route path='/order-sheet' component={OrderListPage} />
-            <Route path='/recipes' component={RecipesPage} />
-            <Route exact path='/' render={(props) => <ProductList {...props} products={products} />} />
-          </Switch>
-        </div>
-        <Footer isUserLoggedIn={isUserLoggedIn} />
-        {
+        { 
           !isUserLoggedIn ? 
-            (
-              <LoginComponent
-                isUserLoggedIn={isUserLoggedIn}
-                setUserLoggedIn={this.setUserLoggedIn}
-                {...this.state}
-              />
-            )
-            : null
+          (
+            <LoginComponent
+              isUserLoggedIn={isUserLoggedIn}
+              setUserLoggedIn={this.setUserLoggedIn}
+              {...this.state}
+            />
+          )
+          :
+          (
+            <div>
+              <Header isUserLoggedIn={isUserLoggedIn} userLoggedIn={loggedInUser} users={users} title={title} />
+              <Switch>
+                <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} />} />
+                <Route path='/order-sheet' component={OrderListPage} />
+                <Route path='/recipes' component={RecipesPage} />
+                <Route exact path='/' render={(props) => <ProductList {...props} products={products} />} />
+              </Switch>
+              <Footer isUserLoggedIn={isUserLoggedIn} />
+            </div>
+          )
         }
       </div>
     );

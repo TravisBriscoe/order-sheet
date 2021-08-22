@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch, Route, NavLink, withRouter, useHistory } from 'react-router-dom';
+import { Switch, Route, NavLink, withRouter } from 'react-router-dom';
 
 import ManageProducts from '../../components/manage-products/manage-products.component';
 import ManageUsers from '../../components/manage-users/manage-users.component';
@@ -14,12 +14,13 @@ class ManagePage extends React.Component {
     this.state = {
       isSelected: false,
       users: this.props.users,
+      userLoggedIn: this.props.userLoggedIn,
     }
   }
 
   render() {
-    console.log(this.props)
-
+    console.log(this.state);
+    
     return (
       <div className='manage-page'>
         <div className='manage-page-header'>
@@ -29,7 +30,7 @@ class ManagePage extends React.Component {
             activeStyle={{backgroundColor: "blue", color: "white"}}
           >Manage Products</NavLink>
           <NavLink
-            to={{ pathname: '/manage/edit-users' }}
+            to={{ pathname: '/manage/edit-users', state: { userLoggedIn: this.props.userLoggedIn } }}
             className='manage-page-header--link_users'
             activeStyle={{backgroundColor: "blue", color: "white"}}
           >Manage Users</NavLink>

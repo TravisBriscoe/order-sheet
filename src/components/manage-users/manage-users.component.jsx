@@ -2,19 +2,28 @@ import React from 'react';
 
 import { withRouter } from 'react-router-dom';
 
-class ManageUsers extends React.Component {
-  constructor(props) {
-    super(props) 
+import '../../firebase/firebase.utils.js'
 
-    this.state = {
-      users: this.props.users,
-    }
-  }
-  
-  render() {
-    const { users } = this.state;
+const ManageUsers = (props) => {
+    const { users, userLoggedIn } = props;
     const userObj = Object.entries(users);
-    console.log(this.props)
+    console.log(userLoggedIn)
+
+    const adminDeleteAll = () => {
+      if (userLoggedIn !== 'Admin') {
+        return;
+      } else {
+        const deleteAllUsers = Object.entries(users).filter((user, index) => user[1].name !== 'Admin');
+        console.log(deleteAllUsers.length)
+        const userObjRemoved = userObj.filter((el, index) => el[index] === deleteAllUsers[index][1].name);
+        // for (let i = 0; i === deleteAllUsers.length; i++) {
+        //   console.log(deleteAllUsers[i])
+        //   return delete userObj[i][deleteAllUsers[1]].name
+        // }
+        console.log(userObjRemoved)
+      }
+
+    }
 
     return(
       <div>
@@ -37,14 +46,13 @@ class ManageUsers extends React.Component {
           })
         }
         <button>Add New User</button>
-        {/* {
+        {
           userLoggedIn === 'Admin' ?
-            (<button>Delete All!</button>)
+            (<button onClick={adminDeleteAll}>Delete All!</button>)
             : null
-        } */}
+        }
       </div>
     );
   }
-}
 
 export default withRouter(ManageUsers);

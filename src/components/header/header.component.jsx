@@ -27,11 +27,11 @@ class Header extends React.Component {
   }
 
   render() {
-    const { isUserLoggedIn, userLoggedIn, title = 'Portsmouth Tavern' } = this.props;
+    const { userLoggedIn, title = 'Portsmouth Tavern' } = this.props;
     console.log(userLoggedIn);
 
     return (
-      <div className={`header ${!isUserLoggedIn ? "is-blurred" : ""}`} >
+      <div className="header" >
         <div className="header-title-user">
           {
             userLoggedIn ?

@@ -4,7 +4,9 @@ import React from 'react';
 
 // import NewUserComponent from '../newuser/newuser.component';
 
-import USER_DATA from '../../data/user.data';
+// import USER_DATA from '../../data/user.data';
+
+import { signIn } from '../../firebase/firebase.utils';
 
 import './login.styles.scss';
 
@@ -16,9 +18,7 @@ class LoginComponent extends React.Component {
     this.checkLogin = this.checkLogin.bind(this);
 
     this.state = {
-      users: USER_DATA,
       username: '',
-      location: '',
       password: '',
     }
   }
@@ -31,27 +31,37 @@ class LoginComponent extends React.Component {
     });
   };
 
-  checkLogin(event) {
+  async checkLogin(event) {
     event.preventDefault();
 
-    const { users, username, password } = this.state;
+    const { username, password } = this.state;
 
-    console.log(users[username])
+    const signInData = await signIn(username, password);
 
-    if (!users[username]) {
-      alert('Username or password does not match! Please try again');
-      return this.setState({ username: '', password: '' });
-    }      
-    if (users[username].name === username && users[username].password === password) {
-      this.props.setUserLoggedIn(true, username);
+    this.props.setUserLoggedIn(signInData.isUserLoggedIn, signInData.name);
+
+    return signInData;
+
+    // const signInData = signIn(username, password);
+
+    // console.log(signInData);
+
+    // console.log(users)
+
+    // if (!users[username]) {
+    //   alert('Username or password does not match! Please try again');
+    //   return this.setState({ username: '', password: '' });
+    // }      
+    // if (users[username].name === username && users[username].password === password) {
+    //   this.props.setUserLoggedIn(true, username);
       
-      return username;
-    }
+    //   return username;
+    // }
   }
 
 
   render() {
-    const { username, location, password } = this.state.users;
+    const { username, password } = this.state;
 
     return (
       <div className='login'>
@@ -63,14 +73,6 @@ class LoginComponent extends React.Component {
             name='username'
             placeholder='Username'
             value={username}
-            onChange={this.handleChange}
-          />
-          <input
-            className='login-form--location'
-            type='text'
-            name='location'
-            placeholder='Location'
-            value={location}
             onChange={this.handleChange}
           />
           <input
