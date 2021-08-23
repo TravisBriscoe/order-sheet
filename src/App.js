@@ -11,7 +11,7 @@ import LoginComponent from './components/login/login.component.jsx';
 
 import PRODUCT_DATA from './data/product.data';
 
-import { userData } from './firebase/firebase.utils';
+import { userData, recipeData } from './firebase/firebase.utils';
 
 // import logo from './logo.svg';
 import './App.scss';
@@ -25,8 +25,9 @@ class App extends React.Component {
     this.state = {
       isUserLoggedIn: false,
       loggedInUser: '',
-      users: userData,
+      users: '',
       products: PRODUCT_DATA,
+      recipes: '',
     }
   }
 
@@ -35,8 +36,26 @@ class App extends React.Component {
     this.setState({loggedInUser: user});
   }
 
+  componentDidMount() {
+
+    const getUserData = async () => {
+      const userDataObj = await userData();
+      
+      this.setState({users: userDataObj})
+    }
+  
+    const getRecipeData = async () => {
+      const recipeDataObj = await recipeData();
+
+      this.setState({recipes: recipeDataObj})
+    }
+
+    getUserData();
+    getRecipeData();
+  }
+
   render() {
-    const { isUserLoggedIn, loggedInUser, title, users, products } = this.state;
+    const { isUserLoggedIn, loggedInUser, title, users, products, recipes } = this.state;
 
     return (
       <div>
@@ -58,7 +77,7 @@ class App extends React.Component {
               <Switch>
                 <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} />} />
                 <Route path='/order-sheet' component={OrderListPage} />
-                <Route path='/recipes' component={RecipesPage} />
+                <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
                 <Route exact path='/' render={(props) => <ProductList {...props} products={products} />} />
               </Switch>
               <Footer isUserLoggedIn={isUserLoggedIn} />

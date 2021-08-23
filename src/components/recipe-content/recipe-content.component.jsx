@@ -4,13 +4,13 @@ import { useParams } from 'react-router-dom';
 
 import './recipe-content.styles.scss';
 
-const RecipeContent = (...otherRecipeProps) => {
+const RecipeContent = ({ recipes }) => {
   const { recipeId } = useParams();
-  const recipeData = {...otherRecipeProps[0][recipeId]};
+  const recipeData = {...recipes[recipeId]};
 
   const { name, recipe: {ingredients, notes } = {} } = recipeData;
   // const { ingredients, notes } = recipe;
-
+  
   return (
   <div className='recipe-content'>
     <h2 className='recipe-content-title' key={name}>{name}</h2>

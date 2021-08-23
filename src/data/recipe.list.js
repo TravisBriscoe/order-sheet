@@ -81,7 +81,7 @@ const RECIPE_DATA = {
     name: 'Roast-beef Rub',
     linkUrl: 'beefrub',
     recipe: {
-      ingrediants: [
+      ingredients: [
         '4 tablespoons Kosher Salt',
         '2 tablespoons Cracked Black Pepper',
         '1 tablespoon Smoked Paprika',

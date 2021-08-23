@@ -15,9 +15,9 @@ class Header extends React.Component {
   }
 
   userClickedManageUserLink(event) {
-    const {userLoggedIn} = this.props;
+    const { userLoggedIn } = this.props;
 
-    if (userLoggedIn === 'Worker') {
+    if (userLoggedIn === 'worker') {
       event.preventDefault();
       return console.log('Logout!');
     } else {

@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 // import "firebase/analytics";
 import 'firebase/firestore';
 import 'firebase/auth';
+// import RECIPE_DATA from '../data/recipe.list';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBhlBXhSRTzKYU3i8sGcxxiBDYnp8R9Em4",
@@ -20,6 +21,7 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 export const users = firestore.collection('users');
+export const recipes = firestore.collection('recipe-list');
 
 export const signIn = async (username, pass) => {
   const userDataObj = await userData();
@@ -40,19 +42,17 @@ export const signIn = async (username, pass) => {
   return loggedInUser;
 }
 
-
-export const signOut = firebase.auth().signOut()
-  .then(() => {
-    let user = ''
-    return user;
-  })
-  .catch(err => console.err('Error!', err.message));
+// export const signOut = firebase.auth().signOut()
+//   .then(() => {
+//     let user = ''
+//     return user;
+//   })
+//   .catch(err => console.err('Error!', err.message));
 
 export const userData = async () => {
   const userDataObj = Object.create({});
   
   try {
-
     await users.get().then(snapshot => snapshot.docs.map(doc => {
       const { name } = doc.data();
 
@@ -63,14 +63,42 @@ export const userData = async () => {
 
       return userDataObj;
     }));
-    
-    return userDataObj;
-
   } catch (err) {
-    console.log('Error: ', err.message);
+    console.log('Error! ', err.message)
   }
-
+  
   return userDataObj;
 }
+
+export const recipeData = async () => {
+  const recipeDataObj = Object.create({});
+
+  await recipes.get().then(snapshot => snapshot.docs.map(doc => {
+    const { linkUrl } = doc.data();
+
+    recipeDataObj[linkUrl] = {
+      ...doc.data()
+    }
+
+    return recipeDataObj;
+  }))
+  
+  return recipeDataObj;
+}
+
+// Add data (recipes) to firebase.
+// const inputDataToFirebase = async () => {
+//   const batch = firestore.batch();
+
+//   Object.entries(RECIPE_DATA).map((key) => {
+//     const { linkUrl } = key[1];
+//     const recipeListDoc = recipes.doc(linkUrl);
+//     batch.set(recipeListDoc, key[1]);    
+//   })
+
+//   return await batch.commit();
+// }
+
+// inputDataToFirebase();
 
 export default firebase;
