@@ -40,7 +40,7 @@ class App extends React.Component {
 
     const getUserData = async () => {
       const userDataObj = await userData();
-      
+
       this.setState({users: userDataObj})
     }
   
@@ -75,7 +75,7 @@ class App extends React.Component {
             <div className={'App'}>
               <Header isUserLoggedIn={isUserLoggedIn} userLoggedIn={loggedInUser} users={users} title={title} />
               <Switch>
-                <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} />} />
+                <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} recipes={recipes} />} />
                 <Route path='/order-sheet' component={OrderListPage} />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
                 <Route exact path='/' render={(props) => <ProductList {...props} products={products} />} />
