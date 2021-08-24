@@ -12,8 +12,8 @@ class ProductList extends React.Component {
   }
   render() {
     const { products } = this.state;
-    const { where } = products
-    const { findlay, quatrocchis } = where;
+    const { where } = products;
+    const { findlays, quattrocchis, pigolive } = where;
     const productsObj = Object.entries(products);
 
     return (
@@ -29,24 +29,30 @@ class ProductList extends React.Component {
               <option value="pigolive">Pig &amp; Olive</option>
               <option value="misc">Misc</option>
             </select>
-            <label className='product-headers-actions-labels-category' htmlFor="header-order-catagory">Category:</label>
-            <select className='product-headers-actions--category' name="header-order-catagory">
+            <label className='product-headers-actions-labels-storage' htmlFor='header-order-storage'>Storage:</label>
+            <select className='product-headers-actions--storage' name='header-order-storage'>
               <option value="all" default> -= ALL =- </option>
               <option value="fridge">Fridge</option>
               <option value="freezer">Freezer</option>
               <option value="pantry">Pantry</option>
+            </select>
+            <label className='product-headers-actions-labels-category' htmlFor="header-order-catagory">Category:</label>
+            <select className='product-headers-actions--category' name="header-order-catagory">
+              <option value="all" default> -= ALL =- </option>
               <option value="dairy">Dairy</option>
               <option value="meat">Meats</option>
               <option value="produce">Produce</option>
               <option value="sauces">Sauces &amp; Dressings</option>
-              <option value="paper">Paper</option>
+              <option value="spices">Spices</option>
+              <option value="paper">Paper/Plastic</option>
+              <option value="chemicals">Chemicals</option>
               <option value="misc">Misc</option>
             </select>
-            <input className="product-headers-actions--search_input" type="text"></input>
-            {/* <button className="product-headers-actions--search_button">Search</button> */}
+            <input className="product-headers-actions--search_input" type="text" placeholder='Search!'></input>
+            <button className="product-headers-actions--search_btn--clr">Clear</button>
           </div>
           <div className='product-headers-labels'>
-            <div className='product-headers-id'>Product Id</div>
+            {/* <div className='product-headers-id'>Product Id</div> */}
             <div className='product-headers-labels-name'>Name</div>
             <div className='product-headers-labels-desc'>Description</div>
             <div className='product-headers-labels-unit'>Unit</div>
@@ -59,8 +65,8 @@ class ProductList extends React.Component {
             {
               productsObj.map(el => {
                 return (
-                  <ul className='product-item' key={el[1].findlay.id}>
-                    <li className='product-item-id'>1</li>
+                  <ul className='product-item' key={el[1]}>
+                    {/* <li className='product-item-id'>1</li> */}
                     <li className='product-item-name'>Cheddar</li>
                     <li className='product-item-desc'>Shredded</li>
                     <li className='product-item-unit'>4x5lb/cs</li>

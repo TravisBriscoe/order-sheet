@@ -1,33 +1,41 @@
 .manage-page {
+  width: 80%;
+  justify-self: center;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: 1fr 10fr;
   grid-template-areas: "managenav"
                        "managecontent";
 
   &-header {
     grid-area: managenav;
-    justify-self: center;
+    place-self: center;
     display: grid;
     width: 30%;
-    height: 22px;
     justify-items: center;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid gray;
+    padding-bottom: 6px;
     
-    &--link_products {
+    &--link {
       text-align: center;
       width: 60%;
-      grid-column: 1/2;
-    }
-    &--link_users {
-      text-align: center;
-      width: 60%;
-      grid-column: 2/2;
+      
+      &_products {
+        grid-column: 1 / 2;
+      }
+      &--link_users {
+        grid-column: 2 / 2;
+      }
+      &--link_recipes {
+        grid-column: 3 / 4;
+      }
     }
   }
 
   &-content {
     grid-area: managecontent;
     justify-self: center;
+    align-self: start;
   }
 }
