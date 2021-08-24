@@ -22,7 +22,6 @@ class ManagePage extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     
     return (
       <div className='manage-page'>

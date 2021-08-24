@@ -1,15 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
-import RECIPE_DATA from '../../data/recipe.list';
+// import RECIPE_DATA from '../../data/recipe.list';
 
 import './recipe-nav.styles.scss';
 
-const RecipeNav = () => {
+const RecipeNav = ({ recipes }) => {
+  const { path } = useRouteMatch();
+
   return (
     <nav className='recipe-nav'>
       {
-        Object.keys(RECIPE_DATA).map((keyName, keyIndex) => (<Link key={keyIndex} to={`/recipes/${RECIPE_DATA[keyName].linkUrl}`}>{RECIPE_DATA[keyName].name}</Link>))
+        Object.keys(recipes).map((keyName, keyIndex) => (<Link key={keyIndex} to={`${path}/${recipes[keyName].linkUrl}`}>{recipes[keyName].name}</Link>))
       }
     </nav>
   )

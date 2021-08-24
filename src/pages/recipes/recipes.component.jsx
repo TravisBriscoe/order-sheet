@@ -19,7 +19,9 @@ const RecipesPage = (props) => {
           <RecipeContent recipes={recipes} />
         </Route>
       </Switch>
-      <RecipeNav />
+      <div className='recipe-navi'>
+        <RecipeNav recipes={recipes} />
+      </div>
     </div>
   )
 };
