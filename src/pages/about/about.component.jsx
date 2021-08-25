@@ -6,7 +6,7 @@ const AboutPage = () => {
 
   return (
     <div className='about-content'>
-      <div className='about-content-copyright'>&copy; 2021, Walrus Enterprises/<a href='https://github.com/TravisBriscoe'>Travis Briscoe</a></div>
+      <div className='about-content-copyright'>&copy; 2021, Walrus Enterprises/<a href='https://github.com/TravisBriscoe/order-sheet' target='_blank' rel="noreferrer">Travis Briscoe</a></div>
       <br />
       <div className='about-content-favicon'>Favicon made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
       <br />
