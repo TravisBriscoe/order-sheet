@@ -8,6 +8,7 @@ import ManagePage from './pages/manage/manage.component';
 import OrderListPage from './pages/order-list/order-list.component';
 import RecipesPage from './pages/recipes/recipes.component';
 import LoginComponent from './components/login/login.component.jsx';
+import AboutPage from './pages/about/about.component';
 
 import PRODUCT_DATA from './data/product.data';
 
@@ -78,6 +79,7 @@ class App extends React.Component {
                 <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} recipes={recipes} />} />
                 <Route path='/order-sheet' component={OrderListPage} />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
+                <Route exact path='/about' component={AboutPage} />
                 <Route exact path='/' render={(props) => <ProductList {...props} products={products} />} />
               </Switch>
               <Footer isUserLoggedIn={isUserLoggedIn} />

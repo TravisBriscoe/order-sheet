@@ -8,7 +8,7 @@ const Footer = (props) => {
 
   return (
   <div className='footer'>
-    <div className='footer-copyright'>&copy; 2021, Travis Briscoe</div>
+    <Link to='/about'>About</Link>
     <div className='footer-item-total'>12 items</div>
     <div className='footer-nav--submit'>
       {

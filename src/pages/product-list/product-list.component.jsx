@@ -11,10 +11,9 @@ class ProductList extends React.Component {
     }
   }
   render() {
-    const { products } = this.state;
-    const { where } = products;
-    const { findlays, quattrocchis, pigolive } = where;
-    const productsObj = Object.entries(products);
+    // const { products } = this.state;
+    // const { where } = products;
+    // const productsObj = Object.entries(products);
 
     return (
       // product-id name desc unit split quantity
@@ -62,11 +61,10 @@ class ProductList extends React.Component {
         </div>
         <div>
           <div className='product-items'>
-            {
+            {/* {
               productsObj.map(el => {
                 return (
                   <ul className='product-item' key={el[1]}>
-                    {/* <li className='product-item-id'>1</li> */}
                     <li className='product-item-name'>Cheddar</li>
                     <li className='product-item-desc'>Shredded</li>
                     <li className='product-item-unit'>4x5lb/cs</li>
@@ -75,7 +73,14 @@ class ProductList extends React.Component {
                   </ul>
                 )
               })
-            }
+            } */}
+            <ul className='product-item'>
+              <li className='product-item-name'>Cheddar</li>
+              <li className='product-item-desc'>Shredded</li>
+              <li className='product-item-unit'>4x5lb/cs</li>
+              <li className='product-item-split'>Y</li>
+              <input type='text' className='product-item-quantity' placeholder='0' />
+            </ul>
           </div>
         </div>
       </div>

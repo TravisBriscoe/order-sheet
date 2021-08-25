@@ -1,0 +1,8 @@
+.about-content {
+  grid-area: main;
+  place-self: center;
+
+  &--contact-me {
+    text-align: center ;
+  }
+}
