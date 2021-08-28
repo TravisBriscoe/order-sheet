@@ -1,11 +1,5 @@
 import React from 'react';
 
-// import { Link } from 'react-router-dom';
-
-// import NewUserComponent from '../newuser/newuser.component';
-
-// import USER_DATA from '../../data/user.data';
-
 import { signIn } from '../../firebase/firebase.utils';
 
 import './login.styles.scss';
@@ -38,32 +32,15 @@ class LoginComponent extends React.Component {
 
     const signInData = await signIn(username, password);
     
-    if (!signInData.isUserLoggedIn) {
-      this.props.setUserLoggedIn(false, null);
-      this.setState({ username: '', password: '' });
-      return alert('Invalid username or password.');
+    console.log('Login!?')
+    console.log(signInData)
+    if (signInData.name) {
+      this.props.setUserLoggedIn(signInData.name);
     } else {
-      this.props.setUserLoggedIn(signInData.isUserLoggedIn, signInData.name);
+      this.props.setUserLoggedIn(null);
+      alert('Invalid username or password.');
     }
-
-
-    return signInData;
-
-    // const signInData = signIn(username, password);
-
-    // console.log(signInData);
-
-    // console.log(users)
-
-    // if (!users[username]) {
-    //   alert('Username or password does not match! Please try again');
-    //   return this.setState({ username: '', password: '' });
-    // }      
-    // if (users[username].name === username && users[username].password === password) {
-    //   this.props.setUserLoggedIn(true, username);
-      
-    //   return username;
-    // }
+    return signInData
   }
 
 

@@ -1,0 +1,93 @@
+.product {
+
+  &-headers {
+    border-bottom: 2px solid black;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+  
+    
+    &-actions {
+      grid-row: 1 / 2;
+      width: 100%;
+      margin-bottom: 10px;
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-areas: "nothing where storage nothing"
+      "nothing categories categories nothing"
+      "searchbar searchbar searchbar clear";
+      
+      // &-labels {
+        
+        //   &-from {
+          //     grid-area: whereLabel;
+          //     place-self: center;
+          //   }
+          //   &-storage {
+            //     grid-column: 3 / 4;
+            //     place-self: center;
+            //   }
+            //   &-category {
+              //     grid-row: 2 / 3;
+              //     grid-column: 2 / 3;
+              //     place-self: center;
+              //   }
+              // }
+      &--from {
+        grid-area: where;
+        place-self: center;
+        text-align: center;
+      }
+      &--storage {
+        grid-area: storage;
+        place-self: center;
+        text-align: center;
+      }
+      &--category {
+        grid-area: categories;
+        place-self: center;
+        text-align: center;
+      }
+      &--search {
+        &_input {
+          grid-area: searchbar;
+          justify-self: end;
+          text-align: right;
+          margin-right: 15px;
+          width: 75%;
+          padding-right: 12px;
+        }
+        &_btn--clr {
+          grid-area: clear;
+          width: 45px;
+          justify-self: start;
+        }
+      }
+    }
+    &-labels {
+      grid-row: 2 / 3;
+      display: grid;
+      grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
+      width: 100%;
+      justify-items: center;
+      font-weight: bold;
+      
+      &-name {
+        grid-column: 1 / 2;
+      }
+      &-desc {
+        grid-column: 2 / 3;
+      }
+      &-unit {
+        grid-column: 3 / 4;
+      }
+      &-split {
+        grid-column: 4 / 5;
+      }
+      &-quantity {
+        grid-column: 5 / 6;
+      }
+    }
+  }
+}

@@ -28,15 +28,12 @@ export const signIn = async (username, pass) => {
   username = username.toLowerCase();
   let loggedInUser = {}
 
-  if (userDataObj[username.toLowerCase()] && userDataObj[username.toLowerCase()].password === pass) {
+  if (userDataObj[username] && userDataObj[username].password === pass) {
     loggedInUser = {
-      isUserLoggedIn: true,
       ...userDataObj[username]
     }
   } else {
-    loggedInUser = {
-      isUserLoggedIn: false,
-    }
+    loggedInUser = null
   }
   
   return loggedInUser;

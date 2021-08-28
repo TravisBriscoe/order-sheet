@@ -22,50 +22,52 @@ class App extends React.Component {
     super() 
 
     this.setUserLoggedIn = this.setUserLoggedIn.bind(this);
+    this.setNotification = this.setNotification.bind(this);
 
     this.state = {
-      isUserLoggedIn: false,
       loggedInUser: '',
       users: '',
       products: PRODUCT_DATA,
       recipes: '',
+      notification: true,
     }
   }
 
-  setUserLoggedIn(status, user) {
-    this.setState({isUserLoggedIn: status });
-    this.setState({loggedInUser: user});
+  setUserLoggedIn(user) {
+    return this.setState({ loggedInUser: user });
+  }
+
+  setNotification(notifications) {
+    if (notifications) {
+      return this.setState({ notification: false });
+    } else {
+      return this.setState({ notification: true });
+    }
   }
 
   componentDidMount() {
 
-    const getUserData = async () => {
+    const getData = async () => {
       const userDataObj = await userData();
-
-      this.setState({users: userDataObj})
-    }
-  
-    const getRecipeData = async () => {
       const recipeDataObj = await recipeData();
 
+      this.setState({users: userDataObj})
       this.setState({recipes: recipeDataObj})
     }
 
-    getUserData();
-    getRecipeData();
+    return getData();
   }
 
   render() {
-    const { isUserLoggedIn, loggedInUser, title, users, products, recipes } = this.state;
+    const { loggedInUser, title, users, products, recipes, notification } = this.state;
 
     return (
       <div>
         { 
-          !isUserLoggedIn ? 
+          !loggedInUser ? 
           (
             <div className={'App'}>
               <LoginComponent
-                isUserLoggedIn={isUserLoggedIn}
                 setUserLoggedIn={this.setUserLoggedIn}
                 {...this.state}
               />
@@ -74,17 +76,18 @@ class App extends React.Component {
           :
           (
             <div className={'App'}>
-              <Header isUserLoggedIn={isUserLoggedIn} userLoggedIn={loggedInUser} users={users} title={title} />
+              <Header loggedInUser={loggedInUser} users={users} title={title} notification={notification} setNotification={this.setNotification} />
               <Switch>
                 <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} recipes={recipes} />} />
-                <Route path='/order-sheet' component={OrderListPage} />
+                <Route path='/order-sheet' render={(props) => <OrderListPage {...props} />} />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
                 <Route exact path='/about' component={AboutPage} />
                 <Route exact path='/' render={(props) => <ProductList {...props} products={products} />} />
               </Switch>
-              <Footer isUserLoggedIn={isUserLoggedIn} />
+              <Footer />
             </div>
           )
+          
         }
       </div>
     );

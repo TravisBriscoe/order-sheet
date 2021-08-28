@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductListMenu from '../../components/product-list-menu/product-list-menu.component';
 
 import './product-list.styles.scss';
 
@@ -6,19 +7,29 @@ class ProductList extends React.Component {
   constructor(props) {
     super(props)
 
+    this.handleInputChange = this.handleInputChange.bind(this);
+
     this.state = {
-      products: this.props.products
+      products: this.props.products,
+      orderProducts: {},
+      quantity: 0,
     }
   }
-  render() {
-    // const { products } = this.state;
-    // const { where } = products;
-    // const productsObj = Object.entries(products);
 
+  handleInputChange(event, name) {
+    const target = event.target;
+    const value = target.value;
+    this.setState({ quantity: value })
+    this.setState({ orderProducts: {
+      [name]: value
+    }}, () => console.log(this.state.orderProducts));
+  }
+
+  render() {
     return (
-      // product-id name desc unit split quantity
       <div className='product'>
-        <div className='product-headers'>
+        <ProductListMenu />
+        {/* <div className='product-headers'>
           <div className='product-headers-actions'>
             <label className='product-headers-actions-labels-from' htmlFor="header-order-from">From:</label>
             <select className="product-headers-actions--from" name="header-order-from">
@@ -51,14 +62,13 @@ class ProductList extends React.Component {
             <button className="product-headers-actions--search_btn--clr">Clear</button>
           </div>
           <div className='product-headers-labels'>
-            {/* <div className='product-headers-id'>Product Id</div> */}
             <div className='product-headers-labels-name'>Name</div>
             <div className='product-headers-labels-desc'>Description</div>
             <div className='product-headers-labels-unit'>Unit</div>
             <div className='product-headers-labels-split'>Split?</div>
             <div className='product-headers-labels-quantity'>Order Quantity</div>
           </div>
-        </div>
+        </div> */}
         <div>
           <div className='product-items'>
             {/* {
@@ -79,7 +89,13 @@ class ProductList extends React.Component {
               <li className='product-item-desc'>Shredded</li>
               <li className='product-item-unit'>4x5lb/cs</li>
               <li className='product-item-split'>Y</li>
-              <input type='text' className='product-item-quantity' placeholder='0' />
+              <input
+                type='text'
+                name='quantity'
+                className='product-item-quantity'
+                value={this.state.quantity}
+                onChange={(event) => this.handleInputChange(event, 'cheddar')}
+              />
             </ul>
           </div>
         </div>

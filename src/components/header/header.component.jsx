@@ -11,13 +11,23 @@ class Header extends React.Component {
 
     this.state = {
       status: null,
+      loggedInUser: this.props.loggedInUser,
+      notification: this.props.notification,
+    }
+  }
+
+  componentDidMount() {
+    console.log(this.state.notification)
+    if (this.state.notification === true && this.state.loggedInUser === 'manager') {
+      alert('Products added to Order Sheet!');
+      return this.props.setNotification(this.state.notification);
     }
   }
 
   userClickedManageUserLink(event) {
-    const { userLoggedIn } = this.props;
+    const { loggedInUser } = this.props;
 
-    if (userLoggedIn === 'worker') {
+    if (loggedInUser === 'worker') {
       event.preventDefault();
       return console.log('Logout!');
     } else {
@@ -26,14 +36,14 @@ class Header extends React.Component {
   }
 
   render() {
-    const { userLoggedIn, title = 'Portsmouth Tavern' } = this.props;
+    const { loggedInUser, title = 'Portsmouth Tavern' } = this.props;
 
     return (
       <div className="header" >
         <div className="header-title-user">
           {
-            userLoggedIn ?
-              (<Link to={{ pathname: '/manage', state: { userLoggedIn } }} onClick={this.userClickedManageUserLink}>User: {userLoggedIn}</Link>)
+            loggedInUser ?
+              (<Link to={{ pathname: '/manage', state: { loggedInUser } }} onClick={this.userClickedManageUserLink}>User: {loggedInUser}</Link>)
               : (<Link to='/'>Login</Link>)
           }
         </div>
