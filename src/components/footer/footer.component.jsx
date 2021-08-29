@@ -24,6 +24,9 @@ const Footer = (props) => {
           : null
       }
     </div>
+    <div className='footer-nav--logout'>
+      <button onClick={props.signOut}>Logout</button>
+    </div>
   </div>
 )};
 

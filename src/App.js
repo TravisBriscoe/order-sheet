@@ -23,6 +23,7 @@ class App extends React.Component {
 
     this.setUserLoggedIn = this.setUserLoggedIn.bind(this);
     this.setNotification = this.setNotification.bind(this);
+    this.setSignOut = this.setSignOut.bind(this);
 
     this.state = {
       loggedInUser: '',
@@ -34,6 +35,7 @@ class App extends React.Component {
   }
 
   setUserLoggedIn(user) {
+    this.props.history.push('/');
     return this.setState({ loggedInUser: user });
   }
 
@@ -56,6 +58,12 @@ class App extends React.Component {
     }
 
     return getData();
+  }
+
+  setSignOut() {
+    this.setState({ loggedInUser: '' });
+    window.localStorage.clear();
+    return this.props.history.push('/');
   }
 
   render() {
@@ -84,7 +92,7 @@ class App extends React.Component {
                 <Route exact path='/about' component={AboutPage} />
                 <Route exact path='/' render={(props) => <ProductList {...props} products={products} />} />
               </Switch>
-              <Footer />
+              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut}/>
             </div>
           )
           

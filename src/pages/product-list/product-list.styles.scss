@@ -133,12 +133,19 @@
 }
 
 @media only screen and (max-width: 880px) {
-  .product-headers {
-    grid-template-rows: 1fr;
+  .product {
 
-    &-actions {
+    &-headers {
       grid-template-rows: 1fr;
-      &--from, &--storage, &--category { display: none; }
+
+      &-actions {
+        grid-template-rows: 1fr;
+        &--from, &--storage, &--category { display: none; }
+      }
+    }
+
+    &-items-container {
+      overflow-y: auto;
     }
   }
 }

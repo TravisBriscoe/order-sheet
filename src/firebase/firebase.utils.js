@@ -25,6 +25,7 @@ export const recipes = firestore.collection('recipe-list');
 
 export const signIn = async (username, pass) => {
   const userDataObj = await userData();
+  const myStorage = window.localStorage;
   username = username.toLowerCase();
   let loggedInUser = {}
 
@@ -32,7 +33,10 @@ export const signIn = async (username, pass) => {
     loggedInUser = {
       ...userDataObj[username]
     }
+
+    myStorage.setItem("name", `${loggedInUser.name}`);
   } else {
+    myStorage.clear();
     loggedInUser = null
   }
   

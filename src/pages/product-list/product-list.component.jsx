@@ -30,8 +30,10 @@ class ProductList extends React.Component {
     return (
       <div className='product'>
         <ProductListMenu />
-        <div className='product-items'>
-          <ProductListContent products={this.state.products} />
+        <div className='product-items-container'>
+          <div className='product-items'>
+            <ProductListContent products={this.state.products} />
+          </div>
         </div>
       </div>
     )

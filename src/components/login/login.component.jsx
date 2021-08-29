@@ -41,6 +41,15 @@ class LoginComponent extends React.Component {
     return signInData
   }
 
+  componentDidMount() {
+    const myStorage = window.localStorage;
+
+    const alreadyLoggedIn = myStorage.getItem('name');
+
+    if (alreadyLoggedIn) {
+      this.props.setUserLoggedIn(alreadyLoggedIn);
+    } else return;
+  }
 
   render() {
     const { username, password } = this.state;
