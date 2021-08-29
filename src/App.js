@@ -60,7 +60,6 @@ class App extends React.Component {
 
   render() {
     const { loggedInUser, title, users, products, recipes, notification } = this.state;
-    console.log(products);
 
     return (
       <div>
