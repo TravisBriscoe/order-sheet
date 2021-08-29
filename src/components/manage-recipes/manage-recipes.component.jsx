@@ -12,7 +12,7 @@ const ManageRecipes = (props) => {
 
   return (
     <div className='manage-recipes'>
-      <div className='manage-recipes-nav'>
+      <div className='manage-recipes-navi'>
         <RecipeNav recipes={recipes} />
       </div>
       <div className='manage-recipes-content'>

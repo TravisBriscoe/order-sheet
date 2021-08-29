@@ -17,7 +17,6 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.state.notification)
     if (this.state.notification === true && this.state.loggedInUser === 'manager') {
       alert('Products added to Order Sheet!');
       return this.props.setNotification(this.state.notification);

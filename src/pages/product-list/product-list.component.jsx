@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductListContent from '../../components/product-list-content/product-list-content.component';
 import ProductListMenu from '../../components/product-list-menu/product-list-menu.component';
 
 import './product-list.styles.scss';
@@ -83,7 +84,7 @@ class ProductList extends React.Component {
                   </ul>
                 )
               })
-            } */}
+            }
             <ul className='product-item'>
               <li className='product-item-name'>Cheddar</li>
               <li className='product-item-desc'>Shredded</li>
@@ -97,6 +98,8 @@ class ProductList extends React.Component {
                 onChange={(event) => this.handleInputChange(event, 'cheddar')}
               />
             </ul>
+            */}
+            <ProductListContent products={this.state.products} />
           </div>
         </div>
       </div>

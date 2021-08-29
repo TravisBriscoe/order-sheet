@@ -1,41 +1,44 @@
 .manage-page {
   width: 90%;
-  place-self: center;
+  justify-self: center;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 10fr;
+  grid-template-rows: 25px 1fr;
   grid-template-areas: "managenav"
                        "managecontent";
 
   &-header {
     grid-area: managenav;
-    place-self: center;
+    justify-self: center;
+    align-content: start;
     display: grid;
     width: 40%;
-    justify-items: center;
+    // justify-items: center;
     grid-template-columns: 1fr 1fr 1fr;
     border-bottom: 1px solid gray;
     padding-bottom: 6px;
     
     &--link {
-      text-align: center;
-      width: 60%;
+      justify-self: center;
+      // width: 60%;
       
-      &_products {
-        grid-column: 1 / 2;
-      }
-      &--link_users {
-        grid-column: 2 / 2;
-      }
-      &--link_recipes {
-        grid-column: 3 / 4;
-      }
+      // &_products {
+      //   grid-column: 1 / 2;
+      // }
+      // &_users {
+      //   grid-column: 2 / 2;
+      // }
+      // &_recipes {
+      //   grid-column: 3 / 4;
+      // }
     }
   }
 
   &-content {
     grid-area: managecontent;
-    justify-self: center;
-    align-self: start;
+    // justify-self: start;
+    // display: grid;
+    // grid-template-rows: 1fr;
+    // width: 100%;
   }
 }

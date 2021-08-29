@@ -1,14 +1,17 @@
 .manage-recipes {
+  grid-area: managecontent;
   display: grid;
-  width: 100%;
-  height: 80vh;
+  // width: 100%;
+  // height: 80vh;
   grid-template-columns: 2fr 16fr;
-  grid-template-rows: 14fr 1fr;
+  grid-template-rows: 2fr 1fr;
   
-  &-nav {
+  &-navi {
+    // width: 100%;
+    // justify-self: start;
     grid-column: 1 / 2;
-    grid-row: 1 / 3;
-    padding-left: 5px;
+    // grid-row: 1 / 3;
     border-right: 1px solid gray;
+    overflow-y: auto;
   }
 }
