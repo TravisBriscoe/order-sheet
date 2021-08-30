@@ -24,13 +24,16 @@ class App extends React.Component {
     this.setUserLoggedIn = this.setUserLoggedIn.bind(this);
     this.setNotification = this.setNotification.bind(this);
     this.setSignOut = this.setSignOut.bind(this);
+    this.setOnOrder = this.setOnOrder.bind(this);
 
     this.state = {
       loggedInUser: '',
       users: '',
       products: PRODUCT_DATA,
       recipes: '',
-      notification: true,
+      notification: false,
+      onOrder: {},
+      onQuantity: 0,
     }
   }
 
@@ -66,8 +69,13 @@ class App extends React.Component {
     return this.props.history.push('/');
   }
 
+  setOnOrder(orderProducts) {
+    this.setState({ notification: true });
+    this.setState({ onOrder: orderProducts });
+  }
+
   render() {
-    const { loggedInUser, title, users, products, recipes, notification } = this.state;
+    const { loggedInUser, title, users, products, recipes, notification, onOrder, onQuantity } = this.state;
 
     return (
       <div>
@@ -87,12 +95,12 @@ class App extends React.Component {
               <Header loggedInUser={loggedInUser} users={users} title={title} notification={notification} setNotification={this.setNotification} />
               <Switch>
                 <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} recipes={recipes} />} />
-                <Route path='/order-sheet' render={(props) => <OrderListPage {...props} />} />
+                <Route path='/order-sheet' render={(props) => <OrderListPage {...props} onOrder={onOrder} />} />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
-                <Route exact path='/about' component={AboutPage} />
-                <Route exact path='/' render={(props) => <ProductList {...props} products={products} />} />
+                <Route path='/about' component={AboutPage} />
+                <Route path='/' render={(props) => <ProductList {...props} setOnOrder={this.setOnOrder} onQuantity={onQuantity} products={products} />} />
               </Switch>
-              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut}/>
+              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut} />
             </div>
           )
           

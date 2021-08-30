@@ -8,35 +8,25 @@ class ProductList extends React.Component {
   constructor(props) {
     super(props)
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-
     this.state = {
       products: this.props.products,
-      orderProducts: {},
-      quantity: 0,
+      setOnOrder: this.props.setOnOrder,
     }
   }
 
-  handleInputChange(event, name) {
-    const target = event.target;
-    const value = target.value;
-    this.setState({ quantity: value })
-    this.setState({ orderProducts: {
-      [name]: value
-    }}, () => console.log(this.state.orderProducts));
-  }
-
   render() {
+    const { products, setOnOrder } = this.state;
+
     return (
       <div className='product'>
         <ProductListMenu />
         <div className='product-items-container'>
           <div className='product-items'>
-            <ProductListContent products={this.state.products} />
+            <ProductListContent products={products} setOnOrder={setOnOrder} />
           </div>
         </div>
       </div>
-    )
+    );
   }
 };
 

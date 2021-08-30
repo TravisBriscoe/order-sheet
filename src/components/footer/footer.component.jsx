@@ -10,13 +10,6 @@ const Footer = (props) => {
   <div className='footer'>
     <Link to='/about'>About</Link>
     <div className='footer-item-total'>12 items</div>
-    <div className='footer-nav--submit'>
-      {
-        pathname === '/' ?
-        (<button>Commit</button>)
-        : null
-      }
-    </div>
     <div className='footer-nav--ordersheet'>
       {
         pathname === '/' ?
