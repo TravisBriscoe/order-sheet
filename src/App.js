@@ -103,7 +103,7 @@ class App extends React.Component {
     this.setState({ distributor: dist },
       () => {  
       if (this.state.distributor !== 'all') {
-        const newStuff = this.state.products.filter(x => {
+        const newStuff = this.state.sortedProds.filter(x => {
           return x.dist === this.state.distributor
         })
         

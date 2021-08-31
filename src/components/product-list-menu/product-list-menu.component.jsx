@@ -47,8 +47,11 @@ class ProductListMenu extends React.Component {
             <option value="produce">Produce</option>
             <option value="sauces">Sauces &amp; Dressings</option>
             <option value="spices">Spices</option>
+            <option value="oil">Oil &amp; Vinegar</option>
             <option value="paper">Paper/Plastic</option>
-            <option value="chemicals">Chemicals</option>
+            <option value="chemical">Chemicals</option>
+            <option value="bar">Bar</option>
+            <option value="bread">Bread</option>
             <option value="misc">Misc</option>
           </select>
           <input className="product-headers-actions--search_input" type="text" placeholder='Search!'></input>
