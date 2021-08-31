@@ -7,13 +7,13 @@ class ProductListContent extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
 
     this.state = {
-      products: this.props.products,
       quantity: {},
       orderProducts: {},
-      setOnOrder: this.props.setOnOrder
+      setOnOrder: this.props.setOnOrder,
     }
   }
 
+  
   handleInputChange(event, orderedProducts) {
     const { name, id } = orderedProducts;
     const { value } = event.target;
@@ -51,20 +51,20 @@ class ProductListContent extends React.Component {
 
   render() {
     
-  
-    const { products, quantity } = this.state;
+    const { quantity } = this.state;
+    const { sortedProds } = this.props;
     
     return (
       <div>
         {
-          products.map(el => {
+          Object.entries(sortedProds).map(el => {
             return (
-              <ul className='product-item' key={el.id}>
-                <li className='product-item-name'>{el.name}</li>
-                <li className='product-item-desc'>{el.desc}</li>
-                <li className='product-item-unit'>{el.unit}</li>
-                <input type='checkbox' checked={el.split ? 'checked' : ''} readOnly className='product-item-split' />
-                <input type='text' className='product-item-quantity' value={quantity[el.id] ? quantity[el.id].value : '0'} onChange={(event) => this.handleInputChange(event, { name: el.name, id: el.id })} />
+              <ul className='product-item' key={el[1].id}>
+                <li className='product-item-name'>{el[1].name}</li>
+                <li className='product-item-desc'>{el[1].desc}</li>
+                <li className='product-item-unit'>{el[1].unit}</li>
+                <input type='checkbox' checked={el[1].split ? 'checked' : ''} readOnly className='product-item-split' />
+                <input type='text' className='product-item-quantity' placeholder='0' value={quantity[el[1].id] ? quantity[el[1].id].value : ''} onChange={(event) => this.handleInputChange(event, { name: el[1].name, id: el[1].id })} />
               </ul>
             )
           })

@@ -25,6 +25,7 @@ class App extends React.Component {
     this.setNotification = this.setNotification.bind(this);
     this.setSignOut = this.setSignOut.bind(this);
     this.setOnOrder = this.setOnOrder.bind(this);
+    this.onMenuSelect = this.onMenuSelect.bind(this);
 
     this.state = {
       loggedInUser: '',
@@ -34,6 +35,10 @@ class App extends React.Component {
       notification: false,
       onOrder: {},
       onQuantity: 0,
+      sortedProds: '',
+      distributor: 'all',
+      storedWhere: 'all',
+      storedWhat: 'all',
     }
   }
 
@@ -60,6 +65,14 @@ class App extends React.Component {
       this.setState({recipes: recipeDataObj})
     }
 
+    const { products, sortedProds } = this.state;
+
+    if (!sortedProds || sortedProds.length <= 0) {
+      this.setState({ sortedProds: [...products]})
+    } else {
+      this.setState({ sortedProds: [...sortedProds]})
+    }
+
     return getData();
   }
 
@@ -74,8 +87,47 @@ class App extends React.Component {
     this.setState({ onOrder: orderProducts });
   }
 
+  // setSortedProds(sortedBy) {
+  //   const { products, sortedProds } = this.state;
+
+  //   console.log(Object.entries(products))
+
+  //   if (!sortedProds) {
+  //     this.setState({ sortedProds: products}, () => console.log(this.state.sortedProds))
+  //   }
+  // }
+
+  onMenuSelect(sortedSelect) {
+    const { dist, sWhat, sWhere } = sortedSelect;
+
+    this.setState({ distributor: dist },
+      () => {  
+      if (this.state.distributor !== 'all') {
+        const newStuff = this.state.products.filter(x => {
+          return x.dist === this.state.distributor
+        })
+        
+        return this.setState({ sortedProds: [
+          ...newStuff,
+        ]})
+      }
+    });
+
+    this.setState({ storedWhere: sWhere }, () => console.log(this.state.storedWhere))
+    this.setState({ storedWhat: sWhat }, () => console.log(this.state.storedWhat));
+  }
+
   render() {
-    const { loggedInUser, title, users, products, recipes, notification, onOrder, onQuantity } = this.state;
+    const {
+      loggedInUser,
+      title,
+      users,
+      products,
+      recipes,
+      notification,
+      onOrder,
+      sortedProds,
+     } = this.state;
 
     return (
       <div>
@@ -98,7 +150,14 @@ class App extends React.Component {
                 <Route path='/order-sheet' render={(props) => <OrderListPage {...props} onOrder={onOrder} />} />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
                 <Route path='/about' component={AboutPage} />
-                <Route path='/' render={(props) => <ProductList {...props} setOnOrder={this.setOnOrder} onQuantity={onQuantity} products={products} />} />
+                <Route path='/' render={(props) =>
+                  <ProductList
+                    {...props}
+                    setOnOrder={this.setOnOrder}
+                    onMenuSelect={this.onMenuSelect}
+                    sortedProds={sortedProds}
+                  />}
+                />
               </Switch>
               <Footer loggedInUser={loggedInUser} signOut={this.setSignOut} />
             </div>

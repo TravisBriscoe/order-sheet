@@ -9,20 +9,21 @@ class ProductList extends React.Component {
     super(props)
 
     this.state = {
-      products: this.props.products,
       setOnOrder: this.props.setOnOrder,
+      onMenuSelect: this.props.onMenuSelect,
     }
   }
 
   render() {
-    const { products, setOnOrder } = this.state;
-
+    const { setOnOrder, onMenuSelect } = this.state;
+    const { sortedProds } = this.props
+    
     return (
       <div className='product'>
-        <ProductListMenu />
+        <ProductListMenu onMenuSelect={onMenuSelect} />
         <div className='product-items-container'>
           <div className='product-items'>
-            <ProductListContent products={products} setOnOrder={setOnOrder} />
+            <ProductListContent sortedProds={sortedProds} setOnOrder={setOnOrder} />
           </div>
         </div>
       </div>
