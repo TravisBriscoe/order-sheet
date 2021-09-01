@@ -219,6 +219,8 @@ class App extends React.Component {
         return this.setState({ sortedProds: [
           ...newStuff,
         ]})
+      } else if (this.state.distributor === 'all' && this.state.storedWhat === 'all' && this.state.storedWhere === 'all') {
+        this.setState({ sortedProds: this.state.products })
       }
     });
 
@@ -231,8 +233,11 @@ class App extends React.Component {
         return this.setState({ sortedProds: [
           ...newStuff,
         ]})
+      } else if (this.state.distributor === 'all' && this.state.storedWhat === 'all' && this.state.storedWhere === 'all') {
+        this.setState({ sortedProds: this.state.products })
       }
     });
+
     this.setState({ storedWhat: sWhat }, () => {  
       if (this.state.storedWhat !== 'all') {
         const newStuff = this.state.products.filter(x => {
@@ -242,6 +247,8 @@ class App extends React.Component {
         return this.setState({ sortedProds: [
           ...newStuff,
         ]})
+      } else if (this.state.distributor === 'all' && this.state.storedWhat === 'all' && this.state.storedWhere === 'all') {
+        this.setState({ sortedProds: this.state.products })
       }
     });
   }

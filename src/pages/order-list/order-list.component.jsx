@@ -15,10 +15,10 @@ const OrderListPage = ({ onOrder }) => {
           return (
             <div className='order-sheet-list' key={el[0]}>
               <ul>
-                <li>
+                <li className='order-sheet-list-item'>
                   {el[1].name}: {el[1].value}
-                  <button>Edit</button>
-                  <button>Remove</button>
+                  <button className='order-sheet-list-item--edit_btn'>Edit</button>
+                  <button className='order-sheet-list-item--remove_btn'>Remove</button>
                 </li>
               </ul>
             </div>
