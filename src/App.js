@@ -97,13 +97,122 @@ class App extends React.Component {
   //   }
   // }
 
+  // onMenuSelect(sortedSelect) {
+  //   const { dist, sWhat, sWhere } = sortedSelect;
+  //   let sortedList;
+
+    // const sortMe = (sortWhat, sortWho, sortList = this.state.products) => {
+    //   const newStuff = sortList.filter(x => {
+    //     console.log(this.state[sortWhat] === x[sortWho])
+    //     return x[sortWho] === this.state[sortWho]
+    //   })
+    //
+    //   return this.setState({ sortedProds: [...newStuff]}, () => sortedList => this.state.sortedProds)
+    // }
+
+    // this.setState({ distributor: dist}, () => {
+    //   this.setState({ storedWhat: sWhat}, () => {
+    //     this.setState({ storedWhere: sWhere}, () => {
+    //       if (!sortedList) sortedList = this.state.sortedProds;
+    //       if (this.state.distributor !== 'all' && this.state.storedWhere === 'all' && this.state.storedWhat === 'all') {
+    //         const newStuff = sortMe(this.state.distributor, dist)
+    //       }
+    //       if (this.state.distributor === 'all' && this.state.storedWhere !== 'all' && this.state.storedWhat !== 'all') { sortMe()}
+
+    //     })
+    //   })
+    // })
+
+    // this.state.distributor !
+    // !this.state.distributor
+    // this.state.storedWhere
+    // !this.state.storedWhere
+    // this.state.storedWhat
+    // !this.state.storedWhat
+    // this.setState({ distributor: dist }, () => {
+    //   if (this.state.distributor !== 'all' && this.state.storedWhere === 'all' && this.state.storedWhat === 'all') {
+    //     const newStuff = this.state.products.filter(x => {
+    //       console.log(this.state.distributor === x.dist)
+    //       return x.dist === this.state.distributor
+    //     })
+        
+    //     console.log(newStuff)
+    //     return this.setState({ sortedProds: [
+    //       ...newStuff,
+    //     ]}, () => {console.log(this.state.sortedProds); sortedList = this.state.sortedProds; console.log(sortedList)})
+    //   } else if (this.state.storedWhat !== 'all' && this.state.distributor !== 'all' && this.state.storedWhere !== 'all') {
+    //     const newStuff = sortedList.filter(x => {
+    //       return x.dist === this.state.distributor
+    //     })
+        
+    //     return this.setState({ sortedProds: [
+    //       ...newStuff,
+    //     ]}, () => {console.log(this.state.sortedProds); sortedList = this.state.sortedProds; console.log(sortedList)})
+    //   }
+      
+      // return this.setState({ sortedProds: this.state.products }, () => console.log(this.state.sortedProds))
+
+    // });
+
+    // this.setState({ storedWhere: sWhere }, () => {
+    //   if (!sortedList) sortedList = this.state.sortedProds;
+    //   if (this.state.storedWhere !== 'all'  && this.state.distributor === 'all' && this.state.storedWhat === 'all') {
+    //     const newStuff = this.state.products.filter(x => {
+    //       return x.stored === this.state.storedWhere
+    //     })
+        
+    //     return this.setState({ sortedProds: [
+    //       ...newStuff,
+    //     ]}, () => {console.log(this.state.sortedProds); sortedList = this.state.sortedProds})
+    //   } else if (this.state.storedWhat !== 'all' && this.state.distributor !== 'all' && this.state.storedWhere !== 'all') {
+    //     const newStuff = sortedList.filter(x => {
+    //       return x.stored === this.state.storedWhere
+    //     })
+        
+    //     return this.setState({ sortedProds: [
+    //       ...newStuff,
+    //     ]}, () => {console.log(this.state.sortedProds); sortedList = this.state.sortedProds})
+    //   }
+      // else {
+      //   this.setState({ sortedProds: this.state.products }, () => sortedList = this.state.sortedProds)
+      // }
+    // });
+
+    // this.setState({ storedWhat: sWhat }, () => {
+    //   if (!sortedList) sortedList = this.state.sortedProds;
+    //   if (this.state.storedWhat !== 'all'  && this.state.storedWhere === 'all' && this.state.distributor === 'all') {
+    //     const newStuff = this.state.products.filter(x => {
+    //       return x.category === this.state.storedWhat
+    //     })
+        
+    //     return this.setState({ sortedProds: [
+    //       ...newStuff,
+    //     ]}, () => {console.log(this.state.sortedProds); sortedList = this.state.sortedProds})
+    //   } else if (this.state.storedWhat !== 'all' && this.state.distributor !== 'all' && this.state.storedWhere !== 'all') {
+    //     const newStuff = sortedList.filter(x => {
+    //       return x.category === this.state.storedWhat
+    //     })
+        
+    //     return this.setState({ sortedProds: [
+    //       ...newStuff,
+    //     ]}, () => {console.log(this.state.sortedProds); sortedList = this.state.sortedProds; console.log(sortedList)})
+    //   }
+      // else {
+      //   this.setState({ sortedProds: this.state.products }, () => sortedList = this.state.sortedProds)
+      // }
+    // });
+
+    // if (this.state.storedWhat === 'all' && this.state.storedWhere === 'all' && this.state.distributor === 'all') {
+    //   this.setState({ sortedProds: this.state.products });
+    // }
+  // }
+
   onMenuSelect(sortedSelect) {
     const { dist, sWhat, sWhere } = sortedSelect;
 
-    this.setState({ distributor: dist },
-      () => {  
+    this.setState({ distributor: dist }, () => {  
       if (this.state.distributor !== 'all') {
-        const newStuff = this.state.sortedProds.filter(x => {
+        const newStuff = this.state.products.filter(x => {
           return x.dist === this.state.distributor
         })
         
@@ -113,8 +222,28 @@ class App extends React.Component {
       }
     });
 
-    this.setState({ storedWhere: sWhere }, () => console.log(this.state.storedWhere))
-    this.setState({ storedWhat: sWhat }, () => console.log(this.state.storedWhat));
+    this.setState({ storedWhere: sWhere }, () => {  
+      if (this.state.storedWhere !== 'all') {
+        const newStuff = this.state.products.filter(x => {
+          return x.stored === this.state.storedWhere
+        })
+        
+        return this.setState({ sortedProds: [
+          ...newStuff,
+        ]})
+      }
+    });
+    this.setState({ storedWhat: sWhat }, () => {  
+      if (this.state.storedWhat !== 'all') {
+        const newStuff = this.state.products.filter(x => {
+          return x.category === this.state.storedWhat
+        })
+        
+        return this.setState({ sortedProds: [
+          ...newStuff,
+        ]})
+      }
+    });
   }
 
   render() {
