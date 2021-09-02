@@ -53,10 +53,9 @@
         &_input {
           grid-area: searchbar;
           justify-self: end;
-          text-align: right;
-          margin-right: 15px;
+          // margin-right: 15px;
           width: 75%;
-          padding-right: 12px;
+          // padding-right: 12px;
         }
         &_btn--clr {
           grid-area: clear;

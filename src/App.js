@@ -26,6 +26,7 @@ class App extends React.Component {
     this.setSignOut = this.setSignOut.bind(this);
     this.setOnOrder = this.setOnOrder.bind(this);
     this.onMenuSelect = this.onMenuSelect.bind(this);
+    this.onHandleSearch = this.onHandleSearch.bind(this);
 
     this.state = {
       loggedInUser: '',
@@ -207,6 +208,11 @@ class App extends React.Component {
     // }
   // }
 
+  onHandleSearch = (e) => {
+    const searchData = this.state.products.filter((product) => product.name.toLowerCase().includes(e.target.value.toLowerCase()));
+    this.setState({ sortedProds: searchData });
+  }
+
   onMenuSelect(sortedSelect) {
     const { dist, sWhat, sWhere } = sortedSelect;
 
@@ -292,6 +298,7 @@ class App extends React.Component {
                     setOnOrder={this.setOnOrder}
                     onMenuSelect={this.onMenuSelect}
                     sortedProds={sortedProds}
+                    onHandleSearch={this.onHandleSearch}
                   />}
                 />
               </Switch>

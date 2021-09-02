@@ -10,7 +10,8 @@ class ProductListMenu extends React.Component {
       distributor: 'all',
       storedWhere: 'all',
       storedWhat: 'all',
-      onMenuSelect: this.props.onMenuSelect
+      onMenuSelect: this.props.onMenuSelect,
+      onHandleSearch: this.props.onHandleSearch,
     }
   }
 
@@ -54,7 +55,7 @@ class ProductListMenu extends React.Component {
             <option value="bread">Bread</option>
             <option value="misc">Misc</option>
           </select>
-          <input className="product-headers-actions--search_input" type="text" placeholder='Search!'></input>
+          <input className="product-headers-actions--search_input" type="text" placeholder='Search!' onChange={this.state.onHandleSearch}></input>
           {/* <button className="product-headers-actions--search_btn--clr">Clear</button> */}
         </div>
         <div className='product-headers-labels'>

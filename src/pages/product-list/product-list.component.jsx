@@ -11,16 +11,17 @@ class ProductList extends React.Component {
     this.state = {
       setOnOrder: this.props.setOnOrder,
       onMenuSelect: this.props.onMenuSelect,
+      onHandleSearch: this.props.onHandleSearch,
     }
   }
 
   render() {
-    const { setOnOrder, onMenuSelect } = this.state;
+    const { setOnOrder, onMenuSelect, onHandleSearch } = this.state;
     const { sortedProds } = this.props
     
     return (
       <div className='product'>
-        <ProductListMenu onMenuSelect={onMenuSelect} />
+        <ProductListMenu onMenuSelect={onMenuSelect} onHandleSearch={onHandleSearch} />
         <div className='product-items-container'>
           <div className='product-items'>
             <ProductListContent sortedProds={sortedProds} setOnOrder={setOnOrder} />
