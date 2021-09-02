@@ -34,7 +34,7 @@
 
       &--name {
         grid-column: 1 / 2;
-        place-self: center;
+        padding-left: 50%;
       }
 
       &--quant {
@@ -43,6 +43,7 @@
 
       &--remove_btn {
         grid-column: 3 / 4;
+        justify-self: center;
       }
     }
   }
