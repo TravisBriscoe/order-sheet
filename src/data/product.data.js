@@ -57,7 +57,6 @@ const PRODUCT_DATA = [
   {"name":"Film Wrap","id":"F55620","unit":"1/2500ft","split":false,"desc":"17\", w/ Cutter","stored":"pantry","category":"paper","dist":"findlays"},
   {"name":"Flour","id":"F09137","unit":"1/20kg","split":false,"desc":"Unbleached, All Purpose","stored":"pantry","category":"","dist":"findlays"},
   {"name":"Foil","id":"F55636","unit":"1/100m","split":false,"desc":"Heavy Duty","stored":"pantry","category":"paper","dist":"findlays"},
-  {"name":"Forks","id":"F54955","unit":"1/1000's","split":false,"desc":"Plastic, Take-out","stored":"pantry","category":"paper","dist":"findlays"},
   {"name":"Franks","id":"F06450","unit":"2/3.78lt","split":true,"desc":"Red Hot, Wing Sauce","stored":"pantry","category":"sauces","dist":"findlays"},
   {"name":"French Dressing","id":"F05012","unit":"200/18ml","split":false,"desc":"Individual","stored":"pantry","category":"sauces","dist":"findlays"},
   {"name":"Garbage Bags","id":"F54172","unit":"1/100's","split":false,"desc":"35 x 50","stored":"pantry","category":"paper","dist":"findlays"},
@@ -119,6 +118,7 @@ const PRODUCT_DATA = [
   {"name":"Pickles","id":"F06630","unit":"1/19lt","split":false,"desc":"Deli Chip, Crinkle Cut","stored":"fridge","category":"","dist":"quattrocchis"},
   {"name":"Pizza Box","id":"F54380","unit":"1/50's","split":false,"desc":"14\"","stored":"pantry","category":"paper","dist":"findlays"}
   ,
+  {"name":"Plastic Forks","id":"F54955","unit":"1/1000's","split":false,"desc":"Plastic, Take-out","stored":"pantry","category":"paper","dist":"findlays"},
   {"name":"Plastic Knives","id":"F54970","unit":"1/1000's","split":false,"desc":"","stored":"pantry","category":"paper","dist":"findlays"},
   {"name":"Plastic Portion Cup","id":"F54502","unit":"10/250's","split":true,"desc":"3.25oz, Translucent","stored":"pantry","category":"paper","dist":"findlays"},
   {"name":"Plum Sauce","id":"F06475","unit":"4/4lt","split":true,"desc":"","stored":"pantry","category":"sauces","dist":"quattrocchis"},
