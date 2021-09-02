@@ -9,7 +9,13 @@ const Footer = (props) => {
   return (
   <div className='footer'>
     <Link to='/about'>About</Link>
-    <div className='footer-item-total'>{props.sortedProds.length} items</div>
+    <div className='footer-item-total'>
+      {
+        pathname === '/' ?
+        <div>{props.sortedProds.length} items</div>
+        : null
+      }
+    </div>
     <div className='footer-nav--ordersheet'>
       {
         pathname === '/' ?

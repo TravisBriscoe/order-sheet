@@ -55,14 +55,14 @@ class ProductListContent extends React.Component {
     const { sortedProds } = this.props;
     
     return (
-      <div>
+      <div className="product-items">
         {
           Object.entries(sortedProds).map(el => {
             return (
-              <ul className='product-item' key={el[1].id}>
-                <li className='product-item-name'>{el[1].name}</li>
-                <li className='product-item-desc'>{el[1].desc}</li>
-                <li className='product-item-unit'>{el[1].unit}</li>
+              <ul className='product-items-item' key={el[1].id}>
+                <li className='product-items-item-name'>{el[1].name}</li>
+                <li className='product-items-item-desc'>{el[1].desc}</li>
+                <li className='product-items-item-unit'>{el[1].unit}</li>
                 <input type='checkbox' checked={el[1].split ? 'checked' : ''} readOnly className='product-item-split' />
                 <input type='text' className='product-item-quantity' placeholder='0' value={quantity[el[1].id] ? quantity[el[1].id].value : ''} onChange={(event) => this.handleInputChange(event, { name: el[1].name, id: el[1].id })} />
               </ul>

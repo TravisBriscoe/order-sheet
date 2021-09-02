@@ -209,7 +209,15 @@ class App extends React.Component {
   // }
 
   onHandleSearch = (e) => {
-    const searchData = this.state.products.filter((product) => product.name.toLowerCase().includes(e.target.value.toLowerCase()));
+    const searchData1 = this.state.products.filter((product) => {
+       return product.name.toLowerCase().includes(e.target.value.toLowerCase());
+    });
+
+    const searchData2 = this.state.products.filter((product) => {
+      return product.desc.toLowerCase().includes(e.target.value.toLowerCase())
+    });
+
+    const searchData = [...searchData1, ...searchData2].filter((x, i, a) => a.indexOf(x) === i)
     this.setState({ sortedProds: searchData });
   }
 
