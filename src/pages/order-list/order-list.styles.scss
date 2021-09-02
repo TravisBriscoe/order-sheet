@@ -3,8 +3,51 @@
   grid-area: main;
   justify-self: center;
   display: grid;
+  grid-template-rows: 40px 1fr;
+  overflow-y: hidden;
 
-  h2 {
+  &-title {
+    grid-row: 1 / 2;
     justify-self: center;
+    border-bottom: 1px solid gray;
+    width: 65%;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  &-list {
+    margin-top: 5px;
+    min-height: 0;
+    height: 75vh;
+    overflow-y: auto;
+    display: grid;
+    grid-auto-rows: 25px;
+    width: 75%;
+    margin: 0 auto;
+    
+    ul { list-style: none; }
+
+    &-item {
+      display: grid;
+      grid-template-columns: 50% 20% 15%;
+      // grid-auto-rows: inherit;
+
+      &--name {
+        grid-column: 1 / 2;
+        place-self: center;
+      }
+
+      &--quant {
+        grid-column: 2 / 3;
+      }
+
+      &--remove_btn {
+        grid-column: 3 / 4;
+      }
+    }
+  }
+  &--clear_btn {
+    justify-self: end;
+    padding-right: 10px;
   }
 }
