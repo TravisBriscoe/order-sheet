@@ -302,7 +302,7 @@ class App extends React.Component {
                   />}
                 />
               </Switch>
-              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut} />
+              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut} sortedProds={sortedProds} />
             </div>
           )
           
