@@ -63,8 +63,8 @@ class ProductListContent extends React.Component {
                 <li className='product-items-item-name'>{el[1].name}</li>
                 <li className='product-items-item-desc'>{el[1].desc}</li>
                 <li className='product-items-item-unit'>{el[1].unit}</li>
-                <input type='checkbox' checked={el[1].split ? 'checked' : ''} readOnly className='product-item-split' />
-                <input type='text' className='product-item-quantity' placeholder='0' value={quantity[el[1].id] ? quantity[el[1].id].value : ''} onChange={(event) => this.handleInputChange(event, { name: el[1].name, id: el[1].id })} />
+                <input type='checkbox' checked={el[1].split ? 'checked' : ''} readOnly className='product-items-item-split' />
+                <input type='text' className='product-items-item-quantity' placeholder='0' value={quantity[el[1].id] ? quantity[el[1].id].value : ''} onChange={(event) => this.handleInputChange(event, { name: el[1].name, id: el[1].id })} />
               </ul>
             )
           })

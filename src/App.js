@@ -40,6 +40,7 @@ class App extends React.Component {
       distributor: 'all',
       storedWhere: 'all',
       storedWhat: 'all',
+      sortCategory: 'all'
     }
   }
 
@@ -222,49 +223,75 @@ class App extends React.Component {
   }
 
   onMenuSelect(sortedSelect) {
-    const { dist, sWhat, sWhere } = sortedSelect;
 
-    this.setState({ distributor: dist }, () => {  
-      if (this.state.distributor !== 'all') {
+    this.setState({ sortCategory: sortedSelect }, () => {
+      const { sortCategory } = this.state;
+
+      console.log(sortCategory);
+
+      if (sortCategory === 'all') {
+        return this.setState({ sortedProds: this.state.products })
+      } else if (sortCategory === 'findlays' || sortCategory === 'quattrocchis' || sortCategory === 'pigolive') {
         const newStuff = this.state.products.filter(x => {
-          return x.dist === this.state.distributor
+          return x.dist === sortCategory
         })
         
         return this.setState({ sortedProds: [
           ...newStuff,
         ]})
-      } else if (this.state.distributor === 'all' && this.state.storedWhat === 'all' && this.state.storedWhere === 'all') {
-        this.setState({ sortedProds: this.state.products })
-      }
-    });
-
-    this.setState({ storedWhere: sWhere }, () => {  
-      if (this.state.storedWhere !== 'all') {
+      } else {
         const newStuff = this.state.products.filter(x => {
-          return x.stored === this.state.storedWhere
+          return x.category === sortCategory
         })
-        
+                
         return this.setState({ sortedProds: [
           ...newStuff,
         ]})
-      } else if (this.state.distributor === 'all' && this.state.storedWhat === 'all' && this.state.storedWhere === 'all') {
-        this.setState({ sortedProds: this.state.products })
       }
-    });
+    })
+  //   const { dist, sWhat, sWhere } = sortedSelect;
 
-    this.setState({ storedWhat: sWhat }, () => {  
-      if (this.state.storedWhat !== 'all') {
-        const newStuff = this.state.products.filter(x => {
-          return x.category === this.state.storedWhat
-        })
+  //   this.setState({ distributor: dist }, () => {  
+  //     if (this.state.distributor !== 'all') {
+  //       const newStuff = this.state.products.filter(x => {
+  //         return x.dist === this.state.distributor
+  //       })
         
-        return this.setState({ sortedProds: [
-          ...newStuff,
-        ]})
-      } else if (this.state.distributor === 'all' && this.state.storedWhat === 'all' && this.state.storedWhere === 'all') {
-        this.setState({ sortedProds: this.state.products })
-      }
-    });
+  //       return this.setState({ sortedProds: [
+  //         ...newStuff,
+  //       ]})
+  //     } else if (this.state.distributor === 'all' && this.state.storedWhat === 'all' && this.state.storedWhere === 'all') {
+  //       this.setState({ sortedProds: this.state.products })
+  //     }
+  //   });
+
+  //   this.setState({ storedWhere: sWhere }, () => {  
+  //     if (this.state.storedWhere !== 'all') {
+  //       const newStuff = this.state.products.filter(x => {
+  //         return x.stored === this.state.storedWhere
+  //       })
+        
+  //       return this.setState({ sortedProds: [
+  //         ...newStuff,
+  //       ]})
+  //     } else if (this.state.distributor === 'all' && this.state.storedWhat === 'all' && this.state.storedWhere === 'all') {
+  //       this.setState({ sortedProds: this.state.products })
+  //     }
+  //   });
+
+  //   this.setState({ storedWhat: sWhat }, () => {  
+  //     if (this.state.storedWhat !== 'all') {
+  //       const newStuff = this.state.products.filter(x => {
+  //         return x.category === this.state.storedWhat
+  //       })
+        
+  //       return this.setState({ sortedProds: [
+  //         ...newStuff,
+  //       ]})
+  //     } else if (this.state.distributor === 'all' && this.state.storedWhat === 'all' && this.state.storedWhere === 'all') {
+  //       this.setState({ sortedProds: this.state.products })
+  //     }
+  //   });
   }
 
   render() {
@@ -307,6 +334,7 @@ class App extends React.Component {
                     onMenuSelect={this.onMenuSelect}
                     sortedProds={sortedProds}
                     onHandleSearch={this.onHandleSearch}
+                    sortCategory={this.state.sortCategory}
                   />}
                 />
               </Switch>

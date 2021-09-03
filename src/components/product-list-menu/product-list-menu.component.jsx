@@ -18,17 +18,21 @@ class ProductListMenu extends React.Component {
   onChangeInput(event, where) {
     const { value } = event.target;
 
-    this.setState({ [where]: value }, () => {
-      this.state.onMenuSelect({dist: this.state.distributor, sWhere: this.state.storedWhere, sWhat: this.state.storedWhat})
-    });
+    this.state.onMenuSelect(value)
+
+    // this.setState({ [where]: value }, () => {
+    //   this.state.onMenuSelect({dist: this.state.distributor, sWhere: this.state.storedWhere, sWhat: this.state.storedWhat})
+    // });
   }
 
   render() {
 
+    console.log(this.props.sortCategory)
+
     return (
       <div className='product-headers'>
         <div className='product-headers-actions'>
-          <select className="product-headers-actions--from" name="header-order-from" value={this.state.distributor} onChange={(event) => this.onChangeInput(event, 'distributor')}>
+          {/* <select className="product-headers-actions--from" name="header-order-from" value={this.state.distributor} onChange={(event) => this.onChangeInput(event, 'distributor')}>
             <option value="all" default> -= Distributor =- </option>
             <option value="findlays">Findlay</option>
             <option value="quattrocchis">Quattrocchi's</option>
@@ -43,6 +47,23 @@ class ProductListMenu extends React.Component {
           </select>
           <select className='product-headers-actions--category' name="header-order-catagory" value={this.state.storedWhat} onChange={(event) => this.onChangeInput(event, 'storedWhat')}>
             <option value="all" default> -= Category =- </option>
+            <option value="dairy">Dairy</option>
+            <option value="meat">Meats</option>
+            <option value="produce">Produce</option>
+            <option value="sauces">Sauces &amp; Dressings</option>
+            <option value="spices">Spices</option>
+            <option value="oil">Oil &amp; Vinegar</option>
+            <option value="paper">Paper/Plastic</option>
+            <option value="chemical">Chemicals</option>
+            <option value="bar">Bar</option>
+            <option value="bread">Bread</option>
+            <option value="misc">Misc</option>
+          </select> */}
+          <select className='product-headers-actions--category' name="header-order-catagory" value={this.props.sortCategory} onChange={(event) => this.onChangeInput(event, 'storedWhat')}>
+            <option value="all" default> -= ALL =- </option>
+            <option value="findlays">Findlay</option>
+            <option value="quattrocchis">Quattrocchi's</option>
+            <option value="pigolive">Pig &amp; Olive</option>
             <option value="dairy">Dairy</option>
             <option value="meat">Meats</option>
             <option value="produce">Produce</option>
