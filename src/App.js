@@ -239,7 +239,7 @@ class App extends React.Component {
         return this.setState({ sortedProds: [
           ...newStuff,
         ]})
-      } else {
+      } else if (sortCategory === '') { return; } else {
         const newStuff = this.state.products.filter(x => {
           return x.category === sortCategory
         })

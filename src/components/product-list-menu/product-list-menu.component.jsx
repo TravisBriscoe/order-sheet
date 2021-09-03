@@ -60,21 +60,23 @@ class ProductListMenu extends React.Component {
             <option value="misc">Misc</option>
           </select> */}
           <select className='product-headers-actions--category' name="header-order-catagory" value={this.props.sortCategory} onChange={(event) => this.onChangeInput(event, 'storedWhat')}>
-            <option value="all" default> -= ALL =- </option>
-            <option value="findlays">Findlay</option>
-            <option value="quattrocchis">Quattrocchi's</option>
-            <option value="pigolive">Pig &amp; Olive</option>
-            <option value="dairy">Dairy</option>
-            <option value="meat">Meats</option>
-            <option value="produce">Produce</option>
-            <option value="sauces">Sauces &amp; Dressings</option>
-            <option value="spices">Spices</option>
-            <option value="oil">Oil &amp; Vinegar</option>
-            <option value="paper">Paper/Plastic</option>
-            <option value="chemical">Chemicals</option>
-            <option value="bar">Bar</option>
-            <option value="bread">Bread</option>
-            <option value="misc">Misc</option>
+            <option value="all"> -= ALL =- </option>
+            <option value="">Distributor:</option>
+            <option value="findlays">&nbsp;&nbsp;Findlay</option>
+            <option value="quattrocchis">&nbsp;&nbsp;Quattrocchi's</option>
+            <option value="pigolive">&nbsp;&nbsp;Pig &amp; Olive</option>
+            <option value="">Category:</option>
+            <option value="dairy">&nbsp;&nbsp;Dairy</option>
+            <option value="meat">&nbsp;&nbsp;Meats</option>
+            <option value="produce">&nbsp;&nbsp;Produce</option>
+            <option value="sauces">&nbsp;&nbsp;Sauces &amp; Dressings</option>
+            <option value="spices">&nbsp;&nbsp;Spices</option>
+            <option value="oil">&nbsp;&nbsp;Oil &amp; Vinegar</option>
+            <option value="paper">&nbsp;&nbsp;Paper/Plastic</option>
+            <option value="chemical">&nbsp;&nbsp;Chemicals</option>
+            <option value="bar">&nbsp;&nbsp;Bar</option>
+            <option value="bread">&nbsp;&nbsp;Bread</option>
+            <option value="misc">&nbsp;&nbsp;Misc</option>
           </select>
           <input className="product-headers-actions--search_input" type="text" placeholder='Search!' onChange={this.state.onHandleSearch}></input>
           {/* <button className="product-headers-actions--search_btn--clr">Clear</button> */}
