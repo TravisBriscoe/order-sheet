@@ -1,9 +1,11 @@
 .recipe-content {
   grid-area: rcontent;
+  min-height: 0;
+  overflow-y: auto;
   justify-self: center;
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
-  grid-template-rows: 1fr 4fr 3fr; 
+  grid-template-rows: 40px 3fr 1fr; 
 
   &-title {
     text-decoration: underline;
@@ -20,7 +22,7 @@
     grid-row: 2 / 3;
     justify-self: center;
     // font-size: 13px;
-    overflow-y: auto;
+    min-height: 0;
   }
 
   &-notes {
@@ -30,6 +32,7 @@
     grid-row: 3 / 4;
     margin-top: 10px;
     place-self: center;
+    min-height: 0;
     // font-size: 13px;
   }
 
