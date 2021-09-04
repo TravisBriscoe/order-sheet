@@ -3,7 +3,6 @@ import firebase from 'firebase/app';
 // import "firebase/analytics";
 import 'firebase/firestore';
 import 'firebase/auth';
-// import RECIPE_DATA from '../data/recipe.list';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBhlBXhSRTzKYU3i8sGcxxiBDYnp8R9Em4",
@@ -22,6 +21,7 @@ export const firestore = firebase.firestore();
 
 export const users = firestore.collection('users');
 export const recipes = firestore.collection('recipe-list');
+export const products = firestore.collection('product-list');
 
 export const signIn = async (username, pass) => {
   const userDataObj = await userData();
@@ -87,14 +87,35 @@ export const recipeData = async () => {
   return recipeDataObj;
 }
 
-// Add data (recipes) to firebase.
+export const productData = async () => {
+  const productDataObj = Object.create({})
+  
+  try {
+    await products.get().then(snapshot => snapshot.docs.map(doc => {
+      const { id } = doc.data();
+
+
+      productDataObj[id] = {
+        ...doc.data()
+      }
+
+      return productDataObj;
+    }));
+  } catch (err) {
+    console.log('Error! ', err.message)
+  }
+  
+  return productDataObj;
+}
+
+// Add data (products)) to firebase.
 // const inputDataToFirebase = async () => {
 //   const batch = firestore.batch();
 
-//   Object.entries(RECIPE_DATA).map((key) => {
-//     const { linkUrl } = key[1];
-//     const recipeListDoc = recipes.doc(linkUrl);
-//     batch.set(recipeListDoc, key[1]);    
+//   Object.entries(PRODUCT_DATA).map((key) => {
+//     const { id } = key[1];
+//     const productListDoc = products.doc(id);
+//     return batch.set(productListDoc, key[1]);
 //   })
 
 //   return await batch.commit();
