@@ -19,7 +19,7 @@ firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-export const users = firestore.collection('users');
+export const users = firestore.collection('user-list');
 export const recipes = firestore.collection('recipe-list');
 export const products = firestore.collection('product-list');
 
@@ -108,14 +108,40 @@ export const productData = async () => {
   return productDataObj;
 }
 
-// Add data (products)) to firebase.
+// CRUD ops
+
+// New entry
+export const addNewEntry = async (collectionRef, data) => {
+  try {
+    await [collectionRef].doc(data.id).set([...data]);
+  } catch (err) {
+    console.log('Error! ', err.message)
+  }
+};
+// Update entry
+export const updateNewEntry = async (collectionRef, data) => {
+  try {
+    await [collectionRef].doc(data.id).update([...data]);
+  } catch (err) {
+    console.log('Error! ', err.message)
+  }
+};
+// Delete entry
+export const deleteEntry = async (collectionRef, data) => {
+  const { id } = data;
+
+  await [collectionRef].doc(id).delete();
+};
+// End CRUD
+
+// Add data (recipe) to firebase.
 // const inputDataToFirebase = async () => {
 //   const batch = firestore.batch();
 
-//   Object.entries(PRODUCT_DATA).map((key) => {
+//   Object.entries(RECIPE_DATA).map((key) => {
 //     const { id } = key[1];
-//     const productListDoc = products.doc(id);
-//     return batch.set(productListDoc, key[1]);
+//     const recipeListDoc = recipes.doc(id);
+//     return batch.set(recipeListDoc, key[1]);
 //   })
 
 //   return await batch.commit();

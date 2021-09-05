@@ -4,7 +4,7 @@ const third = String.fromCharCode(0x2153);
 
 const RECIPE_DATA = {
   tartar: {
-    id: 1,
+    id: '0001',
     name: 'Tartar Sauce',
     linkUrl: 'tartar',
     recipe: {
@@ -24,7 +24,7 @@ const RECIPE_DATA = {
     },
   },
   coleslaw: {
-    id: 2,
+    id: '0002',
     name: 'Coleslaw',
     linkUrl: 'coleslaw',
     recipe: {
@@ -51,7 +51,7 @@ const RECIPE_DATA = {
     }
   },
   rosemaryaioli: {
-    id: 3,
+    id: '0003',
     name: 'Rosemary Aioli',
     linkUrl: 'rosemaryaioli',
     recipe: {
@@ -66,7 +66,7 @@ const RECIPE_DATA = {
     }
   },
   sriracha: {
-    id: 4,
+    id: '0004',
     name: 'Sriracha',
     linkUrl: 'sriracha',
     recipe: {
@@ -77,7 +77,7 @@ const RECIPE_DATA = {
     }
   },
   beefrub: {
-    id: 5,
+    id: '0005',
     name: 'Roast-beef Rub',
     linkUrl: 'beefrub',
     recipe: {
@@ -92,7 +92,7 @@ const RECIPE_DATA = {
     }
   },
   chickenmarinade: {
-    id: 6,
+    id: '0006',
     name: 'Chicken Marinade',
     linkUrl: 'chickenmarinade',
     recipe: {
@@ -110,7 +110,7 @@ const RECIPE_DATA = {
     }
   },
   frenchonionsoup: {
-    id: 7,
+    id: '0007',
     name: 'French Onion Soup',
     linkUrl: 'frenchonionsoup',
     recipe: {
@@ -131,7 +131,7 @@ const RECIPE_DATA = {
     }
   },
   obatzda: {
-    id: 8,
+    id: '0008',
     name: 'Obatzda',
     linkUrl: 'obatzda',
     recipe: {
@@ -149,7 +149,7 @@ const RECIPE_DATA = {
     }
   },
   marinara: {
-    id: 9,
+    id: '0009',
     name: 'Marinara Sauce',
     linkUrl: 'marinara',
     recipe: {
@@ -166,7 +166,7 @@ const RECIPE_DATA = {
     }
   },
   chickenfingers: {
-    id: 10,
+    id: '0010',
     name: 'Chicken Fingers',
     linkUrl: 'chickenfingers',
     recipe: {
@@ -192,7 +192,7 @@ const RECIPE_DATA = {
     }
   },
   guacamole: {
-    id: 11,
+    id: '0011',
     name: 'Guacamole',
     linkUrl: 'guacamole',
     recipe: {
@@ -208,7 +208,7 @@ const RECIPE_DATA = {
     }
   },
   tzatziki: {
-    id: 12,
+    id: '0012',
     name: 'Tzatziki',
     linkUrl: 'tzatziki',
     recipe: {
@@ -226,7 +226,7 @@ const RECIPE_DATA = {
     }
   },
   garlicbutter: {
-    id: 13,
+    id: '0013',
     name: 'Garlic Butter',
     linkUrl: 'garlicbutter',
     recipe: {
@@ -245,7 +245,7 @@ const RECIPE_DATA = {
     }
   },
   fishbatter: {
-    id: 14,
+    id: '0014',
     name: 'Fish Batter',
     linkUrl: 'fishbatter',
     recipe: {
