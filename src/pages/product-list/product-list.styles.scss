@@ -108,10 +108,10 @@
 
   &-items {
     // grid-row: 2 / 3;
-    // min-height: 0;
+    min-height: 0;
     overflow-y: auto;
     // place-self: end;
-    // max-height: 100%;
+    max-height: 100%;
     height: 75vh;
     
     &-item {

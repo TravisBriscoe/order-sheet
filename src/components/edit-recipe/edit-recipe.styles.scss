@@ -1,0 +1,65 @@
+.manage-recipes-content-recipe {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 25px 1fr;
+  grid-template-areas: 
+                      "newrecipebtn"
+                      "form";
+
+
+  &--newrecipe {
+    // grid-column: 2 / 3;
+    grid-area: newrecipebtn;
+    place-self: center;
+  }
+
+  &-form {
+    grid-area: form;
+    display: grid;
+    grid-template-rows: 25px 3fr 3fr;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas:
+                        ". title ."
+                        ". ingreds ."
+                        ". notes actions";
+    
+    &--title {
+      grid-area: title;
+    justify-self: center;
+    }
+  
+    &--ingreds {
+      grid-area: ingreds;
+      
+      input {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+      }
+    }
+    
+    &--notes {
+      // grid-column: 2 / 3;
+      // grid-row: 4 / 5;
+      grid-area: notes;
+      height: 25px;
+  
+      textarea {
+        width: 100%;
+        height: 100px;
+        overflow-wrap: normal;
+        resize: none;
+      }
+  
+    }
+  
+    &--actions {
+      // grid-row: 4 / 5;
+      // grid-column: 3 / 4;
+      grid-area: actions;
+      place-self: end;
+      margin-right: 10px;
+    }
+  }
+
+}

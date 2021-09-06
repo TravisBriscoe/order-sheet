@@ -38,7 +38,7 @@ class App extends React.Component {
       distributor: 'all',
       storedWhere: 'all',
       storedWhat: 'all',
-      sortCategory: 'all'
+      sortCategory: 'all',
     }
   }
 
@@ -83,6 +83,7 @@ class App extends React.Component {
         } else {
           this.setState({ sortedProds: [...sortedProds]})
         }
+        this.setState({ isLoading: false })
       });
     }
 
