@@ -15,7 +15,7 @@ class EditRecipe extends React.Component {
     this.state = {
       recipeEdit: {
         recipe: {
-          ingredients: [],
+          ingredients: {},
           notes: ''
         }
       },
@@ -71,7 +71,7 @@ class EditRecipe extends React.Component {
           <input name='name' type='text' className='manage-recipes-content-recipe-form--title' placeholder={recipes.name} value={recipeEdit.name ? recipeEdit.name : ''} onChange={this.onHandleInputChange} />
           <div className='manage-recipes-content-recipe-form--ingreds'>
             <h3>Ingredients:</h3>
-            <div>{recipes.recipe.ingredients.map((x, index) => (<input key={index} name={index} placeholder={x} value={recipeEdit.recipe.ingredients[index]} onChange={this.onHandleInputChange} />))}</div>
+            <div>{recipes.recipe.ingredients.map((x, index) => (<input key={index} name={index} placeholder={x} value={x} readOnly />))}</div>
             <button>Add new field</button>
           </div>
           <div className='manage-recipes-content-recipe-form--notes'>
