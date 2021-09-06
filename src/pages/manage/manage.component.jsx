@@ -17,11 +17,11 @@ class ManagePage extends React.Component {
       userLoggedIn: this.props.userLoggedIn,
       users: this.props.users,
       products: this.props.products,
-      recipes: this.props.recipes,
     }
   }
 
   render() {
+    const { recipes } = this.props;
     
     return (
       <div className='manage-page'>
@@ -47,7 +47,7 @@ class ManagePage extends React.Component {
             <Route path='/manage/edit-products' component={ManageProducts} />
             {/* <Route path='/manage/edit-products' render={(props) => <ManageProducts {...props} products={products} />} /> */}
             <Route path='/manage/edit-users' render={(props) => <ManageUsers {...props} users={this.state.users} userLoggedIn={this.state.userLoggedIn} />} />
-            <Route path='/manage/edit-recipes' render={(props) => <ManageRecipes {...props} recipes={this.state.recipes} />} />
+            <Route path='/manage/edit-recipes' render={(props) => <ManageRecipes {...props} recipes={recipes} />} />
           </Switch>
         </div>
       </div>

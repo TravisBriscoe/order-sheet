@@ -1,6 +1,9 @@
 .recipe {
   width: 90%;
   margin: 0 auto;
+  grid-area: main;
+  min-height: 0;
+  overflow-y: auto;
   display: grid;
   grid-template-columns: 1fr 5fr;
   grid-template-rows: 100%;

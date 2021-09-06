@@ -1,6 +1,9 @@
 .manage-page {
   width: 90%;
   justify-self: center;
+  grid-area: main;
+  min-height: 0;
+  overflow-y: hidden;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 25px 1fr;
@@ -36,6 +39,8 @@
 
   &-content {
     grid-area: managecontent;
+    min-height: 0;
+    overflow-y: auto;
     // justify-self: start;
     // display: grid;
     // grid-template-rows: 1fr;

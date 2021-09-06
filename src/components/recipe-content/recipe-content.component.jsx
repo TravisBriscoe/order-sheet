@@ -8,12 +8,12 @@ const RecipeContent = ({ recipes }) => {
   const { recipeId } = useParams();
   const recipeData = {...recipes[recipeId]};
 
+  // console.log(useParams())
   const { name, recipe: {ingredients, notes } = {} } = recipeData;
-  // const { ingredients, notes } = recipe;
   
   return (
   <div className='recipe-content'>
-    <h2 className='recipe-content-title' key={name}>{name}</h2>
+    <h2 className='recipe-content-title'>{name}</h2>
     <div className='recipe-content-ingredients'>
       {
         ingredients ?

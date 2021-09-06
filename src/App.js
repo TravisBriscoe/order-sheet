@@ -10,7 +10,7 @@ import RecipesPage from './pages/recipes/recipes.component';
 import LoginComponent from './components/login/login.component.jsx';
 import AboutPage from './pages/about/about.component';
 
-import { userData, recipeData, productData } from './firebase/firebase.utils';
+import { userData, recipeData, productData, recipes, firestore } from './firebase/firebase.utils';
 
 import './App.scss';
 
@@ -24,6 +24,7 @@ class App extends React.Component {
     this.setOnOrder = this.setOnOrder.bind(this);
     this.onMenuSelect = this.onMenuSelect.bind(this);
     this.onHandleSearch = this.onHandleSearch.bind(this);
+    this.deleteAllRecipes = this.deleteAllRecipes.bind(this);
 
     this.state = {
       loggedInUser: '',
@@ -58,7 +59,12 @@ class App extends React.Component {
 
     const getData = async () => {
       const userDataObj = await userData();
+
       const recipeDataObj = await recipeData();
+      // const recipeDataArr = Object.entries(recipeDataObj).map(x => {
+      //   return x[1];
+      // });
+
       const productDataObj = await productData();
       const productDataArr = Object.entries(productDataObj).map(x => {
         return x[1];
@@ -136,6 +142,19 @@ class App extends React.Component {
     })
   }
 
+  async deleteAllRecipes() {
+    if (window.confirm('Are you sure you want to delete all Recipes?')) {
+      const batch = firestore.batch();
+      await recipes.get().then((data) => data.docs.map(doc => {
+        return batch.delete(doc.ref);
+      }));
+
+      await batch.commit();
+
+      return this.setState({ recipes: null }, () => alert('All recipes have been deleted!'))
+    }
+  }
+
   render() {
     const {
       loggedInUser,
@@ -180,7 +199,7 @@ class App extends React.Component {
                   />}
                 />
               </Switch>
-              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut} sortedProds={sortedProds} />
+              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut} sortedProds={sortedProds} deleteAllRecipes={this.deleteAllRecipes} recipes={recipes} />
             </div>
           )
           

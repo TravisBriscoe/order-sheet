@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import './footer.styles.scss';
 
+
 const Footer = (props) => {
   const { pathname } = useLocation();
 
@@ -20,6 +21,11 @@ const Footer = (props) => {
       {
         pathname === '/' ?
           (<Link to='/order-sheet'><button>Order Sheet</button></Link>)
+          : null
+      }
+      {
+        pathname.includes('edit-recipes') ?
+          (<button onClick={props.deleteAllRecipes}>Delete All!</button>)
           : null
       }
     </div>

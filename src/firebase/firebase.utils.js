@@ -4,6 +4,8 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
+// import RECIPE_DATA from '../data/recipe.list'
+
 const firebaseConfig = {
   apiKey: "AIzaSyBhlBXhSRTzKYU3i8sGcxxiBDYnp8R9Em4",
   authDomain: "order-sheet-42332.firebaseapp.com",
@@ -119,7 +121,7 @@ export const addNewEntry = async (collectionRef, data) => {
   }
 };
 // Update entry
-export const updateNewEntry = async (collectionRef, data) => {
+export const updateEntry = async (collectionRef, data) => {
   try {
     await [collectionRef].doc(data.id).update([...data]);
   } catch (err) {
