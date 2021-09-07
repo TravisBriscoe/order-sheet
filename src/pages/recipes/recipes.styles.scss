@@ -13,4 +13,24 @@
     border-right: 1px solid gray;
     // width: 40%;
   }
+
+}
+
+.recipe-none {
+  margin: 0 auto;
+  width: 90%;
+  display: grid;
+  grid-template-rows: 4fr 2fr 4fr;
+  grid-template-columns: 3fr 2fr 3fr;
+
+  &-content {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+    place-self: center;
+  }
+  
+  &--add-recipe_btn {
+    place-self: center;
+    text-align: center;
+  }
 }

@@ -13,15 +13,28 @@ const RecipesPage = (props) => {
   const { recipes } = props;
 
   return (
-    <div className='recipe'>
-      <Switch>
-        <Route path='/recipes/:recipeId'>
-          <RecipeContent recipes={recipes} />
-        </Route>
-      </Switch>
-      <div className='recipe-navi'>
-        <RecipeNav recipes={recipes} />
-      </div>
+    <div>
+      {
+        recipes ?
+          (<div className='recipe'>
+            <Switch>
+              <Route path='/recipes/:recipeId'>
+                <RecipeContent recipes={recipes} />
+              </Route>
+            </Switch>
+            <div className='recipe-navi'>
+              <RecipeNav recipes={recipes} />
+            </div>
+          </div>)
+        : <div className='recipe-none'>
+            <div className='recipe-none-content'>
+              <h1>No Recipes!</h1>
+              <div className='recipe-none--add-recipe_btn'>
+                <button>Add Recipe</button>
+              </div>
+            </div>
+          </div>
+      }
     </div>
   )
 };

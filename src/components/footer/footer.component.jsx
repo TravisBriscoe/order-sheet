@@ -24,7 +24,7 @@ const Footer = (props) => {
           : null
       }
       {
-        pathname.includes('edit-recipes') ?
+        pathname.includes('edit-recipes') && props.loggedInUser === 'manager' ?
           (<button onClick={props.deleteAllRecipes}>Delete All!</button>)
           : null
       }
