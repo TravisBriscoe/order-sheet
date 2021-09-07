@@ -1,20 +1,20 @@
 const USER_DATA = {
   admin: {
-    name: 'Admin',
+    name: 'admin',
     password: '123456',
     email: 'overlord@test.com',
     role: 'administrator',
     id: '0001',
   },
   manager: {
-    name: 'Manager',
+    name: 'manager',
     password: '123456',
     email: 'master@test.com',
     role: 'manager',
     id: '0002',
   },
   worker: {
-    name: 'Worker',
+    name: 'worker',
     password: '123456',
     email: 'minion@test.com',
     role: 'worker',

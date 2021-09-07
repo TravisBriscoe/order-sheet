@@ -10,7 +10,7 @@ import RecipesPage from './pages/recipes/recipes.component';
 import LoginComponent from './components/login/login.component.jsx';
 import AboutPage from './pages/about/about.component';
 
-import { userData, recipeData, productData, recipes, firestore } from './firebase/firebase.utils';
+import { userData, recipeData, productData, recipes, firestore, users, products } from './firebase/firebase.utils';
 
 import './App.scss';
 
@@ -24,7 +24,7 @@ class App extends React.Component {
     this.setOnOrder = this.setOnOrder.bind(this);
     this.onMenuSelect = this.onMenuSelect.bind(this);
     this.onHandleSearch = this.onHandleSearch.bind(this);
-    this.deleteAllRecipes = this.deleteAllRecipes.bind(this);
+    this.deleteAllData = this.deleteAllData.bind(this);
 
     this.state = {
       loggedInUser: '',
@@ -143,16 +143,25 @@ class App extends React.Component {
     })
   }
 
-  async deleteAllRecipes() {
-    if (window.confirm('Are you sure you want to delete all Recipes?')) {
+  async deleteAllData(collection, text) {
+    if (window.confirm(`Are you sure you want to delete all ${text}?`)) {
+      if (collection === 'products' ) collection = products;
+      else if (collection === 'users') collection = users;
+      else collection = recipes;
+
       const batch = firestore.batch();
-      await recipes.get().then((data) => data.docs.map(doc => {
+      await collection.get().then((data) => data.docs.map(doc => {
         return batch.delete(doc.ref);
       }));
 
       await batch.commit();
 
-      return this.setState({ recipes: null }, () => alert('All recipes have been deleted!'))
+      if (collection === products) {
+        this.setState({ products: null, sortedProds: null}, () => alert(`All ${text} have been deleted!`))
+      } else this.setState({ [text]: null }, () => {
+        console.log(this.state[collection])
+        alert(`All ${text} have been deleted!`)
+      })
     }
   }
 
@@ -200,7 +209,7 @@ class App extends React.Component {
                   />}
                 />
               </Switch>
-              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut} sortedProds={sortedProds} deleteAllRecipes={this.deleteAllRecipes} recipes={recipes} />
+              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut} sortedProds={sortedProds} deleteAllData={this.deleteAllData} recipes={recipes} />
             </div>
           )
           

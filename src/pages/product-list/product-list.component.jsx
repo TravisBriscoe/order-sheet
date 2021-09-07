@@ -20,13 +20,19 @@ class ProductList extends React.Component {
     const { sortedProds } = this.props
     
     return (
-      <div className='product'>
-        <ProductListMenu onMenuSelect={onMenuSelect} onHandleSearch={onHandleSearch} sortCategory={this.props.sortCategory} />
-        <div className='product-items-container'>
-          <div className='product-items'>
-            <ProductListContent sortedProds={sortedProds} setOnOrder={setOnOrder} />
-          </div>
-        </div>
+      <div>
+        {
+          sortedProds ?
+            <div className='product'>
+              <ProductListMenu onMenuSelect={onMenuSelect} onHandleSearch={onHandleSearch} sortCategory={this.props.sortCategory} />
+              <div className='product-items-container'>
+                <div className='product-items'>
+                  <ProductListContent sortedProds={sortedProds} setOnOrder={setOnOrder} />
+                </div>
+              </div>
+            </div>
+          : (<button>Create New Product</button>)
+        }
       </div>
     );
   }

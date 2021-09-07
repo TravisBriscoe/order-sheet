@@ -13,7 +13,7 @@ const Footer = (props) => {
     <div className='footer-item-total'>
       {
         pathname === '/' ?
-        <div>{props.sortedProds.length} items</div>
+        <div>{props.sortedProds ? props.sortedProds.length : '0'} items</div>
         : null
       }
     </div>
@@ -24,8 +24,13 @@ const Footer = (props) => {
           : null
       }
       {
+        pathname === '/manage/edit-products' && props.loggedInUser === 'manager' ?
+          (<button onClick={() => props.deleteAllData('products', 'products')}>Delete All!</button>)
+        : null
+      }
+      {
         pathname.includes('edit-recipes') && props.loggedInUser === 'manager' ?
-          (<button onClick={props.deleteAllRecipes}>Delete All!</button>)
+          (<button onClick={() => props.deleteAll('recipes', 'recipes')}>Delete All!</button>)
           : null
       }
     </div>

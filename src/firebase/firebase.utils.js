@@ -4,7 +4,9 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-import RECIPE_DATA from '../data/recipe.list'
+import PRODUCT_DATA from '../data/product.data';
+import RECIPE_DATA from '../data/recipe.list';
+import USER_DATA from '../data/user.data';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBhlBXhSRTzKYU3i8sGcxxiBDYnp8R9Em4",
@@ -136,14 +138,26 @@ export const deleteEntry = async (collectionRef, data) => {
 };
 // End CRUD
 
-// Add data (recipe) to firebase.
+// Add data (all) to firebase.
 const inputDataToFirebase = async () => {
   const batch = firestore.batch();
+
+  Object.entries(PRODUCT_DATA).map((key) => {
+    const { id } = key[1];
+    const productListDoc = products.doc(id);
+    return batch.set(productListDoc, key[1]);
+  })
 
   Object.entries(RECIPE_DATA).map((key) => {
     const { id } = key[1];
     const recipeListDoc = recipes.doc(id);
     return batch.set(recipeListDoc, key[1]);
+  })
+
+  Object.entries(USER_DATA).map((key) => {
+    const { id } = key[1];
+    const userListDoc = users.doc(id);
+    return batch.set(userListDoc, key[1]);
   })
 
   return await batch.commit();

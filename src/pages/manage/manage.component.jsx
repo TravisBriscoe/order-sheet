@@ -15,8 +15,6 @@ class ManagePage extends React.Component {
     this.state = {
       isSelected: false,
       userLoggedIn: this.props.userLoggedIn,
-      users: this.props.users,
-      products: this.props.products,
     }
   }
 
@@ -44,9 +42,9 @@ class ManagePage extends React.Component {
         </div>
         <div className='manage-page-content'>  
           <Switch>
-            <Route path='/manage/edit-products' component={ManageProducts} />
+            <Route path='/manage/edit-products' render={(props) => <ManageProducts {...props} products={this.props.products} />} />
             {/* <Route path='/manage/edit-products' render={(props) => <ManageProducts {...props} products={products} />} /> */}
-            <Route path='/manage/edit-users' render={(props) => <ManageUsers {...props} users={this.state.users} userLoggedIn={this.state.userLoggedIn} />} />
+            <Route path='/manage/edit-users' render={(props) => <ManageUsers {...props} users={this.props.users} userLoggedIn={this.state.userLoggedIn} />} />
             <Route path='/manage/edit-recipes' render={(props) => <ManageRecipes {...props} recipes={recipes} />} />
           </Switch>
         </div>
