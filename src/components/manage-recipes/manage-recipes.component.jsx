@@ -12,7 +12,6 @@ import './manage-recipes.styles.scss';
 const ManageRecipes = (props) => {
 
   const { recipes } = props;
-  console.log(recipes)
 
   return (
     <div>

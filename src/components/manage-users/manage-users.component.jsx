@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { withRouter } from 'react-router-dom';
 
@@ -7,7 +7,13 @@ import '../../firebase/firebase.utils.js'
 const ManageUsers = (props) => {
     const { users, userLoggedIn } = props;
     const userObj = Object.entries(users);
-    console.log(userLoggedIn)
+    
+    let userNames
+    userObj.forEach(user => {
+      return userNames = {[user[0]]: false, ...userNames }
+    });
+
+    const [onAllow, setOnAllow] = useState(userNames);
 
     const adminDeleteAll = () => {
       if (userLoggedIn !== 'Admin') {
@@ -16,13 +22,8 @@ const ManageUsers = (props) => {
         const deleteAllUsers = Object.entries(users).filter((user, index) => user[1].name !== 'Admin');
         console.log(deleteAllUsers.length)
         const userObjRemoved = userObj.filter((el, index) => el[index] === deleteAllUsers[index][1].name);
-        // for (let i = 0; i === deleteAllUsers.length; i++) {
-        //   console.log(deleteAllUsers[i])
-        //   return delete userObj[i][deleteAllUsers[1]].name
-        // }
         console.log(userObjRemoved)
       }
-
     }
 
     return(
@@ -32,15 +33,16 @@ const ManageUsers = (props) => {
           userObj.map((el) => {
             return (
               <div key={el[1].name}>
-                <input type='text' disabled placeholder={`${el[1].name}`} />
-                <input type='password' disabled placeholder={`${el[1].password}`} />
-                <select disabled>
+                <input type='text' disabled={onAllow[el[1].name] ? '' : 'disabled'} placeholder={`${el[1].name}`} />
+                <input type='password' hidden={onAllow[el[1].name] ? '' : 'disabled'} placeholder={`${el[1].password}`} />
+                <select hidden={onAllow[el[1].name] ? '' : 'disabled'} defaultValue={el[1].role}>
                   <option value='admin'>Admin</option>
                   <option value='manager'>Manager</option>
                   <option value='worker'>Worker</option>
                 </select>
-                <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={() => setOnAllow({[el[1].name]: true})}>Edit</button>
+                <button hidden={onAllow[el[1].name] ? '' : 'disabled'}>Save</button>
+                <button hidden={onAllow[el[1].name] ? '' : 'disabled'}>Delete</button>
               </div>
             );
           })
