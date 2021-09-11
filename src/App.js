@@ -10,7 +10,7 @@ import RecipesPage from './pages/recipes/recipes.component';
 import LoginComponent from './components/login/login.component.jsx';
 import AboutPage from './pages/about/about.component';
 
-import { userData, recipeData, productData, recipes, firestore, users, products } from './firebase/firebase.utils';
+import { userData, recipeData, productData, recipes, firestore, users, products, updateEntry } from './firebase/firebase.utils';
 
 import './App.scss';
 
@@ -25,6 +25,7 @@ class App extends React.Component {
     this.onMenuSelect = this.onMenuSelect.bind(this);
     this.onHandleSearch = this.onHandleSearch.bind(this);
     this.deleteAllData = this.deleteAllData.bind(this);
+    this.onUpdateEntry = this.onUpdateEntry.bind(this);
 
     this.state = {
       loggedInUser: '',
@@ -42,28 +43,13 @@ class App extends React.Component {
     }
   }
 
-  setUserLoggedIn(user) {
-    this.props.history.push('/');
-    return this.setState({ loggedInUser: user });
-  }
-
-  setNotification(notifications) {
-    if (notifications) {
-      return this.setState({ notification: false });
-    } else {
-      return this.setState({ notification: true });
-    }
-  }
-
+  // setting intiial state from database when component mounts
   componentDidMount() {
 
     const getData = async () => {
       const userDataObj = await userData();
 
       const recipeDataObj = await recipeData();
-      // const recipeDataArr = Object.entries(recipeDataObj).map(x => {
-      //   return x[1];
-      // });
 
       const productDataObj = await productData();
       const productDataArr = Object.entries(productDataObj).map(x => {
@@ -87,8 +73,21 @@ class App extends React.Component {
       });
     }
 
-
     return getData();
+  }
+
+  // Set Some states
+  setUserLoggedIn(user) {
+    this.props.history.push('/');
+    return this.setState({ loggedInUser: user });
+  }
+
+  setNotification(notifications) {
+    if (notifications) {
+      return this.setState({ notification: false });
+    } else {
+      return this.setState({ notification: true });
+    }
   }
 
   setSignOut() {
@@ -102,6 +101,7 @@ class App extends React.Component {
     this.setState({ onOrder: orderProducts });
   }
 
+  // Handle the searchbar and set the sortedProds state
   onHandleSearch = (e) => {
     const searchData1 = this.state.products.filter((product) => {
        return product.name.toLowerCase().includes(e.target.value.toLowerCase());
@@ -115,6 +115,7 @@ class App extends React.Component {
     this.setState({ sortedProds: searchData });
   }
 
+  // Handle dropdown menu for product search and set sortedProds state
   onMenuSelect(sortedSelect) {
     this.setState({ sortCategory: sortedSelect }, () => {
       const { sortCategory } = this.state;
@@ -143,6 +144,7 @@ class App extends React.Component {
     })
   }
 
+  // function for deleting data within the database (users, recipes, or products)
   async deleteAllData(collection, text) {
     if (window.confirm(`Are you sure you want to delete all ${text}?`)) {
       if (collection === 'products' ) collection = products;
@@ -163,6 +165,15 @@ class App extends React.Component {
         alert(`All ${text} have been deleted!`)
       })
     }
+  }
+
+  // Modify users
+  async onUpdateEntry(collectionRef, data) {
+    if (collectionRef === 'users') collectionRef = users;
+    else if (collectionRef === 'products') collectionRef = products;
+    else collectionRef = recipes;
+
+    await updateEntry(collectionRef, data);
   }
 
   render() {
@@ -194,7 +205,7 @@ class App extends React.Component {
             <div className={'App'}>
               <Header loggedInUser={loggedInUser} users={users} title={title} notification={notification} setNotification={this.setNotification} />
               <Switch>
-                <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} recipes={recipes} />} />
+                <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} recipes={recipes} onUpdateEntry={this.onUpdateEntry} />} />
                 <Route path='/order-sheet' render={(props) => <OrderListPage {...props} onOrder={onOrder} />} />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
                 <Route path='/about' component={AboutPage} />

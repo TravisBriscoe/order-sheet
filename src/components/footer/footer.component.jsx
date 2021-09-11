@@ -29,8 +29,13 @@ const Footer = (props) => {
         : null
       }
       {
+        pathname === '/manage/edit-users' && props.loggedInUser === 'manager' ?
+          (<button onClick={() => props.deleteAllData('users', 'users')}>Delete All!</button>)
+        : null
+      }
+      {
         pathname.includes('edit-recipes') && props.loggedInUser === 'manager' ?
-          (<button onClick={() => props.deleteAll('recipes', 'recipes')}>Delete All!</button>)
+          (<button onClick={() => props.deleteAllData('recipes', 'recipes')}>Delete All!</button>)
           : null
       }
     </div>

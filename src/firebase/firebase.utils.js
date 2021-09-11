@@ -125,7 +125,7 @@ export const addNewEntry = async (collectionRef, data) => {
 // Update entry
 export const updateEntry = async (collectionRef, data) => {
   try {
-    await [collectionRef].doc(data.id).update([...data]);
+    await collectionRef.doc(data.data.id).update({...data.data});
   } catch (err) {
     console.log('Error! ', err.message)
   }
