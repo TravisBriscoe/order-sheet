@@ -10,7 +10,7 @@ import RecipesPage from './pages/recipes/recipes.component';
 import LoginComponent from './components/login/login.component.jsx';
 import AboutPage from './pages/about/about.component';
 
-import { userData, recipeData, productData, recipes, firestore, users, products, updateEntry } from './firebase/firebase.utils';
+import { userData, recipeData, productData, recipes, firestore, users, products, updateEntry, addNewEntry, deleteEntry } from './firebase/firebase.utils';
 
 import './App.scss';
 
@@ -24,8 +24,10 @@ class App extends React.Component {
     this.setOnOrder = this.setOnOrder.bind(this);
     this.onMenuSelect = this.onMenuSelect.bind(this);
     this.onHandleSearch = this.onHandleSearch.bind(this);
+    
     this.deleteAllData = this.deleteAllData.bind(this);
     this.onUpdateEntry = this.onUpdateEntry.bind(this);
+    this.onNewEntry = this.onNewEntry.bind(this);
 
     this.state = {
       loggedInUser: '',
@@ -167,13 +169,36 @@ class App extends React.Component {
     }
   }
 
-  // Modify users
-  async onUpdateEntry(collectionRef, data) {
+  // Modify firebase data (testing: users)
+
+  // Helper function to set the collection reference to correct collection
+  setCollectionRef(collectionRef) {
     if (collectionRef === 'users') collectionRef = users;
     else if (collectionRef === 'products') collectionRef = products;
     else collectionRef = recipes;
 
+    return collectionRef;
+  }
+
+  // Update existing entry
+  async onUpdateEntry(collectionRef, data) {
+    collectionRef = this.setCollectionRef(collectionRef);
+    
     await updateEntry(collectionRef, data);
+  }
+  
+  // Create new entry
+  async onNewEntry(collectionRef, data) {
+    collectionRef = this.setCollectionRef(collectionRef);
+
+    await addNewEntry(collectionRef, data);
+  }
+
+  // Delete existing entry (delete all is in Footer component)
+  async onDeleteEntry(collectionRef, data) {
+    collectionRef = this.setCollectionRef(collectionRef);
+
+    await deleteEntry(collectionRef, data);
   }
 
   render() {
@@ -205,7 +230,7 @@ class App extends React.Component {
             <div className={'App'}>
               <Header loggedInUser={loggedInUser} users={users} title={title} notification={notification} setNotification={this.setNotification} />
               <Switch>
-                <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} recipes={recipes} onUpdateEntry={this.onUpdateEntry} />} />
+                <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} recipes={recipes} onUpdateEntry={this.onUpdateEntry} onNewEntry={this.onNewEntry} />} />
                 <Route path='/order-sheet' render={(props) => <OrderListPage {...props} onOrder={onOrder} />} />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
                 <Route path='/about' component={AboutPage} />

@@ -10,12 +10,29 @@ class NewUser extends React.Component {
         email: '',
         role: '',
         password: '',
-        id: Object.keys(this.props.users).length < 10 ? `000${Object.keys(this.props.users).length + 1}` : `00${Object.keys(this.props.users).length + 1}`,
+        id: this.props.userLength < 10 ? `000${this.props.userLength + 1}` : `00${this.props.userLength + 1}`,
       }
     }
   }
 
+  onHandleInput(event) {
+    const { name, value } = event.target;
+
+    this.setState((prevState) => 
+    ({ newUser: {
+        ...prevState.newUser,
+        [name]: value
+      }})
+    )
+  }
+
+  onHandleSubmit(event, data) {
+    event.preventDefault();
+
+  }
+
   render() {
+    
     return (
       <div>
         <h3>New User!</h3>

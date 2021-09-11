@@ -81,7 +81,7 @@ class ManageUsers extends React.Component {
                   (<button onClick={() => {this.setState({ onNewUser: true })}}>Add New User</button>)
                 : (
                   <div>
-                    <NewUser users={users} />
+                    <NewUser userLength={Object.keys(users).length} onNewEntry={this.props.onNewEntry} />
                     <button onClick={() => this.setState({ onNewUser: false })}>Cancel</button>
                   </div>
                   )
