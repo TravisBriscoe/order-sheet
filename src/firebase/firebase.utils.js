@@ -29,31 +29,29 @@ export const products = firestore.collection('product-list');
 
 export const signIn = async (username, pass) => {
   const userDataObj = await userData();
+  
   const myStorage = window.localStorage;
   username = username.toLowerCase();
-  let loggedInUser = {}
   const serverUsername = userDataObj[username].name.toLowerCase();
-  
+  let loggedInUser = {}
+      
   if (serverUsername && userDataObj[username].password === pass) {
     loggedInUser = {
       ...userDataObj[username]
     }
   
     myStorage.setItem("name", `${loggedInUser.name}`);
-  } else {
+  } else if (pass !== userDataObj[username].password || !serverUsername) {
     myStorage.clear();
     loggedInUser = null
+    alert(`username or password don't match.`);
+  } else {
+    myStorage.clear();
+    loggedInUser = null;
   }
   
   return loggedInUser;
 }
-
-// export const signOut = firebase.auth().signOut()
-//   .then(() => {
-//     let user = ''
-//     return user;
-//   })
-//   .catch(err => console.err('Error!', err.message));
 
 export const userData = async () => {
   const userDataObj = Object.create({});
@@ -63,7 +61,7 @@ export const userData = async () => {
       const { name } = doc.data();
 
 
-      userDataObj[name] = {
+      userDataObj[name.toLowerCase()] = {
         ...doc.data()
       }
 

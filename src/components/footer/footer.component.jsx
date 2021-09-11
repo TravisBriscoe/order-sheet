@@ -24,17 +24,17 @@ const Footer = (props) => {
           : null
       }
       {
-        pathname === '/manage/edit-products' && props.loggedInUser === 'manager' ?
+        pathname === '/manage/edit-products' && props.loggedInUser.toLowerCase() === 'manager' ?
           (<button onClick={() => props.deleteAllData('products', 'products')}>Delete All!</button>)
         : null
       }
       {
-        pathname === '/manage/edit-users' && props.loggedInUser === 'manager' ?
+        pathname === '/manage/edit-users' && props.loggedInUser.toLowerCase() === 'manager' ?
           (<button onClick={() => props.deleteAllData('users', 'users')}>Delete All!</button>)
         : null
       }
       {
-        pathname.includes('edit-recipes') && props.loggedInUser === 'manager' ?
+        pathname.includes('edit-recipes') && props.loggedInUser.toLowerCase() === 'manager' ?
           (<button onClick={() => props.deleteAllData('recipes', 'recipes')}>Delete All!</button>)
           : null
       }

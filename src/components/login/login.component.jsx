@@ -30,8 +30,8 @@ class LoginComponent extends React.Component {
 
     const { username, password } = this.state;
 
-    const signInData = await signIn(username, password);
-    
+    const signInData = await signIn(username.toLowerCase(), password);
+        
     if (signInData.name) {
       this.props.setUserLoggedIn(signInData.name);
     } else {
@@ -74,9 +74,7 @@ class LoginComponent extends React.Component {
             value={password}
             onChange={this.handleChange}
           />
-          {/* <Link component={NewUserComponent}><button className='login-form--newuser-btn'>New User</button></Link> */}
           <input className='login-form--login-btn' type='submit' value='Login' />
-          {/* <Link to='/new-user' component={NewUserComponent} /> */}
         </form>
       </div>
     );

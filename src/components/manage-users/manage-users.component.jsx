@@ -81,7 +81,7 @@ class ManageUsers extends React.Component {
                   (<button onClick={() => {this.setState({ onNewUser: true })}}>Add New User</button>)
                 : (
                   <div>
-                    <NewUser />
+                    <NewUser users={users} />
                     <button onClick={() => this.setState({ onNewUser: false })}>Cancel</button>
                   </div>
                   )
@@ -129,9 +129,9 @@ class ManageUsers extends React.Component {
                               defaultValue={user.role}
                               onChange={(e) => onAddEdits(user, e)}
                             >
-                              <option value='admin'>Admin</option>
                               <option value='manager'>Manager</option>
                               <option value='worker'>Worker</option>
+                              <option value='tester'>Tester</option>
                             </select>
                             <button onClick={() => this.props.onUpdateEntry('users', this.state.onEdit)}>Save</button>
                             <button>Delete</button>
