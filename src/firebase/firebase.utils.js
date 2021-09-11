@@ -32,8 +32,9 @@ export const signIn = async (username, pass) => {
   const myStorage = window.localStorage;
   username = username.toLowerCase();
   let loggedInUser = {}
-
-  if (userDataObj[username] && userDataObj[username].password === pass) {
+  const serverUsername = userDataObj[username].name.toLowerCase();
+  
+  if (serverUsername && userDataObj[username].password === pass) {
     loggedInUser = {
       ...userDataObj[username]
     }

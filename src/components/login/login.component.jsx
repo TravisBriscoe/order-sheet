@@ -32,8 +32,6 @@ class LoginComponent extends React.Component {
 
     const signInData = await signIn(username, password);
     
-    console.log(signInData)
-
     if (signInData.name) {
       this.props.setUserLoggedIn(signInData.name);
     } else {
