@@ -23,9 +23,11 @@ firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
+// Collections
 export const users = firestore.collection('user-list');
 export const recipes = firestore.collection('recipe-list');
 export const products = firestore.collection('product-list');
+export const orderlist = firestore.collection('order-list');
 
 export const signIn = async (username, pass) => {
   const userDataObj = await userData();
@@ -53,6 +55,7 @@ export const signIn = async (username, pass) => {
   return loggedInUser;
 }
 
+// User Data retrieval
 export const userData = async () => {
   const userDataObj = Object.create({});
   
@@ -74,6 +77,7 @@ export const userData = async () => {
   return userDataObj;
 }
 
+// Recipe Data Retrieval
 export const recipeData = async () => {
   const recipeDataObj = Object.create({});
 
@@ -90,6 +94,7 @@ export const recipeData = async () => {
   return recipeDataObj;
 }
 
+// Product retrieval
 export const productData = async () => {
   const productDataObj = Object.create({})
   
@@ -111,15 +116,38 @@ export const productData = async () => {
   return productDataObj;
 }
 
+// Order-list retrieval
+export const orderListData = async () => {
+  const orderListDataObj = Object.create({})
+  
+  try {
+    await orderlist.get().then(snapshot => snapshot.docs.map(doc => {
+      const { id } = doc.data();
+
+
+      orderListDataObj[id] = {
+        ...doc.data()
+      }
+      
+      return orderListDataObj;
+    }));
+  } catch (err) {
+    console.log('Error! ', err.message)
+  }
+  
+  return orderListDataObj;
+}
+
 // CRUD ops
 
 // New entry
 export const addNewEntry = async (collectionRef, data) => {
+
   try {
-    await [collectionRef].doc(data.id).set([...data]);
+    await collectionRef.doc(data.id).set({...data});
   } catch (err) {
-    console.log('Error! ', err.message)
-  }
+    console.log('Error! ', err)
+  };
 };
 // Update entry
 export const updateEntry = async (collectionRef, data) => {

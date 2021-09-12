@@ -7,7 +7,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props)
 
-    this.userClickedManageUserLink = this.userClickedManageUserLink.bind(this);
+    // this.userClickedManageUserLink = this.userClickedManageUserLink.bind(this);
 
     this.state = {
       status: null,
@@ -23,16 +23,16 @@ class Header extends React.Component {
     }
   }
 
-  userClickedManageUserLink(event) {
-    const { loggedInUser } = this.props;
+  // userClickedManageUserLink(event) {
+  //   const { loggedInUser } = this.props;
 
-    if (loggedInUser === 'worker') {
-      event.preventDefault();
-      return console.log('Logout!');
-    } else {
-      return;
-    }
-  }
+  //   if (loggedInUser === 'worker') {
+  //     event.preventDefault();
+  //     return console.log('Logout!');
+  //   } else {
+  //     return;
+  //   }
+  // }
 
   render() {
     const { loggedInUser, title = 'Portsmouth Tavern' } = this.props;
@@ -42,7 +42,7 @@ class Header extends React.Component {
         <div className="header-title-user">
           {
             loggedInUser ?
-              (<Link to={{ pathname: '/manage', state: { loggedInUser } }} onClick={this.userClickedManageUserLink}>User: {loggedInUser}</Link>)
+              (<Link to={{ pathname: '/manage', state: { loggedInUser } }}>User: {loggedInUser}</Link>)
               : (<Link to='/'>Login</Link>)
           }
         </div>

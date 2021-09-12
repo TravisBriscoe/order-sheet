@@ -8,7 +8,6 @@ const RecipeContent = ({ recipes }) => {
   const { recipeId } = useParams();
   const recipeData = {...recipes[recipeId]};
 
-  // console.log(useParams())
   const { name, recipe: {ingredients, notes } = {} } = recipeData;
   
   return (

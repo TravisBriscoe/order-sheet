@@ -26,31 +26,29 @@ class EditRecipe extends React.Component {
     const { name, value } = event.target;
     let id;
 
-    console.log(name)
     // Checks if user inputs an ID already in use and alerts user if true.
-    if (name === 'id') {
-      const compare = Object.entries(this.props.recipes).filter(recipe => {
-        return recipe[1].id === value;
-      })
-      if (!compare) {
-        id = value;
-        console.log(id)
-      }
-    } else if (typeof(name) === Number ) {
-      // Checks that the name of the input is a number, in which case it's (probably) an ingredient listing.
-      this.setState({ recipeEdit: {
-        recipe: {
-          ingredients: [
-            value,
-          ]
-        }
-      }}, () => console.log(this.state.recipeEdit))
-    } else if (name === 'notes') {
-      this.setState({ recipeEdit: { recipe: { notes: value }}}, console.log(this.state.recipeEdit))
-    } else {
-      // Sets the rest of state (recipeEdit) to [name: value]
-      this.setState({ recipeEdit: { [name]: value }}, () => console.log(this.state.recipeEdit));
-    }
+    // if (name === 'id') {
+    //   const compare = Object.entries(this.props.recipes).filter(recipe => {
+    //     return recipe[1].id === value;
+    //   })
+    //   if (!compare) {
+    //     id = value;
+    //   }
+    // } else if (typeof(name) === Number ) {
+    //   // Checks that the name of the input is a number, in which case it's (probably) an ingredient listing.
+    //   this.setState({ recipeEdit: {
+    //     recipe: {
+    //       ingredients: [
+    //         value,
+    //       ]
+    //     }
+    //   }}, () => console.log(this.state.recipeEdit))
+    // } else if (name === 'notes') {
+    //   this.setState({ recipeEdit: { recipe: { notes: value }}}, console.log(this.state.recipeEdit))
+    // } else {
+    //   // Sets the rest of state (recipeEdit) to [name: value]
+    //   this.setState({ recipeEdit: { [name]: value }}, () => console.log(this.state.recipeEdit));
+    // }
   }
 
 
@@ -59,8 +57,6 @@ class EditRecipe extends React.Component {
     const { recipeId } = this.props.match.params;
     const recipes = this.props.recipes[recipeId];
     const { recipeEdit } = this.state;
-    console.log(recipes)
-    console.log(recipeEdit);
     
     return (
       <div className='manage-recipes-content-recipe'>

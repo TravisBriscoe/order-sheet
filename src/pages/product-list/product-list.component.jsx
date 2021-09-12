@@ -27,7 +27,7 @@ class ProductList extends React.Component {
               <ProductListMenu onMenuSelect={onMenuSelect} onHandleSearch={onHandleSearch} sortCategory={this.props.sortCategory} />
               <div className='product-items-container'>
                 <div className='product-items'>
-                  <ProductListContent sortedProds={sortedProds} setOnOrder={setOnOrder} />
+                  <ProductListContent sortedProds={sortedProds} setOnOrder={setOnOrder} onOrder={this.props.onOrder} />
                 </div>
               </div>
             </div>

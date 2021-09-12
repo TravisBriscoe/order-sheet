@@ -10,7 +10,7 @@ import RecipesPage from './pages/recipes/recipes.component';
 import LoginComponent from './components/login/login.component.jsx';
 import AboutPage from './pages/about/about.component';
 
-import { userData, recipeData, productData, recipes, firestore, users, products, updateEntry, addNewEntry, deleteEntry } from './firebase/firebase.utils';
+import { userData, recipeData, productData, orderListData, recipes, firestore, users, products, updateEntry, addNewEntry, deleteEntry, orderlist } from './firebase/firebase.utils';
 
 import './App.scss';
 
@@ -35,7 +35,7 @@ class App extends React.Component {
       products:'',
       recipes: '',
       notification: false,
-      onOrder: {},
+      onOrder: '',
       onQuantity: 0,
       sortedProds: '',
       distributor: 'all',
@@ -60,6 +60,7 @@ class App extends React.Component {
       
       productDataArr.sort((a, b) => a.name.localeCompare(b.name));
 
+      const orderListDataObj = await orderListData();
 
       this.setState({ users: userDataObj });
       this.setState({ recipes: recipeDataObj });
@@ -73,6 +74,7 @@ class App extends React.Component {
         }
         this.setState({ isLoading: false })
       });
+      this.setState({ onOrder: orderListDataObj });
     }
 
     return getData();
@@ -98,9 +100,12 @@ class App extends React.Component {
     return this.props.history.push('/');
   }
 
-  setOnOrder(orderProducts) {
+  // Add Products to order-list
+  async setOnOrder(orderProducts) {
     this.setState({ notification: true });
-    this.setState({ onOrder: orderProducts });
+    this.onNewEntry('orderlist', orderProducts);
+    const orderListDataObj = await orderListData();
+    this.setState({ onOrder: orderListDataObj });
   }
 
   // Handle the searchbar and set the sortedProds state
@@ -121,8 +126,6 @@ class App extends React.Component {
   onMenuSelect(sortedSelect) {
     this.setState({ sortCategory: sortedSelect }, () => {
       const { sortCategory } = this.state;
-
-      console.log(sortCategory);
 
       if (sortCategory === 'all') {
         return this.setState({ sortedProds: this.state.products })
@@ -146,12 +149,23 @@ class App extends React.Component {
     })
   }
 
+  
+  // Modify firebase data (testing: users)
+  
+  // Helper function to set the collection reference to correct collection
+  setCollectionRef(collectionRef) {
+    if (collectionRef === 'users') collectionRef = users;
+    else if (collectionRef === 'products') collectionRef = products;
+    else if (collectionRef === 'orderlist') collectionRef = orderlist;
+    else collectionRef = recipes;
+    
+    return collectionRef;
+  }
+
   // function for deleting data within the database (users, recipes, or products)
   async deleteAllData(collection, text) {
-    if (window.confirm(`Are you sure you want to delete all ${text}?`)) {
-      if (collection === 'products' ) collection = products;
-      else if (collection === 'users') collection = users;
-      else collection = recipes;
+    if (window.confirm(`Are you sure you want to delete all ${text === 'onOrder' ? 'Order Sheet products' : text}?`)) {
+      collection = this.setCollectionRef(collection);
 
       const batch = firestore.batch();
       await collection.get().then((data) => data.docs.map(doc => {
@@ -163,27 +177,16 @@ class App extends React.Component {
       if (collection === products) {
         this.setState({ products: null, sortedProds: null}, () => alert(`All ${text} have been deleted!`))
       } else this.setState({ [text]: null }, () => {
-        console.log(this.state[collection])
-        alert(`All ${text} have been deleted!`)
+        alert(`All ${text === 'onOrder' ? 'Order Sheet products' : text} have been deleted!`)
       })
+      if (collection === orderlist) this.setState({ onOrder: {} })
     }
-  }
-
-  // Modify firebase data (testing: users)
-
-  // Helper function to set the collection reference to correct collection
-  setCollectionRef(collectionRef) {
-    if (collectionRef === 'users') collectionRef = users;
-    else if (collectionRef === 'products') collectionRef = products;
-    else collectionRef = recipes;
-
-    return collectionRef;
   }
 
   // Update existing entry
   async onUpdateEntry(collectionRef, data) {
     collectionRef = this.setCollectionRef(collectionRef);
-    
+
     await updateEntry(collectionRef, data);
   }
   
@@ -231,7 +234,7 @@ class App extends React.Component {
               <Header loggedInUser={loggedInUser} users={users} title={title} notification={notification} setNotification={this.setNotification} />
               <Switch>
                 <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} recipes={recipes} onUpdateEntry={this.onUpdateEntry} onNewEntry={this.onNewEntry} />} />
-                <Route path='/order-sheet' render={(props) => <OrderListPage {...props} onOrder={onOrder} />} />
+                <Route path='/order-sheet' render={(props) => <OrderListPage {...props} onOrder={onOrder} deleteAllData={this.deleteAllData} />} />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
                 <Route path='/about' component={AboutPage} />
                 <Route path='/' render={(props) =>
@@ -242,10 +245,11 @@ class App extends React.Component {
                     sortedProds={sortedProds}
                     onHandleSearch={this.onHandleSearch}
                     sortCategory={this.state.sortCategory}
+                    onOrder={this.state.onOrder}
                   />}
                 />
               </Switch>
-              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut} sortedProds={sortedProds} deleteAllData={this.deleteAllData} recipes={recipes} />
+              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut} sortedProds={sortedProds} deleteAllData={this.deleteAllData} recipes={recipes} onOrder={this.state.onOrder} />
             </div>
           )
           

@@ -13,7 +13,6 @@ class ProductListContent extends React.Component {
     }
   }
 
-  
   handleInputChange(event, orderedProducts) {
     const { name, id } = orderedProducts;
     const { value } = event.target;
@@ -38,33 +37,39 @@ class ProductListContent extends React.Component {
       }
     }
 
-    this.setState({ orderProducts: {
-      [id]: {
+    this.setState((prevState) => ({
+      orderProducts: {
+        ...prevState.orderProducts,
+        [id]: {
+          name,
+          value,
+        }
+      }
+    }), () => this.state.setOnOrder({id,
+      data: {
         name,
         value,
-      },
-      ...this.state.orderProducts
-    }}, () => this.state.setOnOrder(this.state.orderProducts));
+      }}));
 
   }
 
 
   render() {
     
-    const { quantity } = this.state;
-    const { sortedProds } = this.props;
+    const { sortedProds, onOrder } = this.props;
     
     return (
       <div className="product-items">
         {
           Object.entries(sortedProds).map(el => {
+            const prod = el[1];
             return (
-              <ul className='product-items-item' key={el[1].id}>
-                <li className='product-items-item-name'>{el[1].name}</li>
-                <li className='product-items-item-desc'>{el[1].desc}</li>
-                <li className='product-items-item-unit'>{el[1].unit}</li>
-                <input type='checkbox' checked={el[1].split ? 'checked' : ''} readOnly className='product-items-item-split' />
-                <input type='text' className='product-items-item-quantity' placeholder='0' value={quantity[el[1].id] ? quantity[el[1].id].value : ''} onChange={(event) => this.handleInputChange(event, { name: el[1].name, id: el[1].id })} />
+              <ul className='product-items-item' key={prod.id}>
+                <li className='product-items-item-name'>{prod.name}</li>
+                <li className='product-items-item-desc'>{prod.desc}</li>
+                <li className='product-items-item-unit'>{prod.unit}</li>
+                <input type='checkbox' checked={prod.split ? 'checked' : ''} readOnly className='product-items-item-split' />
+                <input type='text' className='product-items-item-quantity' placeholder='0' defaultValue={onOrder[prod.id] ? onOrder[prod.id].value : ''} onChange={(event) => this.handleInputChange(event, { name: prod.name, id: prod.id })} />
               </ul>
             )
           })
