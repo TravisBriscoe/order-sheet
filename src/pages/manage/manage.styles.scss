@@ -20,20 +20,21 @@
     grid-template-columns: 1fr 1fr 1fr;
     border-bottom: 1px solid gray;
     padding-bottom: 6px;
+    justify-items: center;
     
     &--link {
-      justify-self: center;
-      // width: 60%;
+      // width: 100%;
+      // justify-self: center;
       
-      // &_products {
-      //   grid-column: 1 / 2;
-      // }
-      // &_users {
-      //   grid-column: 2 / 2;
-      // }
-      // &_recipes {
-      //   grid-column: 3 / 4;
-      // }
+      &_products {
+        padding: 0 10px 0 10px;
+      }
+      &_users {
+        padding: 0 10px 0 10px;
+      }
+      &_recipes {
+        padding: 0 10px 0 10px;
+      }
     }
   }
 

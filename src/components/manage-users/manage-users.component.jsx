@@ -4,6 +4,8 @@ import '../../firebase/firebase.utils.js';
 
 import NewUser from '../add-user/add-user.component.jsx';
 
+import './manager-users.styles.scss';
+
 class ManageUsers extends React.Component {
   constructor(props) {
     super(props)
@@ -71,23 +73,22 @@ class ManageUsers extends React.Component {
     const userObj = Object.entries(users);
 
     return(
-      <div>
+      <div className='manage-users-container'>
         { users ? 
-          <div>
+          <div className='manage-users'>
             <div className='manage-users-hd'>
-              <h3>Manage Users</h3>
               {
                 !this.state.onNewUser ?
-                  (<button onClick={() => {this.setState({ onNewUser: true })}}>Add New User</button>)
+                  (<button className='manage-users-hd--adduser_btn' onClick={() => {this.setState({ onNewUser: true })}}>Add New User</button>)
                 : (
-                  <div>
-                    <NewUser userLength={Object.keys(users).length} onNewEntry={this.props.onNewEntry} />
-                    <button onClick={() => this.setState({ onNewUser: false })}>Cancel</button>
+                  <div className='manage-users-hd'>
+                    <NewUser userLength={Object.keys(users).length} onNewEntry={this.props.onNewEntry} users={users} />
+                    <button className='manage-users-hd--cancel_btn' onClick={() => this.setState({ onNewUser: false })}>Cancel</button>
                   </div>
                   )
               }
             </div>
-            <div>
+            <div className='manage-users-content'>
               {
                 userObj.map((el) => {
                   const user = el[1];
@@ -95,13 +96,14 @@ class ManageUsers extends React.Component {
                     <div key={user.name}>
                       {
                         !onAllow[user.name] ?
-                          <div>
-                            {user.name}
-                            <button onClick={() => this.setState({ onAllow: { [user.name]: true }})}>Edit</button>
+                          <div className='manage-users-content-list'>
+                            <p className='manage-users-content-list--name'>{user.name}</p>
+                            <button className='manage-users-content-list--edit_btn' onClick={() => this.setState({ onAllow: { [user.name]: true }})}>Edit</button>
                           </div>
                         :
-                          <div>
+                          <div className='manage-users-content-list-form'>
                             <input
+                              className='manage-users-content-list-form--name'
                               type='text'
                               disabled={onAllow[user.name] ? '' : 'disabled'}
                               placeholder={`${user.name}`}
@@ -111,6 +113,7 @@ class ManageUsers extends React.Component {
                               onChange={(event) => onAddEdits(user, event)}
                             />
                             <input
+                              className='manage-users-content-list-form--password'
                               type='password'
                               placeholder={`${user.password}`}
                               name='password'
@@ -118,6 +121,7 @@ class ManageUsers extends React.Component {
                               onChange={(e) => onAddEdits(user, e)}
                             />
                             <input
+                              className='manage-users-content-list-form--email'
                               type='email'
                               placeholder={user.email}
                               name='email'
@@ -125,6 +129,7 @@ class ManageUsers extends React.Component {
                               onChange={(e) => onAddEdits(user, e)}
                             />
                             <select
+                              className='manage-users-content-list-form--role'
                               name='role'
                               defaultValue={user.role}
                               onChange={(e) => onAddEdits(user, e)}
@@ -133,11 +138,15 @@ class ManageUsers extends React.Component {
                               <option value='worker'>Worker</option>
                               <option value='tester'>Tester</option>
                             </select>
-                            <button onClick={() => this.props.onUpdateEntry('users', this.state.onEdit)}>Save</button>
-                            <button>Delete</button>
-                            <button onClick={() => {
-                              this.setState({ onEdit: ''}, () => this.setState({ onAllow: { [user.name]: false }}))
-                            }}>Cancel</button>
+                            <div className='manage-users-content-list-form--btn'>
+                              <button className='manage-users-content-list-form--btn_save' onClick={() => this.props.onUpdateEntry('users', this.state.onEdit)}>Save</button>
+                              <button className='manage-users-content-list-form--btn_delete'>Delete</button>
+                              <button 
+                                className='manage-users-content-list-form--btn_cancel'
+                                onClick={() => {
+                                  this.setState({ onEdit: ''}, () => this.setState({ onAllow: { [user.name]: false }}))
+                                }}>Cancel</button>
+                              </div>
                           </div>
                       }
                     </div>

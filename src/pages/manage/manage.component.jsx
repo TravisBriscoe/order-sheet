@@ -26,7 +26,7 @@ class ManagePage extends React.Component {
         <div className='manage-page-header'>
           <NavLink
             to='/manage/edit-products'
-            className={'manage-page-header--link_products'}
+            className='manage-page-header--link_products'
             activeStyle={{backgroundColor: "blue", color: "white"}}
           >Manage Products</NavLink>
           <NavLink

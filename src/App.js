@@ -233,7 +233,16 @@ class App extends React.Component {
             <div className={'App'}>
               <Header loggedInUser={loggedInUser} users={users} title={title} notification={notification} setNotification={this.setNotification} />
               <Switch>
-                <Route path='/manage' render={(props) => <ManagePage {...props} userLoggedIn={loggedInUser} users={users} products={products} recipes={recipes} onUpdateEntry={this.onUpdateEntry} onNewEntry={this.onNewEntry} />} />
+                <Route path='/manage'render={(props) =>
+                  <ManagePage
+                  {...props}
+                  userLoggedIn={loggedInUser}
+                  users={users}
+                  products={products}
+                  recipes={recipes}
+                  onUpdateEntry={this.onUpdateEntry}
+                  onNewEntry={this.onNewEntry} />}
+                />
                 <Route path='/order-sheet' render={(props) => <OrderListPage {...props} onOrder={onOrder} deleteAllData={this.deleteAllData} />} />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
                 <Route path='/about' component={AboutPage} />

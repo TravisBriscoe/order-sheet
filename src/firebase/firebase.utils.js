@@ -142,7 +142,7 @@ export const orderListData = async () => {
 
 // New entry
 export const addNewEntry = async (collectionRef, data) => {
-
+  console.log(data)
   try {
     await collectionRef.doc(data.id).set({...data});
   } catch (err) {

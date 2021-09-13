@@ -1,0 +1,88 @@
+.manage-users-container { width: 100%; height: 100% }
+.manage-users {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 2fr 8fr;
+  grid-template-areas: "hd"
+                       "cont";
+
+  &-hd {
+    grid-area: hd;
+    display: grid;
+
+    &--adduser_btn {
+      height: 60%;
+      width: 200px;
+      place-self: center;
+    }
+    &--cancel_btn {
+      align-self: end;
+      justify-self: end;
+    }
+  }
+
+  &-content {
+    grid-area: cont;
+    
+    &-list {
+      display: grid;
+      grid-template-rows: 2fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-areas: ". . . name btns . . .";
+
+      &--name {
+        grid-column: 4 / 5;
+      }
+
+      &--edit_btn {
+        grid-column: 5 / 6;
+      }
+
+      // manage-users-content-list-form--name'
+      &-form {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas: ". . name pass mail role btns . .";
+
+        &--name {
+          grid-area: name;
+        }
+        
+        &--password {
+          grid-area: pass;
+        }
+
+        &--email {
+          grid-area: mail;
+        }
+
+        &--role {
+          grid-area: role;
+        }
+
+        &--btn {
+          grid-area: btns;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          place-items: center;
+
+          &_save {
+            grid-column: 1 / 2;
+          }
+
+          &_delete {
+            grid-column: 2 / 3;
+          }
+
+          &_cancel {
+            grid-column: 3 / 4;
+          }
+        }
+
+      }
+    }
+  }
+}
