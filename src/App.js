@@ -165,22 +165,35 @@ class App extends React.Component {
 
   // function for deleting collections within the database (users, recipes, or products)
   async deleteAllData(collection, text) {
-    if (window.confirm(`Are you sure you want to delete all ${text === 'onOrder' ? 'Order Sheet products' : text}?`)) {
-      collection = this.setCollectionRef(collection);
+    if (text === 'onOrder') text = 'products on the Order-Sheet'
+    else if (text === 'users') text = 'Users (Initial Manager Role will be untouched)';
 
-      const batch = firestore.batch();
-      await collection.get().then((data) => data.docs.map(doc => {
-        return batch.delete(doc.ref);
-      }));
+    if (window.confirm(`Are you sure you want to delete all ${text}?`)) {
 
-      await batch.commit();
+      if (collection === 'users') {
+        await userData().then((snapshot) => Object.entries(snapshot).filter(doc => {
+          return doc[1].id !== '0001'
+        })).then(docs => docs.map(async doc => {
+          return await users.doc(doc[1].id).delete()
+        })).then(async () => {
+          const userDataObj = await userData();
+          this.setState({users: userDataObj})})
+        } else {
+        const batch = firestore.batch();
+        collection = this.setCollectionRef(collection);
 
-      if (collection === products) {
-        this.setState({ products: null, sortedProds: null}, () => alert(`All ${text} have been deleted!`))
-      } else this.setState({ [text]: null }, () => {
-        alert(`All ${text === 'onOrder' ? 'Order Sheet products' : text} have been deleted!`)
-      })
-      if (collection === orderlist) this.setState({ onOrder: {} })
+        await collection.get().then((data) => data.docs.map(doc => {
+          return batch.delete(doc.ref);
+        }));
+
+        await batch.commit();
+      }
+
+
+      if (collection === products) this.setState({ products: {}, sortedProds: {}}, () => alert(`All ${text} have been deleted!`))
+      else if (collection === 'users') alert(`User database cleared. Manager untouched.`)
+      else if (collection === orderlist) this.setState({ onOrder: {} }, () => alert('Order-Sheet has been cleared!'))
+      else this.setState({ [text]: {}}, () => alert(`All ${text} has been deleted!`))
     }
   }
 
