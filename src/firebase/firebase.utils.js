@@ -41,7 +41,7 @@ export const signIn = async (username, pass) => {
     loggedInUser = {
       ...userDataObj[username]
     }
-  
+    
     myStorage.setItem("name", `${loggedInUser.name}`);
   } else if (pass !== userDataObj[username].password || !serverUsername) {
     myStorage.clear();
@@ -54,6 +54,8 @@ export const signIn = async (username, pass) => {
   
   return loggedInUser;
 }
+
+// CRUD ops
 
 // User Data retrieval
 export const userData = async () => {
@@ -138,9 +140,7 @@ export const orderListData = async () => {
   return orderListDataObj;
 }
 
-// CRUD ops
-
-// New entry
+// Create new entry
 export const addNewEntry = async (collectionRef, data) => {
   console.log(data)
   try {
@@ -149,7 +149,8 @@ export const addNewEntry = async (collectionRef, data) => {
     console.log('Error! ', err)
   };
 };
-// Update entry
+
+// Update existing entry
 export const updateEntry = async (collectionRef, data) => {
   try {
     await collectionRef.doc(data.data.id).update({...data.data});
@@ -157,11 +158,12 @@ export const updateEntry = async (collectionRef, data) => {
     console.log('Error! ', err.message)
   }
 };
-// Delete entry
+
+// Delete existing entry
 export const deleteEntry = async (collectionRef, data) => {
   const { id } = data;
 
-  await [collectionRef].doc(id).delete();
+  await collectionRef.doc(id).delete();
 };
 // End CRUD
 

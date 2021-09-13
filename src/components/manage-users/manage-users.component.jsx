@@ -11,6 +11,7 @@ class ManageUsers extends React.Component {
     super(props)
 
     this.onAddEdits = this.onAddEdits.bind(this);
+    this.onCloseNewUser = this.onCloseNewUser.bind(this);
 
     this.state = {
       onAllow: {},
@@ -67,6 +68,10 @@ class ManageUsers extends React.Component {
     })
   }
 
+  onCloseNewUser() {
+    this.setState({ onNewUser: false });
+  }
+
   render() {
 
     const { onAddEdits, state: { onAllow }, props: { users }} = this;
@@ -81,9 +86,8 @@ class ManageUsers extends React.Component {
                 !this.state.onNewUser ?
                   (<button className='manage-users-hd--adduser_btn' onClick={() => {this.setState({ onNewUser: true })}}>Add New User</button>)
                 : (
-                  <div className='manage-users-hd'>
-                    <NewUser userLength={Object.keys(users).length} onNewEntry={this.props.onNewEntry} users={users} />
-                    <button className='manage-users-hd--cancel_btn' onClick={() => this.setState({ onNewUser: false })}>Cancel</button>
+                  <div>
+                    <NewUser userLength={Object.keys(users).length} onNewEntry={this.props.onNewEntry} users={users} onNewUser={this.state.onNewUser} onClose={this.onCloseNewUser} />
                   </div>
                   )
               }
@@ -140,7 +144,7 @@ class ManageUsers extends React.Component {
                             </select>
                             <div className='manage-users-content-list-form--btn'>
                               <button className='manage-users-content-list-form--btn_save' onClick={() => this.props.onUpdateEntry('users', this.state.onEdit)}>Save</button>
-                              <button className='manage-users-content-list-form--btn_delete'>Delete</button>
+                              <button className='manage-users-content-list-form--btn_delete' disabled={user.id === '0001' && user.role === 'manager' ? 'disabled' : ''} onClick={() => this.props.onDeleteEntry('users', user)}>Delete</button>
                               <button 
                                 className='manage-users-content-list-form--btn_cancel'
                                 onClick={() => {

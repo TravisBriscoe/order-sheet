@@ -1,0 +1,86 @@
+.add-user {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr;
+
+  &-form {
+    grid-row: 1 / 2;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+    place-items: center;
+    grid-template-areas: ". . . . . . . ."
+                         ". name pass confirmpass email role btns .";
+
+    &-name {
+      width: 60%;
+      grid-area: name;
+    }
+
+    &-password {
+      grid-area: pass;
+    }
+
+    &-confirmpass {
+      grid-area: confirmpass;
+      place-self: center;
+    }
+
+
+    &-email {
+      grid-area: email;
+    }
+
+    &-emailerror {
+      grid-area: emailerror;
+      color: red;
+      font-size: 12px;
+    }
+
+    &-role {
+      grid-area: role;
+    }
+
+    &-btns {
+      grid-area: btns;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      place-items: center;
+
+      &--submit {
+        grid-column: 1 / 2;
+      }
+  
+      &--cancel {
+        grid-column: 2 / 3;
+      }
+    }
+  }
+
+  &-errors {
+    grid-row: 2 / 3;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+    grid-template-areas: ". . . confirmpass confirmemail . . .";
+    place-items: center;
+
+    &-password {
+      grid-area: confirmpass;
+      
+      &--error {
+        color: red;
+        font-size: 12px;
+      }
+    }
+
+    &-email {
+      grid-area: confirmemail;
+
+      &--error {
+        color: red;
+        font-size: 12px;
+      }
+    }
+  }
+
+}

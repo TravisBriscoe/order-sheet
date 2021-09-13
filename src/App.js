@@ -28,6 +28,7 @@ class App extends React.Component {
     this.deleteAllData = this.deleteAllData.bind(this);
     this.onUpdateEntry = this.onUpdateEntry.bind(this);
     this.onNewEntry = this.onNewEntry.bind(this);
+    this.onDeleteEntry = this.onDeleteEntry.bind(this);
 
     this.state = {
       loggedInUser: '',
@@ -162,7 +163,7 @@ class App extends React.Component {
     return collectionRef;
   }
 
-  // function for deleting data within the database (users, recipes, or products)
+  // function for deleting collections within the database (users, recipes, or products)
   async deleteAllData(collection, text) {
     if (window.confirm(`Are you sure you want to delete all ${text === 'onOrder' ? 'Order Sheet products' : text}?`)) {
       collection = this.setCollectionRef(collection);
@@ -199,9 +200,15 @@ class App extends React.Component {
 
   // Delete existing entry (delete all is in Footer component)
   async onDeleteEntry(collectionRef, data) {
-    collectionRef = this.setCollectionRef(collectionRef);
 
-    await deleteEntry(collectionRef, data);
+    if (window.confirm(`Are you sure you want to delete ${collectionRef}: ${data.name}?`)) {
+      collectionRef = this.setCollectionRef(collectionRef);
+  
+      await deleteEntry(collectionRef, data);
+      const userDataObj = await userData();
+
+      this.setState({ users: userDataObj}, () => alert('Data deleted!'))
+    }
   }
 
   render() {
@@ -241,7 +248,9 @@ class App extends React.Component {
                   products={products}
                   recipes={recipes}
                   onUpdateEntry={this.onUpdateEntry}
-                  onNewEntry={this.onNewEntry} />}
+                  onNewEntry={this.onNewEntry} 
+                  onDeleteEntry={this.onDeleteEntry} 
+                  />}
                 />
                 <Route path='/order-sheet' render={(props) => <OrderListPage {...props} onOrder={onOrder} deleteAllData={this.deleteAllData} />} />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
