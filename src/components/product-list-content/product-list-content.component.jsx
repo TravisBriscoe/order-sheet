@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './product-list-content.styles.scss';
+
 class ProductListContent extends React.Component {
   constructor(props) {
     super(props)
@@ -59,17 +61,17 @@ class ProductListContent extends React.Component {
     const { sortedProds, onOrder } = this.props;
     
     return (
-      <div className="product-items">
+      <div className='product-list-items'>
         {
           Object.entries(sortedProds).map(el => {
             const prod = el[1];
             return (
-              <ul className='product-items-item' key={prod.id}>
-                <li className='product-items-item-name'>{prod.name}</li>
-                <li className='product-items-item-desc'>{prod.desc}</li>
-                <li className='product-items-item-unit'>{prod.unit}</li>
-                <input type='checkbox' checked={prod.split ? 'checked' : ''} readOnly className='product-items-item-split' />
-                <input type='text' className='product-items-item-quantity' placeholder='0' defaultValue={onOrder[prod.id] ? onOrder[prod.id].value : ''} onChange={(event) => this.handleInputChange(event, { name: prod.name, id: prod.id })} />
+              <ul className='product-list-items-item' key={prod.id}>
+                <li className='product-list-items-item-name'>{prod.name}</li>
+                <li className='product-list-items-item-desc'>{prod.desc}</li>
+                <li className='product-list-items-item-unit'>{prod.unit}</li>
+                <input type='checkbox' checked={prod.split ? 'checked' : ''} readOnly className='product-list-items-item-split' />
+                <input type='text' className='product-list-items-item-quantity' placeholder='0' defaultValue={onOrder[prod.id] ? onOrder[prod.id].value : ''} onChange={(event) => this.handleInputChange(event, { name: prod.name, id: prod.id })} />
               </ul>
             )
           })

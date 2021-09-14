@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './product-list-menu.styles.scss';
+
 class ProductListMenu extends React.Component {
   constructor(props) {
     super(props)
@@ -24,9 +26,9 @@ class ProductListMenu extends React.Component {
   render() {
 
     return (
-      <div className='product-headers'>
-        <div className='product-headers-actions'>
-          <select className='product-headers-actions--category' name="header-order-catagory" value={this.props.sortCategory} onChange={(event) => this.onChangeInput(event, 'storedWhat')}>
+      <div className='product-list-header'>
+        <div className='product-list-header-actions'>
+          <select className='product-list-header-actions--category' name="header-order-catagory" value={this.props.sortCategory} onChange={(event) => this.onChangeInput(event, 'storedWhat')}>
             <option value="all"> -= ALL =- </option>
             <option value="">Distributor:</option>
             <option value="findlays">&nbsp;&nbsp;Findlay</option>
@@ -45,14 +47,14 @@ class ProductListMenu extends React.Component {
             <option value="bread">&nbsp;&nbsp;Bread</option>
             <option value="misc">&nbsp;&nbsp;Misc</option>
           </select>
-          <input className="product-headers-actions--search_input" type="text" placeholder='Search!' onChange={this.state.onHandleSearch}></input>
+          <input className="product-list-header-actions--search" type="text" placeholder='Search!' onChange={this.state.onHandleSearch}></input>
         </div>
-        <div className='product-headers-labels'>
-          <div className='product-headers-labels-name'>Name</div>
-          <div className='product-headers-labels-desc'>Description</div>
-          <div className='product-headers-labels-unit'>Unit</div>
-          <div className='product-headers-labels-split'>Split?</div>
-          <div className='product-headers-labels-quantity'>Order Quantity</div>
+        <div className='product-list-header-labels'>
+          <div className='product-list-header-labels-name'>Name</div>
+          <div className='product-list-header-labels-desc'>Description</div>
+          <div className='product-list-header-labels-unit'>Unit</div>
+          <div className='product-list-header-labels-split'>Split?</div>
+          <div className='product-list-header-labels-quantity'>Order Quantity</div>
         </div>
       </div>
     )

@@ -7,7 +7,7 @@ import './product-list.styles.scss';
 class ProductList extends React.Component {
   constructor(props) {
     super(props)
-
+    
     this.state = {
       setOnOrder: this.props.setOnOrder,
       onMenuSelect: this.props.onMenuSelect,
@@ -15,23 +15,26 @@ class ProductList extends React.Component {
     }
   }
 
+  // Menu
+  onChangeInput(event) {
+    const { value } = event.target;
+
+    this.state.onMenuSelect(value)
+  }
+
   render() {
     const { setOnOrder, onMenuSelect, onHandleSearch } = this.state;
     const { sortedProds } = this.props
     
     return (
-      <div>
+      <div className='product-list'>
         {
           sortedProds ?
-            <div className='product'>
-              <ProductListMenu onMenuSelect={onMenuSelect} onHandleSearch={onHandleSearch} sortCategory={this.props.sortCategory} />
-              <div className='product-items-container'>
-                <div className='product-items'>
-                  <ProductListContent sortedProds={sortedProds} setOnOrder={setOnOrder} onOrder={this.props.onOrder} />
-                </div>
-              </div>
+            <div className='product-list-content'>
+              <ProductListMenu onMenuSelect={onMenuSelect} onHandleSearch={onHandleSearch} sortCategory={this.props.sortCategory} />      
+              <ProductListContent sortedProds={sortedProds} setOnOrder={setOnOrder} onOrder={this.props.onOrder} />
             </div>
-          : (<button>Create New Product</button>)
+          : (<button className='product-list-btn--create_new'>Create New Product</button>)
         }
       </div>
     );
