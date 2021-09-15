@@ -1,4 +1,39 @@
 .manage-products {
   display: grid;
-  
+  min-height: 0;
+  // overflow-y: hidden;
+  grid-template-rows: 1fr 45fr;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas: "prodhead prodhead"
+                       "prodnav prodedit";
+
+  // manage-products-actions-btn--new_product
+  &-actions {
+    grid-area: prodhead;
+    place-self: center;
+    width: 25%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "prodnew"
+                         "prodsearch";
+    justify-items: center;
+    grid-gap: 4px;
+ 
+    &-btn--new_product {
+      grid-area: prodnew;
+    }
+
+    &--search {
+      grid-area: prodsearch;
+    }
+  }
+
+  &-list {
+    grid-area: prodnav;
+    min-height: 0;
+    overflow-y: auto;
+    // height: 73vh;
+  }
+
+  &-edit { grid-area: prodedit; }
 }

@@ -42,8 +42,7 @@ class ManagePage extends React.Component {
         </div>
         <div className='manage-page-content'>  
           <Switch>
-            <Route path='/manage/edit-products' render={(props) => <ManageProducts {...props} products={products} />} />
-            {/* <Route path='/manage/edit-products' render={(props) => <ManageProducts {...props} products={products} />} /> */}
+            <Route path='/manage/edit-products' render={(props) => <ManageProducts {...props} products={products} sortedProds={this.props.sortedProds} />} />
             <Route path='/manage/edit-users' render={(props) =>
               <ManageUsers
                 {...props}

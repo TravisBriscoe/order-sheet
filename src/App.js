@@ -256,6 +256,7 @@ class App extends React.Component {
                 <Route path='/manage'render={(props) =>
                   <ManagePage
                   {...props}
+                  sortedProds={sortedProds}
                   userLoggedIn={loggedInUser}
                   users={users}
                   products={products}

@@ -1,0 +1,30 @@
+.edit-product {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: ". . ."
+                       ". editname ."
+                       ". editid ." 
+                       ". editunit ."
+                       ". editdesc ."
+                       ". editsplit ."
+                       ". btns .";
+  gap: 5px;
+
+  &-name { grid-area: editname; }
+
+  &-id { grid-area: editid; }
+
+  &-unit { grid-area: editunit;}
+
+  &-desc { grid-area: editdesc; }
+
+  &-split { grid-area: editsplit; place-self: center;}
+
+  &-btns {
+    grid-area: btns;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3px;
+  }
+}

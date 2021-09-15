@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { Switch, Route } from 'react-router';
-
-// import { Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import RecipeNav from '../recipe-nav/recipe-nav.component';
 import EditRecipe from '../edit-recipe/edit-recipe.component';
