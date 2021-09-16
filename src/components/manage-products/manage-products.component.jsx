@@ -49,7 +49,12 @@ class ManageProducts extends React.Component {
         <div className='manage-products-edit'>
           <Switch>
               <Route path='/manage/edit-products/:productId'>
-                <EditProduct products={this.props.products}/>
+                <EditProduct
+                  products={this.props.products}
+                  onUpdateEntry={this.props.onUpdateEntry}
+                  onDeleteEntry={this.props.onDeleteEntry}
+                  onNewEntry={this.props.onNewEntry}
+                />
               </Route>
             </Switch>
         </div>

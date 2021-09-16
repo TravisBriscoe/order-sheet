@@ -1,25 +1,34 @@
 .edit-product {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas: ". . ."
-                       ". editname ."
                        ". editid ." 
+                       ". editname ."
                        ". editunit ."
                        ". editdesc ."
+                       ". editdist ."
+                       ". editcat ."
+                       ". editstored ."
                        ". editsplit ."
                        ". btns .";
   gap: 5px;
 
   &-name { grid-area: editname; }
 
-  &-id { grid-area: editid; }
+  &-id { grid-area: editid; font-weight: 600; }
 
-  &-unit { grid-area: editunit;}
+  &-unit { grid-area: editunit; }
 
   &-desc { grid-area: editdesc; }
 
-  &-split { grid-area: editsplit; place-self: center;}
+  &-dist { grid-area: editdist; }
+
+  &-cat { grid-area: editcat; }
+
+  &-stored { grid-area: editstored; }
+
+  &-split { grid-area: editsplit; place-self: center; }
 
   &-btns {
     grid-area: btns;

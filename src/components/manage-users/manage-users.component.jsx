@@ -137,6 +137,7 @@ class ManageUsers extends React.Component {
                               name='role'
                               defaultValue={user.role}
                               onChange={(e) => onAddEdits(user, e)}
+                              disabled={user.id === '0001' && user.role === 'manager' ? 'disabled' : ''}
                             >
                               <option value='manager'>Manager</option>
                               <option value='worker'>Worker</option>

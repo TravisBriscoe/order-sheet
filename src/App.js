@@ -214,13 +214,26 @@ class App extends React.Component {
   // Delete existing entry (delete all is in Footer component)
   async onDeleteEntry(collectionRef, data) {
 
+    // reloadState = async(collection) => {
+    //   if (collection = 'users') {
+    //     const userDataObj = await userData();
+
+    //     this.setState({ users: userDataObj }, () => alert('Data deleted!'));
+    //   } else if (collection === 'recipes') { 
+    //     const recipesObj = await recipeData();
+
+    //     this.setState({ recipes: recipesObj}, () => alert('Data deleted'));
+    //   } else if (collection === '')
+
+    // }
+
     if (window.confirm(`Are you sure you want to delete ${collectionRef}: ${data.name}?`)) {
       collectionRef = this.setCollectionRef(collectionRef);
   
       await deleteEntry(collectionRef, data);
       const userDataObj = await userData();
 
-      this.setState({ users: userDataObj}, () => alert('Data deleted!'))
+      this.setState({ users: userDataObj }, () => alert('Data deleted!'))
     }
   }
 
