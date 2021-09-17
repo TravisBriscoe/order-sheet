@@ -50,6 +50,7 @@ class ManagePage extends React.Component {
                 onUpdateEntry={this.props.onUpdateEntry}
                 onDeleteEntry={this.props.onDeleteEntry}
                 onNewEntry={this.props.onNewEntry}
+                onHandleSearch={this.props.onHandleSearch}
               />} />
             <Route path='/manage/edit-users' render={(props) =>
               <ManageUsers
@@ -61,7 +62,13 @@ class ManagePage extends React.Component {
                 onDeleteEntry={this.props.onDeleteEntry}  
               />}
             />
-            <Route path='/manage/edit-recipes' render={(props) => <ManageRecipes {...props} recipes={recipes} />} />
+            <Route path='/manage/edit-recipes' render={(props) =>
+              <ManageRecipes
+                {...props}
+                recipes={recipes}
+                onDeleteEntry={this.props.onDeleteEntry}
+              />}
+            />
           </Switch>
         </div>
       </div>

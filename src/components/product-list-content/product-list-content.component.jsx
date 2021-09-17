@@ -51,6 +51,7 @@ class ProductListContent extends React.Component {
       data: {
         name,
         value,
+        id
       }}));
 
   }

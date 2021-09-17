@@ -16,16 +16,17 @@
   &-form {
     grid-area: form;
     display: grid;
-    grid-template-rows: 25px 3fr 3fr;
+    grid-template-rows: 25px 3fr 1fr min-content;
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-areas:
                         ". title ."
                         ". ingreds ."
-                        ". notes actions";
+                        ". notes ."
+                        ". recid actions";
     
     &--title {
       grid-area: title;
-    justify-self: center;
+      justify-self: center;
     }
   
     &--ingreds {
@@ -39,8 +40,6 @@
     }
     
     &--notes {
-      // grid-column: 2 / 3;
-      // grid-row: 4 / 5;
       grid-area: notes;
       height: 25px;
   
@@ -50,16 +49,19 @@
         overflow-wrap: normal;
         resize: none;
       }
-  
     }
   
+    &--id {
+      grid-area: recid;
+    }
+
     &--actions {
-      // grid-row: 4 / 5;
-      // grid-column: 3 / 4;
       grid-area: actions;
-      place-self: end;
+      place-self: center;
       margin-right: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;      
     }
   }
-
 }

@@ -207,33 +207,49 @@ class App extends React.Component {
   // Create new entry
   async onNewEntry(collectionRef, data) {
     collectionRef = this.setCollectionRef(collectionRef);
-
+    console.log(data)
     await addNewEntry(collectionRef, data);
   }
-
+  
   // Delete existing entry (delete all is in Footer component)
   async onDeleteEntry(collectionRef, data) {
+    
+    const collection = collectionRef;
 
-    // reloadState = async(collection) => {
-    //   if (collection = 'users') {
-    //     const userDataObj = await userData();
-
-    //     this.setState({ users: userDataObj }, () => alert('Data deleted!'));
-    //   } else if (collection === 'recipes') { 
-    //     const recipesObj = await recipeData();
-
-    //     this.setState({ recipes: recipesObj}, () => alert('Data deleted'));
-    //   } else if (collection === '')
-
-    // }
+    const alertWindow = () => {
+      return alert('Data deleted!');
+    }
 
     if (window.confirm(`Are you sure you want to delete ${collectionRef}: ${data.name}?`)) {
       collectionRef = this.setCollectionRef(collectionRef);
   
       await deleteEntry(collectionRef, data);
-      const userDataObj = await userData();
+      
+      if (collection === 'users') {
+        const userDataObj = await userData();
 
-      this.setState({ users: userDataObj }, () => alert('Data deleted!'))
+        this.setState({ users: userDataObj }, () => alertWindow())
+      } else if (collection === 'products') {
+        const productDataObj = await productData();
+        const productDataArr = Object.entries(productDataObj).map(x => {
+          return x[1];
+        });
+        
+        const sortedProd = this.state.sortedProds.filter(prod => prod.name !== data.name);
+        productDataArr.sort((a, b) => a.name.localeCompare(b.name));
+
+        this.setState({ products: productDataArr }, () => {
+          this.setState({ sortedProds: sortedProd}, () => alertWindow())
+        });
+      } else if (collection === 'recipes') {
+        const recipeDataObj = await recipeData();
+
+        this.setState({ recipes: recipeDataObj}, () => alertWindow());
+      } else if (collection === 'orderlist') {
+        const orderSheetObj = await orderListData();
+
+        this.setState({ onOrder: orderSheetObj }, () => alertWindow());
+      }
     }
   }
 
@@ -276,10 +292,18 @@ class App extends React.Component {
                   recipes={recipes}
                   onUpdateEntry={this.onUpdateEntry}
                   onNewEntry={this.onNewEntry} 
-                  onDeleteEntry={this.onDeleteEntry} 
+                  onDeleteEntry={this.onDeleteEntry}
+                  onHandleSearch={this.onHandleSearch}
                   />}
                 />
-                <Route path='/order-sheet' render={(props) => <OrderListPage {...props} onOrder={onOrder} deleteAllData={this.deleteAllData} />} />
+                <Route path='/order-sheet' render={(props) => 
+                  <OrderListPage
+                    {...props}
+                    onOrder={onOrder}
+                    deleteAllData={this.deleteAllData}
+                    onDeleteEntry={this.onDeleteEntry}
+                  />}
+                />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
                 <Route path='/about' component={AboutPage} />
                 <Route path='/' render={(props) =>

@@ -64,8 +64,9 @@ class EditProduct extends React.Component {
 
   onDeleteProduct(event, data) {
     event.preventDefault();
-
-    this.props.onDeleteEntry('products', data)
+    
+    this.props.onDeleteEntry('products', data);
+    this.props.history.push('/manage/edit-products');
   }
 
   render() {
@@ -89,7 +90,7 @@ class EditProduct extends React.Component {
         </div>
         <div className='edit-product-btns'>
           <input type='submit' className='edit-product-btns--save' value='Save' />
-          <button className='edit-product-btns--delete' onClick={(event) => this.onDeleteProduct(event, {data: {id: product.id}})}>Delete</button>
+          <button className='edit-product-btns--delete' onClick={(event) => this.onDeleteProduct(event, product)}>Delete</button>
           <button className='edit-product-btns--cancel'>Cancel</button>
         </div>
       </form>

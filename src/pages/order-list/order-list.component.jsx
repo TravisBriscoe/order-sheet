@@ -17,11 +17,15 @@ const OrderListPage = (props) => {
         :
           onOrderObj.splice(0).map((el) => {
             return (
-                <ul key={el}>
+                <ul key={el[1].data.id}>
                   <li className='order-sheet-list-item'>
                     <div className='order-sheet-list-item--name'>{el[1].data.name}:</div><input className='order-sheet-list-item--quant' type='text' placeholder={el[1].data.value} />
                     
-                    <button className='order-sheet-list-item--remove_btn'>Remove</button>
+                    <button className='order-sheet-list-item--remove_btn' onClick={(event) => {
+                      event.preventDefault();
+                      
+                      props.onDeleteEntry('orderlist', { id: el[1].data.id, name: el[1].data.name })
+                    }}>Remove</button>
                   </li>
                 </ul>
             )

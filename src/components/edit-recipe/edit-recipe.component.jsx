@@ -51,6 +51,12 @@ class EditRecipe extends React.Component {
     // }
   }
 
+  onDeleteRecipe(event, data) {
+    event.preventDefault();
+
+    this.props.onDeleteEntry('recipes', data);
+    this.props.history.push('/manage/edit-recipes')
+  }
 
   render() {
     
@@ -73,12 +79,14 @@ class EditRecipe extends React.Component {
           <div className='manage-recipes-content-recipe-form--notes'>
             <h3>Instructions:</h3>
             <textarea name='notes' placeholder={recipes.notes} style={{color: 'red'}} wrap="soft" value={recipeEdit.recipe ? recipeEdit.recipe.notes : ''} onChange={this.onHandleInputChange} />
+          </div>
+          <div className='manage-recipes-content-recipe-form--id'>
             <h3>Recipe ID:</h3>
             <input type='text' name='id' placeholder={recipes.id} value={recipeEdit.id ? recipeEdit.id : ''} onInput={this.onHandleInputChange} />
           </div>
           <div className='manage-recipes-content-recipe-form--actions'>
             <input type='submit' className='manage-recipes-content-recipe-form--update_btn' value='Update Entry' />
-            <button className='manage-recipes-content-recipe-form--delete_btn'>Delete Recipe</button>
+            <button className='manage-recipes-content-recipe-form--delete_btn' onClick={(event) => this.onDeleteRecipe(event, recipes)}>Delete Recipe</button>
           </div>
         </form>
       </div>

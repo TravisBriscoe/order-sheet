@@ -6,7 +6,6 @@ import './product-nav.styles.scss';
 
 const ProductNav = ({ products }) => {
   const { path } = useRouteMatch();
-  // console.log(products)
 
   return (
     <nav className='manage-products-list-nav'>

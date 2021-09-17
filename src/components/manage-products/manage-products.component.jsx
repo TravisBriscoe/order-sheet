@@ -8,30 +8,27 @@ import EditProduct from '../edit-product/edit-product.component';
 import './manage-products.styles.scss';
 
 class ManageProducts extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.onHandleSearch = this.onHandleSearch.bind(this);
+    // this.onHandleSearch = this.onHandleSearch.bind(this);
 
-    this.state = {
-      sortedProds: []
-    }
-  }
+    // this.state = {
+    //   sortedProds: ''
+    // }
+  // }
 
-  componentDidMount() {
-    this.setState({ sortedProds: this.props.products })
-  }
+  // onHandleSearch = (e) => {
+  //   const searchData = this.props.products.filter((product) => {
+  //      return product.name.toLowerCase().includes(e.target.value.toLowerCase());
+  //   });
 
-  onHandleSearch = (e) => {
-    const searchData = this.props.products.filter((product) => {
-       return product.name.toLowerCase().includes(e.target.value.toLowerCase());
-    });
-
-    this.setState({ sortedProds: searchData });
-  }
+  //   this.setState({ sortedProds: searchData });
+  // }
 
   render() {
-    const { sortedProds } = this.state
+    // const { sortedProds } = this.state;
+    // const { products } = this.props;
   
     return (
       <div className='manage-products'>
@@ -40,11 +37,11 @@ class ManageProducts extends React.Component {
             <button>Create New Product</button>
           </div>
           <div className='manage-products-actions--search_bar'>
-            <input type='text' placeholder='Search by Name' onInput={this.onHandleSearch} />
+            <input type='text' placeholder='Search by Name' onInput={this.props.onHandleSearch} />
           </div>
         </div>
         <div className='manage-products-list'>
-          <ProductNav products={sortedProds} />
+          <ProductNav products={this.props.sortedProds} />
         </div>
         <div className='manage-products-edit'>
           <Switch>

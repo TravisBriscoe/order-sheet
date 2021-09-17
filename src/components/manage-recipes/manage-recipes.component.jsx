@@ -22,7 +22,10 @@ const ManageRecipes = (props) => {
             <div className='manage-recipes-content'>
               <Switch>
                 <Route path='/manage/edit-recipes/:recipeId'>
-                  <EditRecipe recipes={props.recipes}/>
+                  <EditRecipe
+                    recipes={props.recipes}
+                    onDeleteEntry={props.onDeleteEntry}
+                  />
                 </Route>
               </Switch>
             </div>
