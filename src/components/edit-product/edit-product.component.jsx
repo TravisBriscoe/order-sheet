@@ -30,7 +30,7 @@ class EditProduct extends React.Component {
     if (name !== 'name' || name !== 'desc') value = value.toLowerCase();
     // Removes the apostrophes from distributors input
     if (name === 'dist' && value.includes('\'')) { let chars = value.split('\''); value = chars[0] + chars[1]; console.log(value); }
-    // Changes the split field into a checkbox so true or false gets saved.
+    // Changes the split field into a checkbox so the value of true or false gets pushed to state.
     if (name === 'split') value = e.target.checked
 
     // Sets the state of the edited product (needs work, can edit multiple products, should clear if clicked away from current product)

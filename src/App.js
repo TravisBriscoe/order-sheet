@@ -150,9 +150,7 @@ class App extends React.Component {
     })
   }
 
-  
-  // Modify firebase data (testing: users)
-  
+  // Modify firebase data (CRUDs)
   // Helper function to set the collection reference to correct collection
   setCollectionRef(collectionRef) {
     if (collectionRef === 'users') collectionRef = users;

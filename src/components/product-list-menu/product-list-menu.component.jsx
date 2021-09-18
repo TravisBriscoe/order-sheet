@@ -47,7 +47,7 @@ class ProductListMenu extends React.Component {
             <option value="bread">&nbsp;&nbsp;Bread</option>
             <option value="misc">&nbsp;&nbsp;Misc</option>
           </select>
-          <input className="product-list-header-actions--search" type="text" placeholder='Search!' onChange={this.state.onHandleSearch}></input>
+          <input className="product-list-header-actions--search" type="text" placeholder='Search by Name or Description' onChange={this.state.onHandleSearch}></input>
         </div>
         <div className='product-list-header-labels'>
           <div className='product-list-header-labels-name'>Name</div>

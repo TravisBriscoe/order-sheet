@@ -16,15 +16,26 @@
     grid-template-rows: 1fr 1fr;
     grid-template-areas: "prodnew"
                          "prodsearch";
-    justify-items: center;
+    // justify-items: center;
     grid-gap: 4px;
  
     &-btn--new_product {
       grid-area: prodnew;
+      justify-self: center;
     }
 
-    &--search {
+    &--search_bar {
       grid-area: prodsearch;
+      place-self: stretch;
+      // width: 100%;
+    }
+
+    input {
+      width: 100%;
+
+      &::placeholder {
+        text-align: center;
+      }
     }
   }
 

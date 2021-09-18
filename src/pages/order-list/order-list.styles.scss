@@ -4,6 +4,7 @@
   justify-self: center;
   display: grid;
   grid-template-rows: 40px 1fr;
+  min-height: 0;
   overflow-y: hidden;
 
   &-title {
@@ -16,9 +17,6 @@
   }
 
   &-list {
-    margin-top: 5px;
-    min-height: 0;
-    height: 75vh;
     overflow-y: auto;
     display: grid;
     grid-auto-rows: 25px;
@@ -26,6 +24,15 @@
     margin: 0 auto;
     
     ul { list-style: none; }
+
+    &--noprods {
+      justify-self: center;
+      margin-top: 10px;
+
+      h3 {
+        text-align: center;
+      }
+    }
 
     &-item {
       display: grid;

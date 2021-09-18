@@ -9,11 +9,11 @@ const OrderListPage = (props) => {
   
   return (
     <div className='order-sheet'>
-      <h2 className='order-sheet-title'>Order List Page</h2>
+      <h2 className='order-sheet-title'>Order Sheet</h2>
       <div className='order-sheet-list'>
       {
         onOrderObj === null || onOrderObj.length <= 0  ?
-          (<h3>No products! Please go to the product list and add some for the next order.</h3>)
+          (<div className='order-sheet-list--noprods'><h3>Order Sheet Empty!</h3><h3>Please go to the product list and add products for the next order.</h3></div>)
         :
           onOrderObj.splice(0).map((el) => {
             return (
