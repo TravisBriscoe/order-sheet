@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import ProductNav from '../product-nav/product-nav.component';
 import EditProduct from '../edit-product/edit-product.component';
+import AddProduct from '../add-product/add-product.component';
 
 import './manage-products.styles.scss';
 
@@ -53,8 +54,11 @@ class ManageProducts extends React.Component {
                 </Route>
               </Switch>
             :
-              (<div className='manage-producs-add'>
-                <button onClick={this.onAddNewProduct}>Cancel</button>
+              (<div className='manage-products-add'>
+                <AddProduct
+                  addNewProduct={this.state.addNewProduct}
+                  onAddNewProduct={this.onAddNewProduct}
+                />
               </div>)
           }
         </div>
