@@ -27,7 +27,7 @@ class EditProduct extends React.Component {
     let { value, name } = e.target;
 
     // Removes capital letters on all fields except Desc and Name fields
-    if (name !== 'name' || name !== 'desc') value = value.toLowerCase();
+    if (name !== 'name' && name !== 'desc') value = value.toLowerCase();
     // Removes the apostrophes from distributors input
     if (name === 'dist' && value.includes('\'')) { let chars = value.split('\''); value = chars[0] + chars[1]; console.log(value); }
     // Changes the split field into a checkbox so the value of true or false gets pushed to state.

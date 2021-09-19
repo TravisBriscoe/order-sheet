@@ -58,6 +58,7 @@ class ManageProducts extends React.Component {
                 <AddProduct
                   addNewProduct={this.state.addNewProduct}
                   onAddNewProduct={this.onAddNewProduct}
+                  onSaveProduct={this.props.onSaveProduct}
                 />
               </div>)
           }

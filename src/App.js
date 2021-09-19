@@ -29,6 +29,8 @@ class App extends React.Component {
     this.onUpdateEntry = this.onUpdateEntry.bind(this);
     this.onNewEntry = this.onNewEntry.bind(this);
     this.onDeleteEntry = this.onDeleteEntry.bind(this);
+    this.onChangeOrderValue = this.onChangeOrderValue.bind(this);
+    this.onSaveProduct = this.onSaveProduct.bind(this);
 
     this.state = {
       loggedInUser: '',
@@ -150,6 +152,45 @@ class App extends React.Component {
     })
   }
 
+  // Function for changing product order value within Order sheet
+  onChangeOrderValue(event, data) {
+    const { value } = event.target;
+    console.log(data)
+
+    this.setState((prevState) => {
+      return ({
+        ...prevState.onOrder,
+        [data.id]: {
+          ...prevState.onOrder[data.id],
+          data: {
+            ...prevState.onOrder[data.id].data,
+            ...data.data,
+            value: value,
+          }
+        }
+      })
+    }, async () => {
+      await updateEntry(orderlist, this.state.onOrder[data.id])
+      const orderListDataObj = await orderListData();
+
+      this.setState({ onOrder: orderListDataObj})
+    })
+  }
+
+  // Function for saving New Product data and updating state and database
+  async onSaveProduct(data) {
+    
+    this.onNewEntry('products', data);
+    const productDataObj = await productData();
+    const productDataArr = Object.entries(productDataObj).map(x => {
+      return x[1];
+    });
+    
+    productDataArr.sort((a, b) => a.name.localeCompare(b.name));
+
+    this.setState({ products: productDataArr, sortedProds: productDataArr })
+  }
+
   // Modify firebase data (CRUDs)
   // Helper function to set the collection reference to correct collection
   setCollectionRef(collectionRef) {
@@ -188,7 +229,7 @@ class App extends React.Component {
       }
 
 
-      if (collection === products) this.setState({ products: {}, sortedProds: {}}, () => alert(`All ${text} have been deleted!`))
+      if (collection === products) this.setState({ products: [], sortedProds: []}, () => alert(`All ${text} have been deleted!`))
       else if (collection === 'users') alert(`User database cleared. Manager untouched.`)
       else if (collection === orderlist) this.setState({ onOrder: {} }, () => alert('Order-Sheet has been cleared!'))
       else this.setState({ [text]: {}}, () => alert(`All ${text} has been deleted!`))
@@ -205,7 +246,7 @@ class App extends React.Component {
   // Create new entry
   async onNewEntry(collectionRef, data) {
     collectionRef = this.setCollectionRef(collectionRef);
-    console.log(data)
+
     await addNewEntry(collectionRef, data);
   }
   
@@ -282,16 +323,17 @@ class App extends React.Component {
               <Switch>
                 <Route path='/manage'render={(props) =>
                   <ManagePage
-                  {...props}
-                  sortedProds={sortedProds}
-                  userLoggedIn={loggedInUser}
-                  users={users}
-                  products={products}
-                  recipes={recipes}
-                  onUpdateEntry={this.onUpdateEntry}
-                  onNewEntry={this.onNewEntry} 
-                  onDeleteEntry={this.onDeleteEntry}
-                  onHandleSearch={this.onHandleSearch}
+                    {...props}
+                    sortedProds={sortedProds}
+                    userLoggedIn={loggedInUser}
+                    users={users}
+                    products={products}
+                    recipes={recipes}
+                    onUpdateEntry={this.onUpdateEntry}
+                    onNewEntry={this.onNewEntry} 
+                    onDeleteEntry={this.onDeleteEntry}
+                    onHandleSearch={this.onHandleSearch}
+                    onSaveProduct={this.onSaveProduct}
                   />}
                 />
                 <Route path='/order-sheet' render={(props) => 
@@ -300,6 +342,7 @@ class App extends React.Component {
                     onOrder={onOrder}
                     deleteAllData={this.deleteAllData}
                     onDeleteEntry={this.onDeleteEntry}
+                    onChangeOrderValue={this.onChangeOrderValue}
                   />}
                 />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
