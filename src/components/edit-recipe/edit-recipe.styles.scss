@@ -5,6 +5,7 @@
   grid-template-areas: 
                       "newrecipebtn"
                       "form";
+  overflow-y: auto;
 
 
   &--newrecipe {
@@ -16,13 +17,12 @@
   &-form {
     grid-area: form;
     display: grid;
-    grid-template-rows: 25px 3fr 1fr min-content;
+    grid-template-rows: 25px 3fr 1fr;
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-areas:
                         ". title ."
                         ". ingreds ."
-                        ". notes ."
-                        ". recid actions";
+                        ". notes actions";
     
     &--title {
       grid-area: title;
@@ -50,17 +50,13 @@
         resize: none;
       }
     }
-  
-    &--id {
-      grid-area: recid;
-    }
 
-    &--actions {
+    &-actions {
       grid-area: actions;
       place-self: center;
       margin-right: 10px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
       gap: 2px;      
     }
   }

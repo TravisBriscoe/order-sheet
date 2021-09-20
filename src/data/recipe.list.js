@@ -19,7 +19,7 @@ const RECIPE_DATA = {
         '',
         'Breading:',
         '3 cups Panko',
-        '1 tablespoon Kosher Salf',
+        '1 tablespoon Kosher Salt',
         '2 teaspoons Ground Black Pepper',
         '1 teaspoon Onion Powder',
         '1 teaspooon Garlic Powder',
@@ -230,7 +230,8 @@ const RECIPE_DATA = {
       ingredients: [
         `Mayo`,
         `Sriracha`
-      ]
+      ],
+      notes: 'Guess the ratio and mix that shit.'
     }
   },
   tartar: {

@@ -52,6 +52,9 @@ class ManagePage extends React.Component {
                 onNewEntry={this.props.onNewEntry}
                 onHandleSearch={this.props.onHandleSearch}
                 onSaveProduct={this.props.onSaveProduct}
+                sortCategory={this.props.sortCategory}
+                onMenuSelect={this.props.onMenuSelect}
+                isLoading={this.props.isLoading}
               />} />
             <Route path='/manage/edit-users' render={(props) =>
               <ManageUsers

@@ -1,6 +1,7 @@
 import React from 'react';
 
-import './add-product.styles.scss';
+import { withRouter } from 'react-router-dom';
+// import './add-product.styles.scss';
 
 class AddProduct extends React.Component {
   constructor(props) {
@@ -70,7 +71,9 @@ class AddProduct extends React.Component {
     }))
   }
 
+  
   render() {
+
     return (
       <div className='add-product'>
         <h3>Add A New Product!</h3>
@@ -119,28 +122,34 @@ class AddProduct extends React.Component {
           <div className='add-product-form-split'>
             Split? &nbsp; <input type='checkbox' name='split' value={this.state.newProduct.split} onClick={this.onHandleCheckbox} />
           </div>
-          <div className='add-product-form-btns'>
-            <input type='submit' className='add-product-form-btns--save' value='Save' />
-            <button className='add-product-form--btns--cancel' onClick={(event) => {
-              event.preventDefault();
+            {
+               this.props.location.pathname === '/'
+                ? <div className='add-product-form-btns'>
+                    <input type='submit' className='add-product-form-btns--save' value='Save' />
+                  </div>
+                : <div className='add-product-form-btns'>
+                    <input type='submit' className='add-product-form-btns--save' value='Save' />
+                    <button className='add-product-form--btns--cancel' onClick={(event) => {
+                      event.preventDefault();
 
-              this.setState({ newProduct: {
-                name: '',
-                desc: '',
-                unit: '',
-                id: '',
-                dist: '',
-                stored: '',
-                category: '',
-                split: false,
-              }},() => this.props.onAddNewProduct());
-            }}>Cancel</button>
-            <input type='reset' className='add-product-form-btns--reset' value='Clear' />
-          </div>
+                      this.setState({ newProduct: {
+                        name: '',
+                        desc: '',
+                        unit: '',
+                        id: '',
+                        dist: '',
+                        stored: '',
+                        category: '',
+                        split: false,
+                      }},() => this.props.onAddNewProduct());
+                    }}>Cancel</button>
+                    <input type='reset' className='add-product-form-btns--reset' value='Clear' />
+                  </div>
+            }
         </form>
       </div>
     )
   }
 }
 
-export default AddProduct;
+export default withRouter(AddProduct);

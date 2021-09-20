@@ -28,7 +28,7 @@ class ProductListMenu extends React.Component {
     return (
       <div className='product-list-header'>
         <div className='product-list-header-actions'>
-          <select className='product-list-header-actions--category' name="header-order-catagory" value={this.props.sortCategory} onChange={(event) => this.onChangeInput(event, 'storedWhat')}>
+          <select className='product-list-header-actions--category' name="header-order-catagory" value={this.props.sortCategory} onChange={(event) => this.onChangeInput(event)}>
             <option value="all"> -= ALL =- </option>
             <option value="">Distributor:</option>
             <option value="findlays">&nbsp;&nbsp;Findlay</option>
@@ -46,6 +46,7 @@ class ProductListMenu extends React.Component {
             <option value="bar">&nbsp;&nbsp;Bar</option>
             <option value="bread">&nbsp;&nbsp;Bread</option>
             <option value="misc">&nbsp;&nbsp;Misc</option>
+            <option value="user">&nbsp;&nbsp;User Added</option>
           </select>
           <input className="product-list-header-actions--search" type="text" placeholder='Search by Name or Description' onChange={this.state.onHandleSearch}></input>
         </div>

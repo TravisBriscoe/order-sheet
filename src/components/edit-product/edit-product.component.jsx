@@ -8,6 +8,8 @@ class EditProduct extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onCancel = this.onCancel.bind(this);
+
     this.state = {
       editProduct: {
         data: {
@@ -69,6 +71,12 @@ class EditProduct extends React.Component {
     this.props.history.push('/manage/edit-products');
   }
 
+  onCancel(event) {
+    event.preventDefault();
+
+    this.props.history.push('/manage/edit-products');
+  }
+
   render() {
     const { products } = this.props;
     const { productId } = this.props.match.params;
@@ -77,13 +85,13 @@ class EditProduct extends React.Component {
 
     return (
       <form className='edit-product' onSubmit={(event) => {this.onUpdateProduct(event, this.state.editProduct)}}>
-        <input className='edit-product-id' name='id' placeholder={`ID: ${product.id}`} required readOnly />
-        <input className='edit-product-name' name='name' placeholder={`Name: ${this.capitalizeFirstLetter(product.name)}`} required onInput={(event) => this.onHandleInput(event, product)} />
-        <input className='edit-product-unit' name='unit' placeholder={`Unit: ${product.unit}`} required onInput={(event) => this.onHandleInput(event, product)} />
+        <input className='edit-product-id' name='id' placeholder={`ID: ${product.id}`} readOnly />
+        <input className='edit-product-name' name='name' placeholder={`Name: ${this.capitalizeFirstLetter(product.name)}`} onInput={(event) => this.onHandleInput(event, product)} />
+        <input className='edit-product-unit' name='unit' placeholder={`Unit: ${product.unit}`} onInput={(event) => this.onHandleInput(event, product)} />
         <input className='edit-product-desc' name='desc' placeholder={`Description: ${this.capitalizeFirstLetter(product.desc)}`} onInput={(event) => this.onHandleInput(event, product)} />
-        <input className='edit-product-dist' name='dist' placeholder={`Distributor: ${this.capitalizeFirstLetter(product.dist)}`} required onInput={(event) => this.onHandleInput(event, product)} />
+        <input className='edit-product-dist' name='dist' placeholder={`Distributor: ${this.capitalizeFirstLetter(product.dist)}`} onInput={(event) => this.onHandleInput(event, product)} />
         <input className='edit-product-cat' name='category' placeholder={`Category: ${this.capitalizeFirstLetter(product.category)}`} onInput={(event) => this.onHandleInput(event, product)} />
-        <input className='edit-product-stored' name='stored' placeholder={`Storage: ${this.capitalizeFirstLetter(product.stored)}`} required onInput={(event) => this.onHandleInput(event, product)} />
+        <input className='edit-product-stored' name='stored' placeholder={`Storage: ${this.capitalizeFirstLetter(product.stored)}`} onInput={(event) => this.onHandleInput(event, product)} />
         <div className='edit-product-split'>
           Split? &nbsp;
           <input type='checkbox' name='split' onChange={(event) => this.onHandleInput(event, product)} defaultChecked={product.split ? 'checked' : null} />
@@ -91,7 +99,7 @@ class EditProduct extends React.Component {
         <div className='edit-product-btns'>
           <input type='submit' className='edit-product-btns--save' value='Save' />
           <button className='edit-product-btns--delete' onClick={(event) => this.onDeleteProduct(event, product)}>Delete</button>
-          <button className='edit-product-btns--cancel'>Cancel</button>
+          <button className='edit-product-btns--cancel' onClick={this.onCancel}>Cancel</button>
         </div>
       </form>
     );

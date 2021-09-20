@@ -22,6 +22,13 @@ class ManageProducts extends React.Component {
   onAddNewProduct() {
     this.setState((prevState) => ({addNewProduct: !prevState.addNewProduct}), () => this.props.history.push('/manage/edit-products'));
   }
+  
+  // Handles Drops down Menu selection
+  onChangeSelect(event) {
+    const { value } = event.target;
+
+    this.props.onMenuSelect(value)
+  }
 
   render() {
     // const { sortedProds } = this.state;
@@ -29,16 +36,50 @@ class ManageProducts extends React.Component {
   
     return (
       <div className='manage-products'>
-        <div className='manage-products-actions'>
-          <div className='manage-products-actions-btn--new_product'>
-            <button disabled={this.state.addNewProduct ? 'disabled' : ''} onClick={this.onAddNewProduct}>Create New Product</button>
-          </div>
-          <div className='manage-products-actions--search_bar'>
-            <input type='text' placeholder='Search by Name or Description' onInput={this.props.onHandleSearch} />
-          </div>
-        </div>
+          {
+            this.props.sortedProds 
+              ? <div className='manage-products-actions'>
+                  <div className='manage-products-actions-btn--new_product'>
+                    <button disabled={this.state.addNewProduct ? 'disabled' : ''} onClick={this.onAddNewProduct}>Create New Product</button>
+                  </div>
+                  <div className='manage-products-actions-menu'>
+                    <select className='manage-products-actions-menu--category' value={this.props.sortCategory} onChange={(event) => this.onChangeSelect(event) }>
+                      <option value="all"> -= ALL =- </option>
+                      <option value="">Distributor:</option>
+                      <option value="findlays">&nbsp;&nbsp;Findlay</option>
+                      <option value="quattrocchis">&nbsp;&nbsp;Quattrocchi's</option>
+                      <option value="pigolive">&nbsp;&nbsp;Pig &amp; Olive</option>
+                      <option value="">Category:</option>
+                      <option value="dairy">&nbsp;&nbsp;Dairy</option>
+                      <option value="meat">&nbsp;&nbsp;Meats</option>
+                      <option value="produce">&nbsp;&nbsp;Produce</option>
+                      <option value="sauces">&nbsp;&nbsp;Sauces &amp; Dressings</option>
+                      <option value="spices">&nbsp;&nbsp;Spices</option>
+                      <option value="oil">&nbsp;&nbsp;Oil &amp; Vinegar</option>
+                      <option value="paper">&nbsp;&nbsp;Paper/Plastic</option>
+                      <option value="chemical">&nbsp;&nbsp;Chemicals</option>
+                      <option value="bar">&nbsp;&nbsp;Bar</option>
+                      <option value="bread">&nbsp;&nbsp;Bread</option>
+                      <option value="misc">&nbsp;&nbsp;Misc</option>
+                      <option value="user">&nbsp;&nbsp;User Added</option>
+                    </select>
+                    <input type='text' className='manage-products-actions-menu--search_bar' placeholder='Search by Name or Description' onInput={(event) => this.onChangeSelect(event)} />
+                  </div>
+                </div>  
+              : <div className='manage-products-actions'>
+                  <div className='manage-products-edit'>
+                    <div className='manage-products-add'>
+                      <AddProduct
+                        addNewProduct={this.state.addNewProduct}
+                        onAddNewProduct={this.onAddNewProduct}
+                        onSaveProduct={this.props.onSaveProduct}
+                      />
+                    </div>
+                  </div>
+                </div>
+          }
         <div className='manage-products-list'>
-          <ProductNav products={this.props.sortedProds} />
+          <ProductNav products={this.props.sortedProds} isLoading={this.props.isLoading} />
         </div>
         <div className='manage-products-edit'>
           {

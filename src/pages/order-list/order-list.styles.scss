@@ -17,11 +17,14 @@
   }
 
   &-list {
+    grid-row: 2 / 3;
+    min-height: 0;
     overflow-y: auto;
     display: grid;
-    grid-auto-rows: 25px;
+    grid-auto-rows: min-content;
     width: 75%;
     margin: 0 auto;
+    justify-content: center;
     
     ul { list-style: none; }
 
@@ -36,16 +39,18 @@
 
     &-item {
       display: grid;
-      grid-template-columns: 50% 20% 15%;
-      // grid-auto-rows: inherit;
+      grid-template-columns: 60% 25% 15%;
+      width: 75%;
 
       &--name {
         grid-column: 1 / 2;
-        padding-left: 50%;
+        // padding-left: 50%;
+        font-style: italic;
       }
 
       &--quant {
         grid-column: 2 / 3;
+        width: 55%;
       }
 
       &--remove_btn {

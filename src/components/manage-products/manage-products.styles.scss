@@ -15,7 +15,7 @@
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-areas: "prodnew"
-                         "prodsearch";
+                         "prodmenu";
     // justify-items: center;
     grid-gap: 4px;
  
@@ -24,10 +24,23 @@
       justify-self: center;
     }
 
-    &--search_bar {
-      grid-area: prodsearch;
-      place-self: stretch;
-      // width: 100%;
+    &-menu {
+      grid-area: prodmenu;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-template-areas: "prodcat prodsearch";
+      grid-gap: 4px;
+
+      &--category {
+        grid-area: prodcat;
+        place-self: center;
+      }
+  
+      &--search_bar {
+        grid-area: prodsearch;
+        place-self: stretch;
+        // width: 100%;
+      }
     }
 
     input {
@@ -47,4 +60,83 @@
   }
 
   &-edit { grid-area: prodedit; }
+}
+
+.add-product {
+  display: grid;
+  grid-template-rows: min-content min-content;
+  grid-template-columns: 1fr;
+
+  h3 {
+    grid-row: 1 / 2;
+    place-self: center;
+  }
+
+  &-form {
+    grid-row: 2/3;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: ". addid ." ". addname ." ". addunit ." ". adddesc ." ". adddist ." ". addcat ." ". addstored ." ". addsplit ." ". . addbtns";
+    max-height: 80%;
+    // grid-row: 2 / 3;
+    // display: grid;
+    // grid-template-columns: 1fr 2fr 1fr;
+    // grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    // grid-template-areas: ". . ."
+    //                      ". addid ." 
+    //                      ". addname ."
+    //                      ". addunit ."
+    //                      ". adddesc ."
+    //                      ". adddist ."
+    //                      ". addcat ."
+    //                      ". addstored ."
+    //                      ". addsplit ."
+    //                      ". . addbtns";
+    
+    &-id {
+      grid-area: addid;
+    }
+    &-name {
+      grid-area: addname;
+    }
+    &-unit {
+      grid-area: addunit;
+    }
+    &-desc {
+      grid-area: adddesc;
+    }
+    &-dist {
+      grid-area: adddist;
+    }
+    &-cat {
+      grid-area: addcat;
+    }
+    &-stored {
+      grid-area: addstored;
+    }
+    &-split {
+      grid-area: addsplit;
+    }
+    &-btns {
+      grid-area: addbtns;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 2fr;
+      grid-template-areas: "btnsave btncancel btnclear .";
+      place-items: center;
+
+      &--save {
+        grid-area: btnsave;
+        padding: 0 4px 0 4px;
+      }
+  
+      &--cancel {
+        grid-area: btncancel;
+      }
+
+      &--clear {
+        grid-area: btnclear;
+      }
+    }
+  }
 }

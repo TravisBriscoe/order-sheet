@@ -24,7 +24,7 @@ const Footer = (props) => {
           : null
       }
       {
-        pathname === '/manage/edit-products' && props.loggedInUser.toLowerCase() === 'manager' ?
+        pathname.includes('edit-products') && props.loggedInUser.toLowerCase() === 'manager' ?
           (<button onClick={() => props.deleteAllData('products', 'products')}>Delete All!</button>)
         : null
       }

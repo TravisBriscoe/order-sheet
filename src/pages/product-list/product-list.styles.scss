@@ -9,11 +9,20 @@
   min-height: 0;
   overflow-y: auto;
 
+  &-items--new_product {
+      place-self: center;
+  }
+
+  &-loading {
+    place-self: center;
+  }
+
   &-content {
     display: grid;
     grid-template-rows: 1fr 10fr;
     grid-template-areas: "listheader"
                          "listcontent";
     min-height: 0;
+
   }
 }

@@ -45,13 +45,16 @@ class App extends React.Component {
       storedWhere: 'all',
       storedWhat: 'all',
       sortCategory: 'all',
+      isLoading: false,
     }
   }
 
   // setting intiial state from database when component mounts
   componentDidMount() {
-
+    
     const getData = async () => {
+      this.setState({ isLoading: true });
+
       const userDataObj = await userData();
 
       const recipeDataObj = await recipeData();
@@ -75,12 +78,12 @@ class App extends React.Component {
         } else {
           this.setState({ sortedProds: [...sortedProds]})
         }
-        this.setState({ isLoading: false })
       });
       this.setState({ onOrder: orderListDataObj });
+      this.setState({ isLoading: false })
     }
-
-    return getData();
+    
+    getData();
   }
 
   // Set Some states
@@ -140,7 +143,15 @@ class App extends React.Component {
         return this.setState({ sortedProds: [
           ...newStuff,
         ]})
-      } else if (sortCategory === '') { return; } else {
+      } else if (sortCategory === '') {
+        return;
+      } else if (sortCategory === 'user') {
+        const newStuff = this.state.products.filter(x => {
+          return x.id.includes('U')
+        })
+
+        return this.setState({ sortedProds: [...newStuff]});
+      } else {
         const newStuff = this.state.products.filter(x => {
           return x.category === sortCategory
         })
@@ -208,6 +219,7 @@ class App extends React.Component {
     else if (text === 'users') text = 'Users (Initial Manager Role will be untouched)';
 
     if (window.confirm(`Are you sure you want to delete all ${text}?`)) {
+      this.setState({ isLoading: true})
 
       if (collection === 'users') {
         await userData().then((snapshot) => Object.entries(snapshot).filter(doc => {
@@ -226,21 +238,41 @@ class App extends React.Component {
         }));
 
         await batch.commit();
+        this.setState({ isLoading: false })
       }
 
 
-      if (collection === products) this.setState({ products: [], sortedProds: []}, () => alert(`All ${text} have been deleted!`))
+      if (collection === products) this.setState({ products: '', sortedProds: ''}, () => alert(`All ${text} have been deleted!`))
       else if (collection === 'users') alert(`User database cleared. Manager untouched.`)
       else if (collection === orderlist) this.setState({ onOrder: {} }, () => alert('Order-Sheet has been cleared!'))
-      else this.setState({ [text]: {}}, () => alert(`All ${text} has been deleted!`))
+      else this.setState({ [text]: {}})
     }
   }
 
   // Update existing entry
   async onUpdateEntry(collectionRef, data) {
+    const collection = collectionRef;
+
     collectionRef = this.setCollectionRef(collectionRef);
 
     await updateEntry(collectionRef, data);
+
+    if (collection === 'products') {
+      const productDataObj = await productData();
+      const productDataArr = Object.entries(productDataObj).map(x => {
+        return x[1];
+      });
+      
+      productDataArr.sort((a, b) => a.name.localeCompare(b.name));
+
+      this.setState({ products: productDataArr }, () => {
+        const { products, sortedProds } = this.state;
+
+        if (!sortedProds || sortedProds.length <= 0) {
+          this.setState({ sortedProds: [...products]})
+        }
+      });
+    }
   }
   
   // Create new entry
@@ -265,10 +297,15 @@ class App extends React.Component {
       await deleteEntry(collectionRef, data);
       
       if (collection === 'users') {
+        this.setState({ isLoading: true })
         const userDataObj = await userData();
 
-        this.setState({ users: userDataObj }, () => alertWindow())
+        this.setState({ users: userDataObj }, () => {
+          alertWindow()
+          this.setState({ isLoading: false })
+        })
       } else if (collection === 'products') {
+        this.setState({ isLoading: true })
         const productDataObj = await productData();
         const productDataArr = Object.entries(productDataObj).map(x => {
           return x[1];
@@ -278,7 +315,9 @@ class App extends React.Component {
         productDataArr.sort((a, b) => a.name.localeCompare(b.name));
 
         this.setState({ products: productDataArr }, () => {
-          this.setState({ sortedProds: sortedProd}, () => alertWindow())
+          this.setState({ sortedProds: sortedProd}, () => {
+            this.setState({ isLoading: false });            
+          })
         });
       } else if (collection === 'recipes') {
         const recipeDataObj = await recipeData();
@@ -302,6 +341,7 @@ class App extends React.Component {
       notification,
       onOrder,
       sortedProds,
+      sortCategory,
      } = this.state;
 
     return (
@@ -334,6 +374,9 @@ class App extends React.Component {
                     onDeleteEntry={this.onDeleteEntry}
                     onHandleSearch={this.onHandleSearch}
                     onSaveProduct={this.onSaveProduct}
+                    sortCategory={sortCategory}
+                    onMenuSelect={this.onMenuSelect}
+                    isLoading={this.state.isLoading}
                   />}
                 />
                 <Route path='/order-sheet' render={(props) => 
@@ -347,7 +390,7 @@ class App extends React.Component {
                 />
                 <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
                 <Route path='/about' component={AboutPage} />
-                <Route path='/' render={(props) =>
+                <Route exact path='/' render={(props) =>
                   <ProductList
                     {...props}
                     setOnOrder={this.setOnOrder}
@@ -356,6 +399,8 @@ class App extends React.Component {
                     onHandleSearch={this.onHandleSearch}
                     sortCategory={this.state.sortCategory}
                     onOrder={this.state.onOrder}
+                    isLoading={this.state.isLoading}
+                    onSaveProduct={this.onSaveProduct}
                   />}
                 />
               </Switch>
