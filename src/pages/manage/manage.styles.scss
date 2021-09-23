@@ -40,11 +40,6 @@
 
   &-content {
     grid-area: managecontent;
-    min-height: 0;
-    overflow-y: auto;
-    // justify-self: start;
     display: grid;
-    // grid-template-rows: 1fr;
-    // width: 100%;
   }
 }

@@ -69,6 +69,7 @@ class EditRecipe extends React.Component {
     this.recipeForm.current.reset();
   }
 
+
   render() {
     
     const { recipeId } = this.props.match.params;
@@ -77,9 +78,6 @@ class EditRecipe extends React.Component {
     
     return (
       <div className='manage-recipes-content-recipe'>
-        <div className='manage-recipes-content-recipe--newrecipe'>
-          <button>Create New Recipe</button>
-        </div>
         <form className='manage-recipes-content-recipe-form' ref={this.recipeForm}>
           <input name='name' type='text' className='manage-recipes-content-recipe-form--title' placeholder={recipes.name} value={recipeEdit.name ? recipeEdit.name : ''} onChange={this.onHandleInputChange} />
           <div className='manage-recipes-content-recipe-form--ingreds'>

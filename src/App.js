@@ -88,7 +88,7 @@ class App extends React.Component {
 
   // Set Some states
   setUserLoggedIn(user) {
-    this.props.history.push('/');
+    // this.props.history.push('/');
     return this.setState({ loggedInUser: user });
   }
 
@@ -230,23 +230,24 @@ class App extends React.Component {
           const userDataObj = await userData();
           this.setState({users: userDataObj})})
         } else {
-        const batch = firestore.batch();
-        collection = this.setCollectionRef(collection);
-
-        await collection.get().then((data) => data.docs.map(doc => {
-          return batch.delete(doc.ref);
-        }));
-
-        await batch.commit();
-        this.setState({ isLoading: false })
+          const batch = firestore.batch();
+          collection = this.setCollectionRef(collection);
+          
+          await collection.get().then((data) => data.docs.map(doc => {
+            return batch.delete(doc.ref);
+          }));
+          
+          await batch.commit();
+        }
+        
+        
+        if (collection === products) this.setState({ products: '', sortedProds: ''}, () => this.props.history.push('/manage/edit-products'));
+        else if (collection === recipes) this.setState({ recipes: '' }, () => this.props.history.push('/manage/edit-recipes'));
+        else if (collection === orderlist) this.setState({ onOrder: {} }, () => alert('Order-Sheet has been cleared!'));
+        else this.setState({ [text]: {}});
       }
-
-
-      if (collection === products) this.setState({ products: '', sortedProds: ''}, () => alert(`All ${text} have been deleted!`))
-      else if (collection === 'users') alert(`User database cleared. Manager untouched.`)
-      else if (collection === orderlist) this.setState({ onOrder: {} }, () => alert('Order-Sheet has been cleared!'))
-      else this.setState({ [text]: {}})
-    }
+      
+      this.setState({ isLoading: false });
   }
 
   // Update existing entry

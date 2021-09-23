@@ -1,10 +1,9 @@
 .manage-recipes-content-recipe {
+  grid-area: reccontent;
   display: grid;
-  height: 100%;
-  grid-template-rows: 25px 1fr;
-  grid-template-areas: 
-                      "newrecipebtn"
-                      "form";
+  grid-template-rows: 25px max-content;
+  grid-template-areas: "newrecipebtn"
+                       "form";
   overflow-y: auto;
 
 

@@ -71,6 +71,7 @@ class ManagePage extends React.Component {
                 {...props}
                 recipes={recipes}
                 onDeleteEntry={this.props.onDeleteEntry}
+                isLoading={this.props.isLoading}
               />}
             />
           </Switch>

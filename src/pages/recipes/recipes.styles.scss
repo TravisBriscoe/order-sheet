@@ -5,15 +5,9 @@
   min-height: 0;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: max-content 6fr;
   grid-template-rows: 100%;
   grid-template-areas: "navi rcontent";
-
-  &-navi {
-    border-right: 1px solid gray;
-    // width: 40%;
-  }
-
 }
 
 .recipe-none {

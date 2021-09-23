@@ -1,5 +1,8 @@
 import React from 'react';
+
 import { Link, useRouteMatch } from 'react-router-dom';
+
+import withLoading from '../../withLoading';
 
 // import RECIPE_DATA from '../../data/recipe.list';
 
@@ -17,4 +20,4 @@ const RecipeNav = ({ recipes }) => {
   )
 };
 
-export default RecipeNav;
+export default withLoading(RecipeNav);
