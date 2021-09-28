@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 import ProductNav from '../product-nav/product-nav.component';
 import EditProduct from '../edit-product/edit-product.component';
 import AddProduct from '../add-product/add-product.component';
+import withLoading from '../../withLoading';
 
 import './manage-products.styles.scss';
 
@@ -20,7 +21,11 @@ class ManageProducts extends React.Component {
   }
 
   onAddNewProduct() {
-    this.setState((prevState) => ({addNewProduct: !prevState.addNewProduct}), () => this.props.history.push('/manage/edit-products'));
+    const { pathname } = this.props.location;
+
+    this.setState((prevState) => ({addNewProduct: !prevState.addNewProduct}), () => {
+      if (pathname !== '/manage/edit-products') this.props.history.push('/manage/edit-products')
+    });
   }
   
   // Handles Drops down Menu selection
@@ -79,7 +84,7 @@ class ManageProducts extends React.Component {
                 </div>
           }
         <div className='manage-products-list'>
-          <ProductNav products={this.props.sortedProds} isLoading={this.props.isLoading} />
+          <ProductNav products={this.props.sortedProds} isLoading={this.props.isLoading} onAddNewProduct={this.onAddNewProduct} />
         </div>
         <div className='manage-products-edit'>
           {
@@ -109,4 +114,4 @@ class ManageProducts extends React.Component {
   }
 }
 
-export default ManageProducts;
+export default withLoading(withRouter(ManageProducts));

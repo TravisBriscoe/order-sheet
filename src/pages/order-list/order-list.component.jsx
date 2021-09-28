@@ -1,3 +1,7 @@
+// Order Sheet
+// Functional Component
+// Selected products and quantity move here for a single sheet to see what to order.
+
 import React from 'react';
 
 import './order-list.styles.scss';

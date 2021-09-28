@@ -31,6 +31,7 @@ class App extends React.Component {
     this.onDeleteEntry = this.onDeleteEntry.bind(this);
     this.onChangeOrderValue = this.onChangeOrderValue.bind(this);
     this.onSaveProduct = this.onSaveProduct.bind(this);
+    this.onSaveRecipe = this.onSaveRecipe.bind(this);
 
     this.state = {
       loggedInUser: '',
@@ -202,6 +203,15 @@ class App extends React.Component {
     this.setState({ products: productDataArr, sortedProds: productDataArr })
   }
 
+  // Function for saving NewRecipe data to database and updating existing state
+  async onSaveRecipe(data) {
+
+    this.onNewEntry('recipes', data);
+
+    const recipeDataObj = await recipeData();
+    this.setState({ recipes: recipeDataObj });
+  }
+
   // Modify firebase data (CRUDs)
   // Helper function to set the collection reference to correct collection
   setCollectionRef(collectionRef) {
@@ -350,7 +360,7 @@ class App extends React.Component {
         { 
           !loggedInUser ? 
           (
-            <div className={'App'}>
+            <div className='App'>
               <LoginComponent
                 setUserLoggedIn={this.setUserLoggedIn}
                 {...this.state}
@@ -359,10 +369,10 @@ class App extends React.Component {
           )
           :
           (
-            <div className={'App'}>
+            <div className='App'>
               <Header loggedInUser={loggedInUser} users={users} title={title} notification={notification} setNotification={this.setNotification} />
               <Switch>
-                <Route path='/manage'render={(props) =>
+                <Route path='/manage' render={(props) =>
                   <ManagePage
                     {...props}
                     sortedProds={sortedProds}
@@ -375,6 +385,7 @@ class App extends React.Component {
                     onDeleteEntry={this.onDeleteEntry}
                     onHandleSearch={this.onHandleSearch}
                     onSaveProduct={this.onSaveProduct}
+                    onSaveRecipe={this.onSaveRecipe}
                     sortCategory={sortCategory}
                     onMenuSelect={this.onMenuSelect}
                     isLoading={this.state.isLoading}

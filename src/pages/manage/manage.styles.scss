@@ -16,16 +16,13 @@
     align-content: start;
     display: grid;
     width: 40%;
-    // justify-items: center;
     grid-template-columns: 1fr 1fr 1fr;
     border-bottom: 1px solid gray;
     padding-bottom: 6px;
     justify-items: center;
     
     &--link {
-      // width: 100%;
-      // justify-self: center;
-      
+            
       &_products {
         padding: 0 10px 0 10px;
       }

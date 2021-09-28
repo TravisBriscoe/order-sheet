@@ -5,30 +5,26 @@
     width: 100%;
     height: 100%;
     grid-template-columns: max-content 8fr;
+    grid-template-areas: "navi maincontent";
 
     &-navi {
-      grid-column: 1 / 2;
+      grid-area: navi;
     }
   
     &-content {
-      grid-column: 2 / 3;
+      grid-area: maincontent;
       margin-left: 12px;
       display: grid;
       grid-template-columns: 1fr;
-      grid-template-rows: min-content max-content;
+      grid-template-rows: 1fr 10fr;
       grid-template-areas: "newrecbtn"
                            "reccontent";
 
       &--newrecipe {
-        // grid-area: newrecbtn;
+        // manage-recipes-main-content--newrecipe
+        grid-area: newrecbtn;
         place-self: center;
       }
     }
   }
-}
-
-.manage-recipes-main-content--newrecipe {
-  grid-area: newrecipebtn;
-  place-self: center;
-  height: 25px;
 }

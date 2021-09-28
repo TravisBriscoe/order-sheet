@@ -2,11 +2,10 @@ import React from 'react';
 
 import { NavLink, useRouteMatch } from 'react-router-dom';
 
-import withLoading from '../../withLoading';
-
 import './product-nav.styles.scss';
 
-const ProductNav = ({ products }) => {
+const ProductNav = (props) => {
+  const { products } = props;
   const { path } = useRouteMatch();
 
   return (
@@ -22,4 +21,4 @@ const ProductNav = ({ products }) => {
   )
 }
 
-export default withLoading(ProductNav);
+export default ProductNav;

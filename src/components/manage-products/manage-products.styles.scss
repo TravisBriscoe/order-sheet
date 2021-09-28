@@ -2,7 +2,7 @@
   display: grid;
   min-height: 0;
   // overflow-y: hidden;
-  grid-template-rows: 1fr 45fr;
+  grid-template-rows: 1fr minmax(45fr, max-content);
   grid-template-columns: 1fr 5fr;
   grid-template-areas: "prodhead prodhead"
                        "prodnav prodedit";
@@ -64,35 +64,30 @@
 
 .add-product {
   display: grid;
-  grid-template-rows: min-content min-content;
-  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr;
 
   h3 {
     grid-row: 1 / 2;
+    grid-column: 2 / 3;
     place-self: center;
   }
 
   &-form {
-    grid-row: 2/3;
+    grid-row: 2 / 3;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas: ". addid ." ". addname ." ". addunit ." ". adddesc ." ". adddist ." ". addcat ." ". addstored ." ". addsplit ." ". . addbtns";
-    max-height: 80%;
-    // grid-row: 2 / 3;
-    // display: grid;
-    // grid-template-columns: 1fr 2fr 1fr;
-    // grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    // grid-template-areas: ". . ."
-    //                      ". addid ." 
-    //                      ". addname ."
-    //                      ". addunit ."
-    //                      ". adddesc ."
-    //                      ". adddist ."
-    //                      ". addcat ."
-    //                      ". addstored ."
-    //                      ". addsplit ."
-    //                      ". . addbtns";
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: ". . ."
+                         ". addid ." 
+                         ". addname ."
+                         ". addunit ."
+                         ". adddesc ."
+                         ". adddist ."
+                         ". addcat ."
+                         ". addstored ."
+                         ". addsplit ."
+                         ". addbtns .";
     
     &-id {
       grid-area: addid;
@@ -121,8 +116,8 @@
     &-btns {
       grid-area: addbtns;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 2fr;
-      grid-template-areas: "btnsave btncancel btnclear .";
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-areas: "btnsave btncancel btnclear";
       place-items: center;
 
       &--save {

@@ -1,3 +1,8 @@
+// Management page for Products, Users and Recipes
+// Class Component
+// Allows creating, updating and deleting single or all entries.
+// Sends several helper functions and state to various Components
+
 import React from 'react';
 
 import { Switch, Route, NavLink, withRouter } from 'react-router-dom';
@@ -13,7 +18,6 @@ class ManagePage extends React.Component {
     super(props)
 
     this.state = {
-      isSelected: false,
       userLoggedIn: this.props.userLoggedIn,
     }
   }
@@ -72,6 +76,7 @@ class ManagePage extends React.Component {
                 recipes={recipes}
                 onDeleteEntry={this.props.onDeleteEntry}
                 isLoading={this.props.isLoading}
+                onSaveRecipe={this.props.onSaveRecipe}
               />}
             />
           </Switch>

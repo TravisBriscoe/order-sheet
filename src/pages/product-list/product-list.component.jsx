@@ -1,3 +1,7 @@
+// Product List
+// Class Component
+// Handles Order Sheet state propogated from Root
+
 import React from 'react';
 
 import AddProduct from '../../components/add-product/add-product.component';
@@ -21,13 +25,14 @@ class ProductList extends React.Component {
     }
   }
 
-  // Menu
+  // Drop down menu selection and setState from props
   onChangeInput(event) {
     const { value } = event.target;
 
     this.state.onMenuSelect(value)
   }
 
+  // ??
   onNewProduct(event) {
     event.preventDefault();
 
@@ -46,7 +51,6 @@ class ProductList extends React.Component {
                 <ProductListMenu onMenuSelect={onMenuSelect} onHandleSearch={onHandleSearch} sortCategory={sortCategory} />
                 <ProductListContent sortedProds={sortedProds} setOnOrder={setOnOrder} onOrder={onOrder} />
               </div>
-            // : (<button className='product-list-items--new_product' onClick={this.onNewProduct}>Add New Product</button>)
             : <div className=''>
                 <AddProduct onSaveProduct={this.props.onSaveProduct} />
               </div>

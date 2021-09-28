@@ -1,3 +1,6 @@
+// Login Page
+// Class Component
+
 import React from 'react';
 
 import LoginComponent from '../../components/login/login.component';

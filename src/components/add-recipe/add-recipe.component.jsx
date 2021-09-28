@@ -1,3 +1,7 @@
+// Add Recipe's to firebase
+// Class Component
+// Allows user to enter new recipe's, sending them to functions and states in props, allowing users to save to firebase and update state.
+
 import React from 'react';
 
 import { withRouter } from 'react-router-dom';
@@ -28,9 +32,11 @@ class AddRecipe extends React.Component {
     }
   }
 
+  // Handler function for saving Name and Notes inputs to state
   onHandleInput(event) {
     const { name, value } = event.target;
 
+    // If input name is NOT notes then save the state normally
     if (name !== 'notes') {
       this.setState((prevState) => {
         return ({
@@ -41,6 +47,7 @@ class AddRecipe extends React.Component {
         })
       })
     } else {
+      // If input name IS notes then push value into the correct nest
       this.setState((prevState) => {
         return ({
           newRecipe: {
@@ -55,28 +62,51 @@ class AddRecipe extends React.Component {
     }
   }
 
+  // Handler function to manipulate Ingredients being added, and saves to state
   onHandleIngreds(event, index) {
     const { value } = event.target;
+
+    // Retrieves old recipe ingredient state
     const ingreds = [...this.state.newRecipe.recipe.ingredients]
 
+    // Pushes new recipe input to old recipe ingredient variable
     ingreds[index] = value;
 
-    this.setState({ newRecipe: { recipe: { ingredients: ingreds} } })
+    this.setState((prevState) => {
+      return ({
+        newRecipe: {
+          ...prevState.newRecipe,
+          recipe: {
+            ...prevState.newRecipe.recipe,
+            // Saves old Recipe variable with new pushed recipe to state.
+            ingredients: ingreds
+          }
+        }
+      })
+    })
   }
 
+  // Handler function for saving new Recipe to Firebase and state
   onSave(event) {
     event.preventDefault();
 
     this.setState((prevState) => {
+      // Sets ID automatically based on total amount of IDs in firebase
+      const id = Object.entries(this.props.recipes).length > 100 ? `0${Object.entries(this.props.recipes).length + 1}` : `00${Object.entries(this.props.recipes).length + 1}`
       return {
+        // Set linkUrl and ID before saving
         newRecipe: {
           ...prevState.newRecipe,
           linkUrl: this.state.newRecipe.name.replace(/\s+/g, '').toLowerCase(),
-          id: Object.entries(this.props.recipes).length + 1
+          id
         }
-    }})
+    }}, () => {
+      // Sends data to props function for saving recipe entry
+      this.props.onSaveRecipe(this.state.newRecipe);
+    })
   }
 
+  // Helper function for clearing all inputs and returns state to blank skeleton
   onClear(event) {
     event.preventDefault();
 
@@ -91,6 +121,7 @@ class AddRecipe extends React.Component {
     }})
   }
 
+  // Helper function for cancelling AddRecipe component, and redirects to unrendered edit recipe page
   onCancel(event) {
     event.preventDefault();
 
@@ -113,15 +144,24 @@ class AddRecipe extends React.Component {
                     <button className='add-recipe-form-ingredients-container-ingredients--add_field' onClick={(event) => {
                       event.preventDefault();
                       
+                      // Create a shadow copy of any input ingredients
                       const oldIngreds = this.state.newRecipe.recipe.ingredients;
                   
+                      // Push an empty entry into the array
                       oldIngreds.push('')
-      
-                      this.setState({ newRecipe: {
-                        recipe: {
-                          ingredients: oldIngreds
-                        }
-                      }})
+                      
+                      // Save the new ingredients array into state so a new input field will render
+                      this.setState((prevState) => {
+                        return ({
+                          newRecipe: {
+                            ...prevState.newRecipe,
+                            recipe: {
+                              ...prevState.newRecipe.recipe,
+                              ingredients: oldIngreds
+                            }
+                          }
+                        })
+                      })
                     }}>Add Field</button>
                   </div>
                 ) 
