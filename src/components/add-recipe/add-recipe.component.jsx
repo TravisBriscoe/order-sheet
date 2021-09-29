@@ -49,8 +49,8 @@ class AddRecipe extends React.Component {
 
       // Creates title case for newRecipe.name
       let titleCase;
-      if (value.contains(' ')) titleCase = value.split(' ').map(word => word.charAt(0).toUpperCase() + word.subStr(1)).join(' ');
-      else titleCase = value.charAt(0) + value.subStr(1);
+      if (value.includes(' ')) titleCase = value.split(' ').map(word => word.charAt(0).toUpperCase() + word.substr(1)).join(' ');
+      else titleCase = value.charAt(0) + value.substr(1);
 
       this.setState((prevState) => {
         return ({

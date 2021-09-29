@@ -29,13 +29,18 @@ const Footer = (props) => {
           : null
       }
       {
-        pathname === '/recipes'
+        pathname === '/recipes' || pathname === '/manage/edit-recipes'
           ? <div>{Object.entries(props.recipes).length <= 0 ? '0' : Object.entries(props.recipes).length} items</div>
           : null
       }
       {
         pathname === '/manage/edit-users'
           ? <div>{Object.entries(props.users).length} items</div>
+          : null
+      }
+      {
+        pathname === '/order-sheet'
+          ? <div>{Object.entries(props.onOrder).length} items</div>
           : null
       }
     </div>

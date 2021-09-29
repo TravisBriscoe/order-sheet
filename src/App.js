@@ -417,7 +417,15 @@ class App extends React.Component {
                   />}
                 />
               </Switch>
-              <Footer loggedInUser={loggedInUser} signOut={this.setSignOut} sortedProds={sortedProds} deleteAllData={this.deleteAllData} recipes={recipes} onOrder={this.state.onOrder} />
+              <Footer
+                loggedInUser={loggedInUser}
+                sortedProds={sortedProds}
+                users={users}
+                recipes={recipes}
+                onOrder={this.state.onOrder}
+                signOut={this.setSignOut}
+                deleteAllData={this.deleteAllData}
+              />
             </div>
           )
           

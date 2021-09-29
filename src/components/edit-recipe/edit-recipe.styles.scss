@@ -47,6 +47,10 @@
         height: 100px;
         overflow-wrap: normal;
         resize: none;
+        color: red;
+      }
+      textarea::placeholder {
+        color: red;
       }
     }
 

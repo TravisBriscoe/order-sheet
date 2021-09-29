@@ -217,7 +217,7 @@ class EditRecipe extends React.Component {
           </div>
           <div className='manage-recipes-content-recipe-form--notes'>
             <h3>Instructions:</h3>
-            <textarea name='notes' placeholder={recipes.notes} style={{color: 'red'}} wrap="soft" value={recipeEdit.recipe.notes ? recipeEdit.recipe.notes : recipes.notes} onChange={this.onHandleInputChange} />
+            <textarea name='notes' placeholder={recipes.recipe.notes} wrap="soft" value={recipeEdit.recipe.notes || recipes.notes} onChange={this.onHandleInputChange} />
           </div>
           <div className='manage-recipes-content-recipe-form-actions'>
             <input type='submit' className='manage-recipes-content-recipe-form-actions--update_btn' value='Update Entry' />
