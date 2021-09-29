@@ -13,7 +13,7 @@ const ProductNav = (props) => {
       {
         Object.entries(products).map(key => {
           const { id, name } = key[1]
-          return (<NavLink key={id} activeStyle={{backgroundColor: "blue", color: "white"}} to={`${path}/${id.toLowerCase()}`}>{name}</NavLink>)
+          return (<NavLink onClick={() => props.onAddNewProduct(false)} key={id} activeStyle={{backgroundColor: "blue", color: "white"}} to={`${path}/${id.toLowerCase()}`}>{name}</NavLink>)
         })
       }
     </nav>

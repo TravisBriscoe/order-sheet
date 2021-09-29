@@ -1,6 +1,14 @@
-// Product List
-// Class Component
-// Handles Order Sheet state propogated from Root
+/**
+ * Product List
+ * Class Component
+ * Handles Order Sheet state propogated from Root
+ * Uses: withLoading(custom HoC)
+ * Imported Components: AddProduct, ProductListConent, ProductListMenu
+ * State: setOnOrder(), onMenuSelect(), onHandleSearch()
+ * Props: setOnOrder(), onMenuSelect(), onHandleSearch(), onSaveProduct(), sortedProds, onOrder
+ * Hooks: None
+ * Functions: onChangeInput()
+*/
 
 import React from 'react';
 
@@ -16,7 +24,7 @@ class ProductList extends React.Component {
   constructor(props) {
     super(props)
 
-    this.onNewProduct = this.onNewProduct.bind(this);
+    // this.onNewProduct = this.onNewProduct.bind(this);
     
     this.state = {
       setOnOrder: this.props.setOnOrder,
@@ -32,12 +40,12 @@ class ProductList extends React.Component {
     this.state.onMenuSelect(value)
   }
 
-  // ??
-  onNewProduct(event) {
-    event.preventDefault();
+  // ?? - Doesn't look to be relevent or used.
+  // onNewProduct(event) {
+  //   event.preventDefault();
 
-    this.props.history.push('/manage/edit-products');
-  }
+  //   this.props.history.push('/manage/edit-products');
+  // }
 
   render() {
     const { setOnOrder, onMenuSelect, onHandleSearch, sortCategory } = this.state;

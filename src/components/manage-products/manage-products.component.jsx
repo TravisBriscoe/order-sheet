@@ -20,12 +20,14 @@ class ManageProducts extends React.Component {
     }
   }
 
-  onAddNewProduct() {
+  onAddNewProduct(bool) {
     const { pathname } = this.props.location;
-
-    this.setState((prevState) => ({addNewProduct: !prevState.addNewProduct}), () => {
-      if (pathname !== '/manage/edit-products') this.props.history.push('/manage/edit-products')
-    });
+    
+     if (bool) {
+      this.setState((prevState) => ({addNewProduct: !prevState.addNewProduct}), () => {
+        if (pathname !== '/manage/edit-products') this.props.history.push('/manage/edit-products')
+      });
+    } else this.setState({ addNewProduct: false })
   }
   
   // Handles Drops down Menu selection
@@ -45,7 +47,7 @@ class ManageProducts extends React.Component {
             this.props.sortedProds 
               ? <div className='manage-products-actions'>
                   <div className='manage-products-actions-btn--new_product'>
-                    <button disabled={this.state.addNewProduct ? 'disabled' : ''} onClick={this.onAddNewProduct}>Create New Product</button>
+                    <button disabled={this.state.addNewProduct ? 'disabled' : ''} onClick={() => this.onAddNewProduct(true)}>Create New Product</button>
                   </div>
                   <div className='manage-products-actions-menu'>
                     <select className='manage-products-actions-menu--category' value={this.props.sortCategory} onChange={(event) => this.onChangeSelect(event) }>

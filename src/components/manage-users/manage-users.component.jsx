@@ -1,6 +1,20 @@
+/**
+* Manage Users component
+* Allows editing, deleting users. Renders new component when Adding new User
+* Class Component
+* Uses: Firebase.utils
+* Imported Components: NewUser
+* State: onAllow: Object
+*        onEdit: { data: {} }
+*        onNewUser: boolean
+* Props: users, onNewEntry(), onUpdateEntry(), onDeleteEntry()
+* Hooks: ComponentDidMount()
+* Functions: onAddEdits(), onCloseNewUser()
+**/
+
 import React from 'react';
 
-import '../../firebase/firebase.utils.js';
+// import '../../firebase/firebase.utils.js';
 
 import NewUser from '../add-user/add-user.component.jsx';
 

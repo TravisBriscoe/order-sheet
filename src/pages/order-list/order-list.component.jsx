@@ -1,6 +1,13 @@
-// Order Sheet
-// Functional Component
-// Selected products and quantity move here for a single sheet to see what to order.
+/** Order Sheet
+ * Selected products and quantity move here, rendered on a single sheet to see what to order.
+ * Functional Component
+ * Uses: None
+ * Imported Components: None
+ * State: None
+ * Props: onOrder, deleteAllData(), onChangeOrderValue(), 
+ * Hooks: None
+ * Functions: None
+*/
 
 import React from 'react';
 

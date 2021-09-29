@@ -1,5 +1,7 @@
-// Basic about page with contact info
-// Functional Component
+/** Basic about page with contact info
+ * Functional Component
+ * No Uses, Imported Components, State, Props, Hooks or Functions
+*/
 
 import React from 'react';
 

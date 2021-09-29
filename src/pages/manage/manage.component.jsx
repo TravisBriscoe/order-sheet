@@ -1,7 +1,14 @@
-// Management page for Products, Users and Recipes
-// Class Component
-// Allows creating, updating and deleting single or all entries.
-// Sends several helper functions and state to various Components
+/** Management page for Products, Users and Recipes
+ * Class Component
+ * Allows creating, updating and deleting single or all entries.
+ * Passes several props and state to various Components
+ * Uses: React-Router (Switch, Route, NavLink, withRouter)
+ * Imported Components: ManageProducts, ManageUsers, ManageRecipes
+ * State: userLoggedIn: {}
+ * Props: userLoggedIn, recipes, products, users, isLoading, onDeleteEntry(), sortedProds, onUpdateEntry(), onNewEntry(), onHandleSearch(), sortCategory(), onSaveRecipe(), onMenuSelect()
+ * Hooks: None
+ * Functions: None
+*/
 
 import React from 'react';
 

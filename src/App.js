@@ -224,7 +224,9 @@ class App extends React.Component {
   }
 
   // function for deleting collections within the database (users, recipes, or products)
-  async deleteAllData(collection, text) {
+  async deleteAllData(collection) {
+    let text = collection;
+
     if (text === 'onOrder') text = 'products on the Order-Sheet'
     else if (text === 'users') text = 'Users (Initial Manager Role will be untouched)';
 
@@ -254,7 +256,6 @@ class App extends React.Component {
         if (collection === products) this.setState({ products: '', sortedProds: ''}, () => this.props.history.push('/manage/edit-products'));
         else if (collection === recipes) this.setState({ recipes: '' }, () => this.props.history.push('/manage/edit-recipes'));
         else if (collection === orderlist) this.setState({ onOrder: {} }, () => alert('Order-Sheet has been cleared!'));
-        else this.setState({ [text]: {}});
       }
       
       this.setState({ isLoading: false });

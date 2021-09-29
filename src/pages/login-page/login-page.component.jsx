@@ -1,5 +1,13 @@
-// Login Page
-// Class Component
+/** Login Page
+ * Class Component
+ * Renders a basic Username/Password login page and passes state to LoginComponent
+ * Uses: None
+ * Imported Components: LoginComponent
+ * State: users, username: string, password: string, confirmPassword: string, email: string,
+ * Props: users
+ * Hooks: none
+ * Functions: none
+*/
 
 import React from 'react';
 

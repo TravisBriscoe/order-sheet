@@ -1,7 +1,13 @@
-// Manage Recipe's page
-// Class Component
-// Allows users to see list of saved recipes, edit them or add new entries.
-// Saves edited entries to propogated states and functions.
+/**
+ * Manage Recipe's page
+ * Allows users to see list of saved recipes, edit them or add new entries.
+ * Saves edited entries to propogated states and functions.
+ * Class Component
+ * Imported Components: RecipeName, EditRecipe, AddRecipe
+ * State: onNewRecipe: boolean
+ * Props: recipes, onSaveRecipe(), onDeleteEntry()
+ * functions: onCreateRecipe()
+*/
 
 import React from 'react';
 

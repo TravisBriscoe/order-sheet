@@ -1,12 +1,23 @@
+/**
+ * Edit Recipe Component - Allows editing saved recipes
+ * 
+ * Class Component
+ * Uses: React-Router (withRouter)
+ * Imported Components: None
+ * State: recipeEdit: { id, reicpe: { ingredients: [], notes }}
+ * Props:
+ * Hooks: None
+ * Functions: onHandleInputChange(), onHandleIngreds(), onDeleteRecipe(), onClearFields(), onSave()
+ */
 import React from 'react';
 
 import { withRouter } from 'react-router-dom';
 
-import './edit-recipe.styles.scss'
+import './edit-recipe.styles.scss';
 
 class EditRecipe extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.onHandleInputChange = this.onHandleInputChange.bind(this);
     this.onClearFields = this.onClearFields.bind(this);
@@ -19,8 +30,8 @@ class EditRecipe extends React.Component {
           notes: ''
         }
       },
-    }
-  }
+    };
+  };
 
   onHandleInputChange(event) {
     const { name, value } = event.target;
@@ -156,7 +167,6 @@ class EditRecipe extends React.Component {
       
     })
   }
-
 
   render() {
     // Pull recipeId from url

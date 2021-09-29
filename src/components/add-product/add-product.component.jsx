@@ -126,6 +126,7 @@ class AddProduct extends React.Component {
                this.props.location.pathname === '/'
                 ? <div className='add-product-form-btns'>
                     <input type='submit' className='add-product-form-btns--save' value='Save' />
+                    <input type='reset' className='add-product-form-btns--reset' value='Clear' />
                   </div>
                 : <div className='add-product-form-btns'>
                     <input type='submit' className='add-product-form-btns--save' value='Save' />
@@ -141,7 +142,7 @@ class AddProduct extends React.Component {
                         stored: '',
                         category: '',
                         split: false,
-                      }},() => this.props.onAddNewProduct());
+                      }}, () => this.props.onAddNewProduct(false));
                     }}>Cancel</button>
                     <input type='reset' className='add-product-form-btns--reset' value='Clear' />
                   </div>

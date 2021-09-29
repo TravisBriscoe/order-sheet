@@ -1,8 +1,19 @@
+/**
+ * Footer Component
+ * Renders a footer on every page with an About Link, total products listed or null (dynamic), delete all buttons (dynamic), and Logout
+ * Functional Component
+ * Uses: React-Router (Link, useLocation)
+ * Imported Components: None
+ * State: None
+ * Props: 
+ * Hooks: None
+ * Functions: None
+ */
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import './footer.styles.scss';
-
 
 const Footer = (props) => {
   const { pathname } = useLocation();
@@ -11,13 +22,25 @@ const Footer = (props) => {
   <div className='footer'>
     <Link to='/about'>About</Link>
     <div className='footer-item-total'>
+      {/* Renders Length of correct props according to users location */}
       {
-        pathname === '/' ?
-        <div>{props.sortedProds ? props.sortedProds.length : '0'} items</div>
-        : null
+        pathname === '/' || pathname === '/manage/edit-products'
+          ? <div>{props.sortedProds ? props.sortedProds.length : '0'} items</div>
+          : null
+      }
+      {
+        pathname === '/recipes'
+          ? <div>{Object.entries(props.recipes).length <= 0 ? '0' : Object.entries(props.recipes).length} items</div>
+          : null
+      }
+      {
+        pathname === '/manage/edit-users'
+          ? <div>{Object.entries(props.users).length} items</div>
+          : null
       }
     </div>
     <div className='footer-nav--ordersheet'>
+      {/* Renders proper buttons according to users location */}
       {
         pathname === '/' ?
           (<Link to='/order-sheet'><button>Order Sheet</button></Link>)
@@ -25,17 +48,17 @@ const Footer = (props) => {
       }
       {
         pathname.includes('edit-products') && props.loggedInUser.toLowerCase() === 'manager' ?
-          (<button onClick={() => props.deleteAllData('products', 'products')}>Delete All!</button>)
+          (<button onClick={() => props.deleteAllData('products')}>Delete All!</button>)
         : null
       }
       {
         pathname === '/manage/edit-users' && props.loggedInUser.toLowerCase() === 'manager' ?
-          (<button onClick={() => props.deleteAllData('users', 'users')}>Delete All!</button>)
+          (<button onClick={() => props.deleteAllData('users')}>Delete All!</button>)
         : null
       }
       {
         pathname.includes('edit-recipes') && props.loggedInUser.toLowerCase() === 'manager' ?
-          (<button onClick={() => props.deleteAllData('recipes', 'recipes')}>Delete All!</button>)
+          (<button onClick={() => props.deleteAllData('recipes')}>Delete All!</button>)
           : null
       }
     </div>

@@ -1,6 +1,14 @@
-// Add Recipe's to firebase
-// Class Component
-// Allows user to enter new recipe's, sending them to functions and states in props, allowing users to save to firebase and update state.
+/**
+ *  Add Recipe's to firebase
+ * Allows user to enter new recipe's, sending them to functions and states in props, allowing users to save to firebase and update state.
+ * Class Component
+ * Uses: React-Router (withRouter)
+ * Imported Components: none
+ * State: newRecipe: { name: string, linkUrl, string, id: string, recipe: { ingredients: [], notes: string }}
+ * Props:
+ * Hooks: None
+ * Functions: onHandleInput(), onHandleIngreds(), onSave, onCancel(), onClear()
+*/
 
 import React from 'react';
 
@@ -36,18 +44,24 @@ class AddRecipe extends React.Component {
   onHandleInput(event) {
     const { name, value } = event.target;
 
-    // If input name is NOT notes then save the state normally
-    if (name !== 'notes') {
+    // If input name IS name then save the newRecipe.name state
+    if (name === 'name') {
+
+      // Creates title case for newRecipe.name
+      let titleCase;
+      if (value.contains(' ')) titleCase = value.split(' ').map(word => word.charAt(0).toUpperCase() + word.subStr(1)).join(' ');
+      else titleCase = value.charAt(0) + value.subStr(1);
+
       this.setState((prevState) => {
         return ({
           newRecipe: {
             ...prevState.newRecipe,
-            [name]: value,
+            name: titleCase,
           }
         })
       })
-    } else {
-      // If input name IS notes then push value into the correct nest
+    } else if (name === 'notes') {
+      // If input name IS notes then push value into the correct nesting
       this.setState((prevState) => {
         return ({
           newRecipe: {
@@ -62,14 +76,14 @@ class AddRecipe extends React.Component {
     }
   }
 
-  // Handler function to manipulate Ingredients being added, and saves to state
+  // Handler function to manipulate Ingredients being added, and save to state
   onHandleIngreds(event, index) {
     const { value } = event.target;
 
     // Retrieves old recipe ingredient state
     const ingreds = [...this.state.newRecipe.recipe.ingredients]
 
-    // Pushes new recipe input to old recipe ingredient variable
+    // Pushes new recipe input to old recipe ingredient state variable
     ingreds[index] = value;
 
     this.setState((prevState) => {
@@ -91,8 +105,14 @@ class AddRecipe extends React.Component {
     event.preventDefault();
 
     this.setState((prevState) => {
-      // Sets ID automatically based on total amount of IDs in firebase
-      const id = Object.entries(this.props.recipes).length > 100 ? `0${Object.entries(this.props.recipes).length + 1}` : `00${Object.entries(this.props.recipes).length + 1}`
+      
+      // Sets ID automatically based on total amount of IDs in firebase (if > 100 pad with one zero, if > 10 pad with two zeros, or pad with 3)
+      let id;
+      const recipesLength = Object.entries(this.props.recipes).length;
+      if (recipesLength >= 100) id = `0${recipesLength + 1}`;
+      else if (recipesLength >= 10 && recipesLength < 100) id = `00${recipesLength + 1}`;
+      else id = `000${recipesLength + 1}`;
+
       return {
         // Set linkUrl and ID before saving
         newRecipe: {
@@ -102,6 +122,7 @@ class AddRecipe extends React.Component {
         }
     }}, () => {
       // Sends data to props function for saving recipe entry
+      console.log(this.state.newRecipe);
       this.props.onSaveRecipe(this.state.newRecipe);
     })
   }
