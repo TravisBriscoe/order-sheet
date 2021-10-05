@@ -74,7 +74,8 @@ class ManagePage extends React.Component {
                 userLoggedIn={this.state.userLoggedIn}
                 onUpdateEntry={this.props.onUpdateEntry}
                 onNewEntry={this.props.onNewEntry}
-                onDeleteEntry={this.props.onDeleteEntry}  
+                onDeleteEntry={this.props.onDeleteEntry}
+                onEditUser={this.props.onEditUser}
               />}
             />
             <Route path='/manage/edit-recipes' render={(props) =>
@@ -84,6 +85,7 @@ class ManagePage extends React.Component {
                 onDeleteEntry={this.props.onDeleteEntry}
                 isLoading={this.props.isLoading}
                 onSaveRecipe={this.props.onSaveRecipe}
+                onNewRecipe={this.props.onNewRecipe}
               />}
             />
           </Switch>

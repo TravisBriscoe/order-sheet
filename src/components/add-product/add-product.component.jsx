@@ -76,7 +76,7 @@ class AddProduct extends React.Component {
 
     return (
       <div className='add-product'>
-        <h3>Add A New Product!</h3>
+        <h3>Add New Product!</h3>
         <form 
           className='add-product-form'
           ref={this.prodForm}

@@ -140,6 +140,16 @@ export const orderListData = async () => {
   return orderListDataObj;
 }
 
+// Helper function taken from App.js for grabbing collectionRefs
+const setCollectionRef = (collectionRef) => {
+  if (collectionRef === 'users') collectionRef = users;
+  else if (collectionRef === 'products') collectionRef = products;
+  else if (collectionRef === 'orderlist') collectionRef = orderlist;
+  else collectionRef = recipes;
+  
+  return collectionRef;
+}
+
 // Create new entry
 export const addNewEntry = async (collectionRef, data) => {
 
@@ -153,6 +163,9 @@ export const addNewEntry = async (collectionRef, data) => {
 
 // Update existing entry
 export const updateEntry = async (collectionRef, data) => {
+
+  collectionRef = setCollectionRef(collectionRef)
+  
   try {
     await collectionRef.doc(data.data.id).update({...data.data});
   } catch (err) {

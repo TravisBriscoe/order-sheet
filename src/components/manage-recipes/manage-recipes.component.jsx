@@ -21,67 +21,45 @@ import withLoading from '../../withLoading';
 
 import './manage-recipes.styles.scss';
 
-class ManageRecipes extends React.Component {
-  constructor(props) {
-    super(props);
+const ManageRecipes = (props) => {
+  const { recipes, isLoading, onCreateRecipe, onDeleteEntry, onSaveRecipe, onNewRecipe } = props;
 
-    this.onCreateRecipe = this.onCreateRecipe.bind(this);
-
-    this.state = {
-      onNewRecipe: false,
-    }
-  }
-
-  // onCreateRecipe function that propogates state and determines whether to render the AddRecipe component
-  onCreateRecipe() {
-    const value = !this.state.onNewRecipe;
-
-    this.props.history.push('/manage/edit-recipes');
-
-    this.setState({ onNewRecipe: value });
-  }
-
-  render() {
-    const { recipes } = this.props;
-
-    return (
-      <div className='manage-recipes'>
-        { 
-          recipes
-            ? <div className='manage-recipes-main'>
-                <div className='manage-recipes-main-navi'>
-                  <RecipeNav recipes={recipes} isLoading={this.props.isLoading} onCreateRecipe={this.onCreateRecipe} />
-                </div>
-                <div className='manage-recipes-main-content'>
-                  {
-                    !this.state.onNewRecipe
-                      ? <button className='manage-recipes-main-content--newrecipe' onClick={this.onCreateRecipe}>Add New Recipe</button>
-                      : <button className='manage-recipes-main-content--newrecipe' disabled onClick={this.onCreateRecipe}>Add New Recipe</button>
-                  }
-                  {
-                    !this.state.onNewRecipe
-                      ? <Switch>
-                          <Route path='/manage/edit-recipes/:recipeId'>
-                            <EditRecipe
-                              recipes={recipes}
-                              onDeleteEntry={this.props.onDeleteEntry}
-                              onNewRecipe={this.state.onNewRecipe}
-                              onCreateRecipe={this.onCreateRecipe}
-                              onSaveRecipe={this.props.onSaveRecipe}
-                            />
-                          </Route>
-                        </Switch>
-                      : <AddRecipe onNewRecipe={this.state.onNewRecipe} onCreateRecipe={this.onCreateRecipe} recipes={this.props.recipes} onSaveRecipe={this.props.onSaveRecipe} />
-                  }
-                </div>
+  return (
+    <div className='manage-recipes'>
+      { 
+        recipes
+          ? <div className='manage-recipes-main'>
+              <div className='manage-recipes-main-navi'>
+                <RecipeNav recipes={recipes} isLoading={isLoading} onCreateRecipe={onCreateRecipe} />
               </div>
-            : <div className='manage-recipes-main'>
-                <AddRecipe onCreateRecipe={this.onCreateRecipe} onNewRecipe={this.state.onNewRecipe} recipes={recipes} onSaveRecipe={this.props.onSaveRecipe} />
+              <div className='manage-recipes-main-content'>
+                {
+                  !onNewRecipe
+                    ? <button className='manage-recipes-main-content--newrecipe' onClick={onCreateRecipe}>Add New Recipe</button>
+                    : <button className='manage-recipes-main-content--newrecipe' disabled onClick={onCreateRecipe}>Add New Recipe</button>
+                }
+                {
+                  !onNewRecipe
+                    ? <Switch>
+                        <Route path='/manage/edit-recipes/:recipeId'>
+                          <EditRecipe
+                            recipes={recipes}
+                            onDeleteEntry={onDeleteEntry}
+                            onNewRecipe={onNewRecipe}
+                            onCreateRecipe={onCreateRecipe}
+                            onSaveRecipe={onSaveRecipe}
+                          />
+                        </Route>
+                      </Switch>
+                    : <AddRecipe onNewRecipe={onNewRecipe} onCreateRecipe={onCreateRecipe} recipes={recipes} onSaveRecipe={onSaveRecipe} />
+                }
               </div>
-        }
-      </div>
-    );
-  }
+            </div>
+          : <div className='manage-recipes-main'>
+              <AddRecipe onCreateRecipe={onCreateRecipe} onNewRecipe={onNewRecipe} recipes={recipes} onSaveRecipe={onSaveRecipe} />
+            </div>
+      }
+    </div>
+  );
 }
-
 export default withLoading(withRouter(ManageRecipes));

@@ -1,6 +1,12 @@
 import React from 'react';
 import { Switch, Route, withRouter } from "react-router-dom";
 
+import { connect } from 'react-redux';
+import { fetchProducts } from './redux/products/products.actions';
+import { fetchRecipes } from './redux/recipes/recipes.actions';
+import { fetchUsers } from './redux/users/users.actions';
+import { fetchOrder } from './redux/order-list/order-list.actions'
+
 import Header from './components/header/header.component';
 import Footer from './components/footer/footer.component';
 import ProductList from './pages/product-list/product-list.component';
@@ -32,14 +38,11 @@ class App extends React.Component {
     this.onChangeOrderValue = this.onChangeOrderValue.bind(this);
     this.onSaveProduct = this.onSaveProduct.bind(this);
     this.onSaveRecipe = this.onSaveRecipe.bind(this);
+    this.onCreateRecipe = this.onCreateRecipe.bind(this);
 
     this.state = {
       loggedInUser: '',
-      users: '',
-      products:'',
-      recipes: '',
       notification: false,
-      onOrder: '',
       onQuantity: 0,
       sortedProds: '',
       distributor: 'all',
@@ -47,6 +50,7 @@ class App extends React.Component {
       storedWhat: 'all',
       sortCategory: 'all',
       isLoading: false,
+      onNewRecipe: false,
     }
   }
 
@@ -56,31 +60,29 @@ class App extends React.Component {
     const getData = async () => {
       this.setState({ isLoading: true });
 
-      const userDataObj = await userData();
+      // const userDataObj = await userData();
+      // const recipeDataObj = await recipeData();
+      // const productDataObj = await productData();
+      // const orderListDataObj = await orderListData();
+      // this.setState({ users: userDataObj });
+      // this.setState({ recipes: recipeDataObj });
+      // this.setState({ onOrder: orderListDataObj });
 
-      const recipeDataObj = await recipeData();
+      await this.props.fetchProducts();
+      await this.props.fetchRecipes();
+      await this.props.fetchUsers();
+      await this.props.fetchOrder();
 
-      const productDataObj = await productData();
-      const productDataArr = Object.entries(productDataObj).map(x => {
-        return x[1];
-      });
       
-      productDataArr.sort((a, b) => a.name.localeCompare(b.name));
+      const { sortedProds } = this.state;
+      const { products } = this.props;
 
-      const orderListDataObj = await orderListData();
+      if (!sortedProds || sortedProds.length <= 0) {
+        this.setState({ sortedProds: products})
+      } else {
+        this.setState({ sortedProds: [...sortedProds]})
+      }
 
-      this.setState({ users: userDataObj });
-      this.setState({ recipes: recipeDataObj });
-      this.setState({ products: productDataArr }, () => {
-        const { products, sortedProds } = this.state;
-
-        if (!sortedProds || sortedProds.length <= 0) {
-          this.setState({ sortedProds: [...products]})
-        } else {
-          this.setState({ sortedProds: [...sortedProds]})
-        }
-      });
-      this.setState({ onOrder: orderListDataObj });
       this.setState({ isLoading: false })
     }
     
@@ -117,11 +119,12 @@ class App extends React.Component {
 
   // Handle the searchbar and set the sortedProds state
   onHandleSearch = (e) => {
-    const searchData1 = this.state.products.filter((product) => {
+    const { products } = this.props;
+    const searchData1 = products.filter((product) => {
        return product.name.toLowerCase().includes(e.target.value.toLowerCase());
     });
 
-    const searchData2 = this.state.products.filter((product) => {
+    const searchData2 = products.filter((product) => {
       return product.desc.toLowerCase().includes(e.target.value.toLowerCase())
     });
 
@@ -131,13 +134,15 @@ class App extends React.Component {
 
   // Handle dropdown menu for product search and set sortedProds state
   onMenuSelect(sortedSelect) {
+    console.log(this.props.products)
+    const { products } = this.props;
     this.setState({ sortCategory: sortedSelect }, () => {
       const { sortCategory } = this.state;
 
       if (sortCategory === 'all') {
-        return this.setState({ sortedProds: this.state.products })
+        return this.setState({ sortedProds: products })
       } else if (sortCategory === 'findlays' || sortCategory === 'quattrocchis' || sortCategory === 'pigolive') {
-        const newStuff = this.state.products.filter(x => {
+        const newStuff = products.filter(x => {
           return x.dist === sortCategory
         })
         
@@ -147,13 +152,13 @@ class App extends React.Component {
       } else if (sortCategory === '') {
         return;
       } else if (sortCategory === 'user') {
-        const newStuff = this.state.products.filter(x => {
+        const newStuff = products.filter(x => {
           return x.id.includes('U')
         })
 
         return this.setState({ sortedProds: [...newStuff]});
       } else {
-        const newStuff = this.state.products.filter(x => {
+        const newStuff = products.filter(x => {
           return x.category === sortCategory
         })
                 
@@ -201,6 +206,15 @@ class App extends React.Component {
     productDataArr.sort((a, b) => a.name.localeCompare(b.name));
 
     this.setState({ products: productDataArr, sortedProds: productDataArr })
+  }
+
+  // onCreateRecipe function that propogates state and determines whether to render the AddRecipe component
+  onCreateRecipe() {
+    const value = !this.state.onNewRecipe;
+
+    this.props.history.push('/manage/edit-recipes');
+
+    this.setState({ onNewRecipe: value });
   }
 
   // Function for saving NewRecipe data to database and updating existing state
@@ -267,7 +281,12 @@ class App extends React.Component {
 
     collectionRef = this.setCollectionRef(collectionRef);
 
+    if (collection === 'users') {
+      return this.props.editUser(collectionRef, data);
+    }
+
     await updateEntry(collectionRef, data);
+
 
     if (collection === 'products') {
       const productDataObj = await productData();
@@ -347,14 +366,17 @@ class App extends React.Component {
     const {
       loggedInUser,
       title,
-      users,
-      products,
-      recipes,
       notification,
-      onOrder,
       sortedProds,
       sortCategory,
      } = this.state;
+
+     const {
+       products,
+       recipes,
+       users,
+       onOrder
+    } = this.props;
 
     return (
       <div>
@@ -365,6 +387,7 @@ class App extends React.Component {
               <LoginComponent
                 setUserLoggedIn={this.setUserLoggedIn}
                 {...this.state}
+                {...this.props}
               />
             </div>
           )
@@ -390,6 +413,7 @@ class App extends React.Component {
                     sortCategory={sortCategory}
                     onMenuSelect={this.onMenuSelect}
                     isLoading={this.state.isLoading}
+                    onNewRecipe={this.state.onNewRecipe}
                   />}
                 />
                 <Route path='/order-sheet' render={(props) => 
@@ -401,7 +425,7 @@ class App extends React.Component {
                     onChangeOrderValue={this.onChangeOrderValue}
                   />}
                 />
-                <Route path='/recipes' render={(props) => <RecipesPage {...props} recipes={recipes} />} />
+                <Route path='/recipes' render={(props) => <RecipesPage {...props}  onNewRecipe={this.state.onNewRecipe} onSaveRecipe={this.onSaveRecipe} recipes={recipes} />} />
                 <Route path='/about' component={AboutPage} />
                 <Route exact path='/' render={(props) =>
                   <ProductList
@@ -411,7 +435,7 @@ class App extends React.Component {
                     sortedProds={sortedProds}
                     onHandleSearch={this.onHandleSearch}
                     sortCategory={this.state.sortCategory}
-                    onOrder={this.state.onOrder}
+                    onOrder={onOrder}
                     isLoading={this.state.isLoading}
                     onSaveProduct={this.onSaveProduct}
                   />}
@@ -422,17 +446,23 @@ class App extends React.Component {
                 sortedProds={sortedProds}
                 users={users}
                 recipes={recipes}
-                onOrder={this.state.onOrder}
+                onOrder={onOrder}
                 signOut={this.setSignOut}
                 deleteAllData={this.deleteAllData}
               />
             </div>
-          )
-          
+          )   
         }
       </div>
     );
   }
 };
 
-export default withRouter(App);
+const mapStateToProps = state => ({
+  products: state.products.products,
+  recipes: state.recipes.recipes,
+  users: state.users.users,
+  onOrder: state.onOrder.onOrder
+})
+
+export default connect(mapStateToProps, { fetchProducts, fetchRecipes, fetchUsers, fetchOrder })(withRouter(App));

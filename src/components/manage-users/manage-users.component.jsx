@@ -13,10 +13,13 @@
 **/
 
 import React from 'react';
+import { connect } from 'react-redux';
 
 // import '../../firebase/firebase.utils.js';
 
 import NewUser from '../add-user/add-user.component.jsx';
+
+import { editUser } from '../../redux/users/users.actions.js';
 
 import './manager-users.styles.scss';
 
@@ -158,7 +161,7 @@ class ManageUsers extends React.Component {
                               <option value='tester'>Tester</option>
                             </select>
                             <div className='manage-users-content-list-form--btn'>
-                              <button className='manage-users-content-list-form--btn_save' onClick={() => this.props.onUpdateEntry('users', this.state.onEdit)}>Save</button>
+                              <button className='manage-users-content-list-form--btn_save' onClick={() => this.props.editUser('users', this.state.onEdit)}>Save</button>
                               <button className='manage-users-content-list-form--btn_delete' disabled={user.id === '0001' && user.role === 'manager' ? 'disabled' : ''} onClick={() => this.props.onDeleteEntry('users', user)}>Delete</button>
                               <button 
                                 className='manage-users-content-list-form--btn_cancel'
@@ -180,4 +183,4 @@ class ManageUsers extends React.Component {
     );
   }
 }
-export default ManageUsers;
+export default connect(null, { editUser })(ManageUsers);
