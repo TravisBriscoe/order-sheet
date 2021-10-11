@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addNewUser } from '../../features/users';
 
 import './add-user.styles.scss';
 
@@ -47,7 +49,7 @@ class NewUser extends React.Component {
     event.preventDefault();
     const passwordCheck = this.onPasswordConfirm();
     if (passwordCheck) {
-      this.props.onNewEntry('users', this.state.newUser);
+      this.props.onAddNewUser(this.state.newUser);
 
       this.setState({ newUser: {
         name: '',
@@ -105,4 +107,8 @@ class NewUser extends React.Component {
   };
 }
 
-export default NewUser;
+const mapDispatchToProps = (dispatch) => ({
+  onAddNewUser: (data) => dispatch(addNewUser(data))
+})
+
+export default connect(null, mapDispatchToProps)(NewUser);

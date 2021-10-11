@@ -59,7 +59,7 @@ class ProductList extends React.Component {
                 <ProductListMenu onMenuSelect={onMenuSelect} onHandleSearch={onHandleSearch} sortCategory={sortCategory} />
                 <ProductListContent sortedProds={sortedProds} setOnOrder={setOnOrder} onOrder={onOrder} />
               </div>
-            : <div className='product-list--new-product'>
+            : <div className=''>
                 <AddProduct onSaveProduct={this.props.onSaveProduct} />
               </div>
         }

@@ -44,7 +44,7 @@ class ManageProducts extends React.Component {
     return (
       <div className='manage-products'>
           {
-            this.props.sortedProds
+            this.props.sortedProds 
               ? <div className='manage-products-actions'>
                   <div className='manage-products-actions-btn--new_product'>
                     <button disabled={this.state.addNewProduct ? 'disabled' : ''} onClick={() => this.onAddNewProduct(true)}>Create New Product</button>
@@ -73,17 +73,17 @@ class ManageProducts extends React.Component {
                     <input type='text' className='manage-products-actions-menu--search_bar' placeholder='Search by Name or Description' onInput={(event) => this.onChangeSelect(event)} />
                   </div>
                 </div>  
-              // : <div className='manage-products-actions'>
-              //     <div className='manage-products-edit'>
-                :    <div className='manage-products-add'>
+              : <div className='manage-products-actions'>
+                  <div className='manage-products-edit'>
+                    <div className='manage-products-add'>
                       <AddProduct
                         addNewProduct={this.state.addNewProduct}
                         onAddNewProduct={this.onAddNewProduct}
                         onSaveProduct={this.props.onSaveProduct}
                       />
                     </div>
-                //   </div>
-                // </div>
+                  </div>
+                </div>
           }
         <div className='manage-products-list'>
           <ProductNav products={this.props.sortedProds} isLoading={this.props.isLoading} onAddNewProduct={this.onAddNewProduct} />

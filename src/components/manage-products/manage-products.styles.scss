@@ -60,35 +60,34 @@
   }
 
   &-edit { grid-area: prodedit; }
-  &-add { grid-area: prodedit; }
 }
 
 .add-product {
   display: grid;
   grid-template-rows: 1fr 2fr;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 
   h3 {
     grid-row: 1 / 2;
-    // grid-column: 2 / 3;
+    grid-column: 2 / 3;
     place-self: center;
   }
 
   &-form {
     grid-row: 2 / 3;
     display: grid;
-    place-self: stretch;
-    grid-template-columns: 2fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas: "addid" 
-                         "addname"
-                         "addunit"
-                         "adddesc"
-                         "adddist"
-                         "addcat"
-                         "addstored"
-                         "addsplit"
-                         "addbtns";
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: ". . ."
+                         ". addid ." 
+                         ". addname ."
+                         ". addunit ."
+                         ". adddesc ."
+                         ". adddist ."
+                         ". addcat ."
+                         ". addstored ."
+                         ". addsplit ."
+                         ". addbtns .";
     
     &-id {
       grid-area: addid;

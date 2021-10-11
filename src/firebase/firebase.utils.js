@@ -140,7 +140,6 @@ export const orderListData = async () => {
   return orderListDataObj;
 }
 
-// Helper function taken from App.js for grabbing collectionRefs
 const setCollectionRef = (collectionRef) => {
   if (collectionRef === 'users') collectionRef = users;
   else if (collectionRef === 'products') collectionRef = products;
@@ -152,8 +151,8 @@ const setCollectionRef = (collectionRef) => {
 
 // Create new entry
 export const addNewEntry = async (collectionRef, data) => {
-
-  console.log(data)
+  collectionRef = setCollectionRef(collectionRef)
+  
   try {
     await collectionRef.doc(data.id).set({...data});
   } catch (err) {
@@ -163,7 +162,6 @@ export const addNewEntry = async (collectionRef, data) => {
 
 // Update existing entry
 export const updateEntry = async (collectionRef, data) => {
-
   collectionRef = setCollectionRef(collectionRef)
   
   try {
@@ -176,6 +174,8 @@ export const updateEntry = async (collectionRef, data) => {
 // Delete existing entry
 export const deleteEntry = async (collectionRef, data) => {
   const { id } = data;
+  
+  collectionRef = setCollectionRef(collectionRef)
 
   await collectionRef.doc(id).delete();
 };

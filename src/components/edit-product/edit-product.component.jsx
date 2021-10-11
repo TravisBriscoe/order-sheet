@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
+import { deleteProduct, editProduct } from '../../features/products';
 
 import './edit-product.styles.scss';
 
@@ -54,7 +56,7 @@ class EditProduct extends React.Component {
   onUpdateProduct(event, data) {
     event.preventDefault();
 
-    this.props.onUpdateEntry('products', data);
+    this.props.onUpdate(data);
   }
 
   // Creates new product (not implemented yet)
@@ -67,7 +69,7 @@ class EditProduct extends React.Component {
   onDeleteProduct(event, data) {
     event.preventDefault();
     
-    this.props.onDeleteEntry('products', data);
+    this.props.onDelete(data);
     this.props.history.push('/manage/edit-products');
   }
 
@@ -106,4 +108,9 @@ class EditProduct extends React.Component {
   }
 }
 
-export default withRouter(EditProduct);
+const mapDispatchToProps = (dispatch) => ({
+  onDelete: (data) => dispatch(deleteProduct(data)),
+  onUpdate: (data) => dispatch(editProduct(data))
+})
+
+export default connect(null, mapDispatchToProps)(withRouter(EditProduct));

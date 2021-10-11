@@ -1,6 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
+
+import { addNewProduct } from '../../features/products';
+// import store from '../../features/store';
 // import './add-product.styles.scss';
 
 class AddProduct extends React.Component {
@@ -73,29 +77,31 @@ class AddProduct extends React.Component {
 
   
   render() {
+    console.log(this.props);
 
     return (
       <div className='add-product'>
-        <h3>Add New Product!</h3>
+        <h3>Add A New Product!</h3>
         <form 
           className='add-product-form'
           ref={this.prodForm}
           onSubmit={(event) => {
             event.preventDefault();
 
-            this.props.onSaveProduct(this.state.newProduct);
-            this.setState({ newProduct: {
-              id: '',
-              name: '',
-              unit: '',
-              desc: '',
-              dist: '',
-              category: '',
-              stored: '',
-              split: false,
-            }}, () => {
-              this.prodForm.current.reset();
-            });
+            this.props.onNewProduct(this.state.newProduct)
+            // this.props.onSaveProduct(this.state.newProduct);
+            // this.setState({ newProduct: {
+            //   id: '',
+            //   name: '',
+            //   unit: '',
+            //   desc: '',
+            //   dist: '',
+            //   category: '',
+            //   stored: '',
+            //   split: false,
+            // }}, () => {
+            //   this.prodForm.current.reset();
+            // });
           }}
           onReset={(event) => {
             event.preventDefault();
@@ -153,4 +159,8 @@ class AddProduct extends React.Component {
   }
 }
 
-export default withRouter(AddProduct);
+const mapDispatchToProps = (dispatch) => ({
+  onNewProduct: (data) => dispatch(addNewProduct(data))
+})
+
+export default connect(null, mapDispatchToProps)(withRouter(AddProduct));
