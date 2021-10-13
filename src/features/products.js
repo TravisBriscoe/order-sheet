@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { addNewEntry, productData, orderListData, deleteEntry, updateEntry } from '../firebase/firebase.utils';
+import { addNewEntry, productData, deleteEntry, updateEntry, deleteCollection } from '../firebase/firebase.utils';
 
 const getProducts = async() => {
   const productDataObj = await productData();
@@ -14,18 +14,6 @@ const getProducts = async() => {
 const fetchProductData = createAsyncThunk( 'productsData/products',
   () => {
     return getProducts();
-  }
-)
-
-const fetchOnOrder = createAsyncThunk('productsData/onOrder',
-  async() => {
-    const onOrderDataObj = await orderListData();
-
-    const onOrderDataArr = Object.entries(onOrderDataObj).map(x => x[1]);
-    
-    getProducts();
-
-    return onOrderDataArr;
   }
 )
 
@@ -54,12 +42,18 @@ const editProduct = createAsyncThunk('productsData/editProduct',
   }
 )
 
+const deleteAllProducts = createAsyncThunk('productsData/deleteAllProducts',
+  async () => {
+    await deleteCollection('products');
+    return getProducts();
+  }
+)
+
 export const productSlice = createSlice({
   name: 'productsData',
   initialState: {
     products: [],
     sortedProds: [],
-    onOrder: {},
   },
   
   // reducers: {
@@ -91,13 +85,13 @@ export const productSlice = createSlice({
       return state;
     })
 
-    builder.addCase(fetchOnOrder.fulfilled, (state, action) => {
-      state.onOrder = action.payload;
-    }
-  )
+    builder.addCase(deleteAllProducts.fulfilled, (state, action) => {
+      state.products = [];
+      state.sortedProds = [];
+    })
   },
 });
 
-export { fetchProductData, fetchOnOrder, addNewProduct, deleteProduct, editProduct };
+export { fetchProductData, addNewProduct, deleteProduct, editProduct, deleteAllProducts };
 
 export default productSlice.reducer;

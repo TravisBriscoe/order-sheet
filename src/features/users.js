@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { userData, addNewEntry, deleteEntry, updateEntry } from '../firebase/firebase.utils';
+import { userData, addNewEntry, deleteEntry, updateEntry, deleteCollection } from '../firebase/firebase.utils';
 
 const getUsers = async () => {
   const userDataObj = await userData();
@@ -41,6 +41,14 @@ const editUser = createAsyncThunk('usersData/editUser',
   }
 )
 
+const deleteAllUsers = createAsyncThunk('usersData/deleteAllUsers',
+  async () => {
+    await deleteCollection('users');
+
+    return getUsers();
+  }
+)
+
 const usersSlice = createSlice({
   name: 'usersData',
   initialState: {
@@ -62,11 +70,15 @@ const usersSlice = createSlice({
     })
 
     builder.addCase(editUser.fulfilled, (state, action) => {
-      return state
+      return state;
+    })
+
+    builder.addCase(deleteAllUsers.fulfilled, (state, action) =>{
+      return state;
     })
   }
 });
 
-export { fetchUserData, addNewUser, deleteUser, editUser };
+export { fetchUserData, addNewUser, deleteUser, editUser, deleteAllUsers };
 
 export default usersSlice.reducer;

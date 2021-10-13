@@ -179,6 +179,21 @@ export const deleteEntry = async (collectionRef, data) => {
 
   await collectionRef.doc(id).delete();
 };
+
+// Delete Entire Collections
+export const deleteCollection = async (collectionRef) => {
+  console.log(collectionRef)
+
+  const batch = firestore.batch();
+  let collection = setCollectionRef(collectionRef);
+  console.log(collection)
+  
+  await collection.get().then((data) => data.docs.map(doc => {
+    return batch.delete(doc.ref);
+  }));
+  
+  await batch.commit();
+}
 // End CRUD
 
 // Add data (all) to firebase.

@@ -6,9 +6,9 @@
   width: 90%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 3fr 120px 2fr 70px 95px 70px;
+  grid-template-columns: 3fr 120px 2fr 235px;
   grid-template-rows: 30px;
-  grid-template-areas: "copyright items blank buttonone buttontwo buttonthree";
+  grid-template-areas: "copyright items blank buttons";
 
   &-copyright {
     grid-area: copyright;
@@ -23,6 +23,11 @@
   }
 
   &-nav {
+    grid-area: buttons;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "buttonone buttontwo buttonthree";
+
     &--submit {
       grid-area: buttonone;
       place-self: center;
@@ -31,6 +36,8 @@
     &--ordersheet {
       grid-area: buttontwo;
       place-self: center;
+      // margin: 0 auto;
+      // margin-top: 5px;
     }
 
     &--logout {

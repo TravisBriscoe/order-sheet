@@ -35,7 +35,7 @@ class Header extends React.Component {
   // }
 
   render() {
-    const { loggedInUser, title = 'Portsmouth Tavern' } = this.props;
+    const { loggedInUser, title =  this.props.title || 'Fake Restaurant' } = this.props;
 
     return (
       <div className="header" >

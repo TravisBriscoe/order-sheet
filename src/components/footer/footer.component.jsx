@@ -11,12 +11,16 @@
  */
 
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, useLocation, useHistory } from 'react-router-dom';
+import { deleteAllProducts } from '../../features/products';
+import { deleteAllUsers } from '../../features/users';
 
 import './footer.styles.scss';
 
 const Footer = (props) => {
   const { pathname } = useLocation();
+  const history = useHistory();
 
   return (
   <div className='footer'>
@@ -44,33 +48,41 @@ const Footer = (props) => {
           : null
       }
     </div>
-    <div className='footer-nav--ordersheet'>
+    <div className='footer-nav'>
       {/* Renders proper buttons according to users location */}
       {
-        pathname === '/' ?
-          (<Link to='/order-sheet'><button>Order Sheet</button></Link>)
+        pathname !== '/order-sheet' ?
+          (<Link to='/order-sheet'><button className='footer-nav--ordersheet'>Order Sheet</button></Link>)
           : null
       }
       {
         pathname.includes('edit-products') && props.loggedInUser.toLowerCase() === 'manager' ?
-          (<button onClick={() => props.deleteAllData('products')}>Delete All!</button>)
+          (<button className='footer-nav--submit' onClick={() => {
+            if (window.confirm(`Are you sure you want to delete all Products?`)) {
+              props.onDeleteProducts();
+              history.push('/manage/edit-products');
+            } else return;
+          }}>Delete All!</button>)
         : null
       }
       {
         pathname === '/manage/edit-users' && props.loggedInUser.toLowerCase() === 'manager' ?
-          (<button onClick={() => props.deleteAllData('users')}>Delete All!</button>)
+          (<button className='footer-nav--submit' onClick={() => props.deleteAllUsers()}>Delete All!</button>)
         : null
       }
       {
         pathname.includes('edit-recipes') && props.loggedInUser.toLowerCase() === 'manager' ?
-          (<button onClick={() => props.deleteAllData('recipes')}>Delete All!</button>)
+          (<button className='footer-nav--submit' onClick={() => props.deleteAllData('recipes')}>Delete All!</button>)
           : null
       }
-    </div>
-    <div className='footer-nav--logout'>
-      <button onClick={props.signOut}>Logout</button>
+      <button  className='footer-nav--logout' onClick={props.signOut}>Logout</button>
     </div>
   </div>
 )};
 
-export default Footer;
+const mapDispatchToProps = (dispatch) => ({
+  onDeleteProducts: () => dispatch(deleteAllProducts()),
+  onDeleteUsers: () => dispatch(deleteAllUsers()),
+})
+
+export default connect(null, mapDispatchToProps)(Footer);

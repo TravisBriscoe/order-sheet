@@ -1,8 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import thunk from 'redux-thunk'
 
-import rootReducer from './rootReducer';
+// Reducers
+import productReducer from './products';
+import ordersReducer from './orders';
+import usersReducer from './users';
+import recipeReducer from './recipes';
 
-const store = configureStore({ reducer: rootReducer });
+// Store
+const store = configureStore({
+  reducer: {
+    productsData: productReducer,
+    usersData: usersReducer,
+    ordersData: ordersReducer,
+    recipesData: recipeReducer,
+  },
+})
 
 export default store;

@@ -39,11 +39,7 @@ class App extends React.Component {
 
     this.state = {
       loggedInUser: '',
-      // users: '',
-      // products:'',
-      recipes: '',
       notification: false,
-      // onOrder: '',
       onQuantity: 0,
       distributor: 'all',
       storedWhere: 'all',
@@ -60,7 +56,7 @@ class App extends React.Component {
       this.setState({ isLoading: true });
       
       
-      const recipeDataObj = await recipeData();
+      // const recipeDataObj = await recipeData();
       
       // Moved into Redux Thunk Logic -> SortedProds still needs dispatches
       // const productDataObj = await productData();
@@ -83,7 +79,7 @@ class App extends React.Component {
       // const orderListDataObj = await orderListData();
       // this.setState({ onOrder: orderListDataObj });
 
-      this.setState({ recipes: recipeDataObj });
+      // this.setState({ recipes: recipeDataObj });
       this.setState({ isLoading: false })
     }
     
@@ -244,24 +240,22 @@ class App extends React.Component {
         })).then(async () => {
           const userDataObj = await userData();
           this.setState({users: userDataObj})})
-        } else {
-          const batch = firestore.batch();
-          collection = this.setCollectionRef(collection);
-          
-          await collection.get().then((data) => data.docs.map(doc => {
-            return batch.delete(doc.ref);
-          }));
-          
-          await batch.commit();
-        }
+      } else {
+        const batch = firestore.batch();
+        collection = this.setCollectionRef(collection);
         
+        await collection.get().then((data) => data.docs.map(doc => {
+          return batch.delete(doc.ref);
+        }));
         
-        if (collection === products) this.setState({ products: '', sortedProds: ''}, () => this.props.history.push('/manage/edit-products'));
-        else if (collection === recipes) this.setState({ recipes: '' }, () => this.props.history.push('/manage/edit-recipes'));
-        else if (collection === orderlist) this.setState({ onOrder: {} }, () => alert('Order-Sheet has been cleared!'));
+        await batch.commit();
       }
-      
+        
+      if (collection === recipes) this.setState({ recipes: '' }, () => this.props.history.push('/manage/edit-recipes'));
+      else if (collection === orderlist) this.setState({ onOrder: {} }, () => alert('Order-Sheet has been cleared!'));
+  
       this.setState({ isLoading: false });
+    }
   }
 
   // Update existing entry
@@ -351,7 +345,6 @@ class App extends React.Component {
       loggedInUser,
       title,
       notification,
-      recipes,
       sortCategory,
      } = this.state;
 
@@ -359,12 +352,17 @@ class App extends React.Component {
       productsData: {
           products,
           sortedProds,
+        },
+        usersData: {
+          users,
+          // loggedInUser,
+        },
+        ordersData: {
           onOrder,
         },
-      usersData: {
-        users,
-        // loggedInUser,
-      }
+        recipesData: {
+          recipes,
+        }
     } = this.props;
 
     return (
@@ -449,6 +447,8 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
   productsData: state.productsData,
   usersData: state.usersData,
+  ordersData: state.ordersData,
+  recipesData: state.recipesData,
 })
 
 // const mapDispatchToProps = (dispatch) => ({
