@@ -75,6 +75,8 @@ class LoginComponent extends React.Component {
 						value={password}
 						onChange={this.handleChange}
 					/>
+					<div className="login-creds">Username: Tester</div>
+					<div className="login-creds">Password: 123456</div>
 					<input className="login-form--login-btn" type="submit" value="Login" />
 				</form>
 			</div>

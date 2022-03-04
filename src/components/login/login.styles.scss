@@ -1,43 +1,50 @@
 .login {
-  width: 100%;
-  height: 25%;
-  grid-area: main;
-  place-self: center;
-  display: grid;
-  justify-content: center;
-  grid-template-rows: 1fr 3fr;
-  grid-template-areas: "title"
-                       "forms";
+	width: 100%;
+	height: 25%;
+	grid-area: main;
+	place-self: center;
+	display: grid;
+	justify-content: center;
+	grid-template-rows: 1fr 3fr;
+	grid-template-areas:
+		"title"
+		"forms";
 
-  h2 {
-    grid-area: title;
-    justify-self: center;
-    font-size: 30px;
-  }
+	h2 {
+		grid-area: title;
+		justify-self: center;
+		font-size: 30px;
+	}
 
-  &-form {
-    margin-top: 4px;
-    grid-area: forms;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: "userinput"
-                         "passinput"
-                         "actions";
-    justify-items: center;
+	.login-creds {
+		color: red;
+		font-style: italic;
+	}
 
-    &--username {
-      grid-area: userinput;
-      font-style: italic;
-    }
-    &--password {
-      grid-area: passinput;
-      font-style: italic;
-    }
+	&-form {
+		margin-top: 4px;
+		grid-area: forms;
+		display: grid;
+		grid-template-rows: 1fr 1fr 1fr;
+		grid-template-areas:
+			"userinput"
+			"passinput"
+			"actions";
+		justify-items: center;
 
-    &--login-btn {
-      grid-area: actions;
-      padding: 3px 5px 3px 5px;
-      margin-top: 4px;
-    }
-  }
+		&--username {
+			grid-area: userinput;
+			font-style: italic;
+		}
+		&--password {
+			grid-area: passinput;
+			font-style: italic;
+		}
+
+		&--login-btn {
+			grid-area: actions;
+			padding: 3px 5px 3px 5px;
+			margin-top: 4px;
+		}
+	}
 }
