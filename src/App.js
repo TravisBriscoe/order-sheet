@@ -178,7 +178,6 @@ class App extends React.Component {
 	// Function for changing product order value within Order sheet
 	onChangeOrderValue(event, data) {
 		const { value } = event.target;
-		console.log(data);
 
 		this.setState(
 			(prevState) => {

@@ -32,7 +32,6 @@ class LoginComponent extends React.Component {
 		const { username, password } = this.state;
 		try {
 			const signInData = await signIn(username.toLowerCase(), password);
-			console.log(username);
 
 			if (signInData.name) {
 				this.props.setUserLoggedIn(signInData.name);
@@ -40,7 +39,6 @@ class LoginComponent extends React.Component {
 			return signInData;
 		} catch (error) {
 			this.setState({ error }, () => console.log(error));
-			// console.log(error);
 		}
 		// else {
 		// 	this.props.setUserLoggedIn(null);
@@ -60,7 +58,6 @@ class LoginComponent extends React.Component {
 
 	render() {
 		const { username, password, error } = this.state;
-		console.log(error);
 
 		return (
 			<div className="login">
