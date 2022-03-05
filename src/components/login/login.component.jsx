@@ -14,6 +14,7 @@ class LoginComponent extends React.Component {
 		this.state = {
 			username: "",
 			password: "",
+			error: "",
 		};
 	}
 
@@ -29,17 +30,22 @@ class LoginComponent extends React.Component {
 		event.preventDefault();
 
 		const { username, password } = this.state;
+		try {
+			const signInData = await signIn(username.toLowerCase(), password);
+			console.log(username);
 
-		const signInData = await signIn(username.toLowerCase(), password);
-		console.log(username);
-
-		if (signInData.name) {
-			this.props.setUserLoggedIn(signInData.name);
-		} else {
-			this.props.setUserLoggedIn(null);
-			alert("Invalid username or password.");
+			if (signInData.name) {
+				this.props.setUserLoggedIn(signInData.name);
+			}
+			return signInData;
+		} catch (error) {
+			this.setState({ error }, () => console.log(error));
+			// console.log(error);
 		}
-		return signInData;
+		// else {
+		// 	this.props.setUserLoggedIn(null);
+		// 	alert("Invalid username or password.");
+		// }
 	}
 
 	componentDidMount() {
@@ -53,7 +59,8 @@ class LoginComponent extends React.Component {
 	}
 
 	render() {
-		const { username, password } = this.state;
+		const { username, password, error } = this.state;
+		console.log(error);
 
 		return (
 			<div className="login">
@@ -77,6 +84,7 @@ class LoginComponent extends React.Component {
 					/>
 					<div className="login-creds">Username: Tester</div>
 					<div className="login-creds">Password: 123456</div>
+					<div style={{ color: "red", fontStyle: "italic", fontSize: 25 }}>{error.toString()}</div>
 					<input className="login-form--login-btn" type="submit" value="Login" />
 				</form>
 			</div>

@@ -34,25 +34,30 @@ export const signIn = async (username, pass) => {
 
 	const myStorage = window.localStorage;
 	username = username.toLowerCase();
-	const serverUsername = userDataObj[username].name.toLowerCase();
-	let loggedInUser = {};
-
-	if (serverUsername && userDataObj[username].password === pass) {
-		loggedInUser = {
-			...userDataObj[username],
-		};
-
-		myStorage.setItem("name", `${loggedInUser.name}`);
-	} else if (pass !== userDataObj[username].password || !serverUsername) {
-		myStorage.clear();
-		loggedInUser = null;
-		alert(`username or password don't match.`);
+	if (!userDataObj[username]) {
+		throw Error("Invalid username");
 	} else {
-		myStorage.clear();
-		loggedInUser = null;
-	}
+		const serverUsername = userDataObj[username].name.toLowerCase();
+		let loggedInUser = {};
 
-	return loggedInUser;
+		if (serverUsername && userDataObj[username].password === pass) {
+			loggedInUser = {
+				...userDataObj[username],
+			};
+
+			myStorage.setItem("name", `${loggedInUser.name}`);
+		} else if (pass !== userDataObj[username].password || !serverUsername) {
+			myStorage.clear();
+			loggedInUser = null;
+			// alert(`username or password don't match.`);
+			throw Error("wrong email or password");
+		} else {
+			myStorage.clear();
+			loggedInUser = null;
+		}
+
+		return loggedInUser;
+	}
 };
 
 // CRUD ops
