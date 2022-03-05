@@ -38,7 +38,7 @@ class LoginComponent extends React.Component {
 			}
 			return signInData;
 		} catch (error) {
-			this.setState({ error }, () => console.log(error));
+			this.setState({ error });
 		}
 		// else {
 		// 	this.props.setUserLoggedIn(null);
